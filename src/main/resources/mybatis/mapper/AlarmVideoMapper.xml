@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bjfu.forestfiremonitor.dao.AlarmVideoMapper" >
+  <resultMap id="BaseResultMap" type="com.bjfu.forestfiremonitor.entity.AlarmVideoKey" >
+    <id column="aRecID" property="arecid" jdbcType="INTEGER" />
+    <id column="vidID" property="vidid" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.bjfu.forestfiremonitor.entity.AlarmVideoKey" >
+    delete from alarm_video
+    where aRecID = #{arecid,jdbcType=INTEGER}
+      and vidID = #{vidid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bjfu.forestfiremonitor.entity.AlarmVideoKey" >
+    insert into alarm_video (aRecID, vidID)
+    values (#{arecid,jdbcType=INTEGER}, #{vidid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjfu.forestfiremonitor.entity.AlarmVideoKey" >
+    insert into alarm_video
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="arecid != null" >
+        aRecID,
+      </if>
+      <if test="vidid != null" >
+        vidID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="arecid != null" >
+        #{arecid,jdbcType=INTEGER},
+      </if>
+      <if test="vidid != null" >
+        #{vidid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bjfu.forestfiremonitor.dao.VideoMapper" >
+  <resultMap id="BaseResultMap" type="com.bjfu.forestfiremonitor.entity.Video" >
+    <id column="vidID" property="vidid" jdbcType="INTEGER" />
+    <result column="vidName" property="vidname" jdbcType="VARCHAR" />
+    <result column="vidStartTime" property="vidstarttime" jdbcType="TIMESTAMP" />
+    <result column="vipUrl" property="vipurl" jdbcType="VARCHAR" />
+    <result column="vidSkchImgUrl" property="vidskchimgurl" jdbcType="VARCHAR" />
+    <result column="vidType" property="vidtype" jdbcType="INTEGER" />
+    <result column="mptID" property="mptid" jdbcType="INTEGER" />
+    <result column="userID" property="userid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    vidID, vidName, vidStartTime, vipUrl, vidSkchImgUrl, vidType, mptID, userID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from videotable
+    where vidID = #{vidid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from videotable
+    where vidID = #{vidid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bjfu.forestfiremonitor.entity.Video" >
+    insert into videotable (vidID, vidName, vidStartTime, 
+      vipUrl, vidSkchImgUrl, vidType, 
+      mptID, userID)
+    values (#{vidid,jdbcType=INTEGER}, #{vidname,jdbcType=VARCHAR}, #{vidstarttime,jdbcType=TIMESTAMP}, 
+      #{vipurl,jdbcType=VARCHAR}, #{vidskchimgurl,jdbcType=VARCHAR}, #{vidtype,jdbcType=INTEGER}, 
+      #{mptid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjfu.forestfiremonitor.entity.Video" >
+    insert into videotable
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vidid != null" >
+        vidID,
+      </if>
+      <if test="vidname != null" >
+        vidName,
+      </if>
+      <if test="vidstarttime != null" >
+        vidStartTime,
+      </if>
+      <if test="vipurl != null" >
+        vipUrl,
+      </if>
+      <if test="vidskchimgurl != null" >
+        vidSkchImgUrl,
+      </if>
+      <if test="vidtype != null" >
+        vidType,
+      </if>
+      <if test="mptid != null" >
+        mptID,
+      </if>
+      <if test="userid != null" >
+        userID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vidid != null" >
+        #{vidid,jdbcType=INTEGER},
+      </if>
+      <if test="vidname != null" >
+        #{vidname,jdbcType=VARCHAR},
+      </if>
+      <if test="vidstarttime != null" >
+        #{vidstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipurl != null" >
+        #{vipurl,jdbcType=VARCHAR},
+      </if>
+      <if test="vidskchimgurl != null" >
+        #{vidskchimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="vidtype != null" >
+        #{vidtype,jdbcType=INTEGER},
+      </if>
+      <if test="mptid != null" >
+        #{mptid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjfu.forestfiremonitor.entity.Video" >
+    update videotable
+    <set >
+      <if test="vidname != null" >
+        vidName = #{vidname,jdbcType=VARCHAR},
+      </if>
+      <if test="vidstarttime != null" >
+        vidStartTime = #{vidstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipurl != null" >
+        vipUrl = #{vipurl,jdbcType=VARCHAR},
+      </if>
+      <if test="vidskchimgurl != null" >
+        vidSkchImgUrl = #{vidskchimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="vidtype != null" >
+        vidType = #{vidtype,jdbcType=INTEGER},
+      </if>
+      <if test="mptid != null" >
+        mptID = #{mptid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userID = #{userid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where vidID = #{vidid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjfu.forestfiremonitor.entity.Video" >
+    update videotable
+    set vidName = #{vidname,jdbcType=VARCHAR},
+      vidStartTime = #{vidstarttime,jdbcType=TIMESTAMP},
+      vipUrl = #{vipurl,jdbcType=VARCHAR},
+      vidSkchImgUrl = #{vidskchimgurl,jdbcType=VARCHAR},
+      vidType = #{vidtype,jdbcType=INTEGER},
+      mptID = #{mptid,jdbcType=INTEGER},
+      userID = #{userid,jdbcType=INTEGER}
+    where vidID = #{vidid,jdbcType=INTEGER}
+  </update>
+</mapper>

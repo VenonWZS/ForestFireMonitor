@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bjfu.forestfiremonitor.dao.MonitorMapper" >
+  <resultMap id="BaseResultMap" type="com.bjfu.forestfiremonitor.entity.Monitor" >
+    <id column="mptID" property="mptid" jdbcType="INTEGER" />
+    <result column="mptName" property="mptname" jdbcType="VARCHAR" />
+    <result column="mptIP" property="mptip" jdbcType="VARCHAR" />
+    <result column="height" property="height" jdbcType="DOUBLE" />
+    <result column="poiID" property="poiid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mptID, mptName, mptIP, height, poiID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from monitortable
+    where mptID = #{mptid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from monitortable
+    where mptID = #{mptid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bjfu.forestfiremonitor.entity.Monitor" >
+    insert into monitortable (mptID, mptName, mptIP, 
+      height, poiID)
+    values (#{mptid,jdbcType=INTEGER}, #{mptname,jdbcType=VARCHAR}, #{mptip,jdbcType=VARCHAR}, 
+      #{height,jdbcType=DOUBLE}, #{poiid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjfu.forestfiremonitor.entity.Monitor" >
+    insert into monitortable
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mptid != null" >
+        mptID,
+      </if>
+      <if test="mptname != null" >
+        mptName,
+      </if>
+      <if test="mptip != null" >
+        mptIP,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="poiid != null" >
+        poiID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mptid != null" >
+        #{mptid,jdbcType=INTEGER},
+      </if>
+      <if test="mptname != null" >
+        #{mptname,jdbcType=VARCHAR},
+      </if>
+      <if test="mptip != null" >
+        #{mptip,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="poiid != null" >
+        #{poiid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjfu.forestfiremonitor.entity.Monitor" >
+    update monitortable
+    <set >
+      <if test="mptname != null" >
+        mptName = #{mptname,jdbcType=VARCHAR},
+      </if>
+      <if test="mptip != null" >
+        mptIP = #{mptip,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="poiid != null" >
+        poiID = #{poiid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where mptID = #{mptid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjfu.forestfiremonitor.entity.Monitor" >
+    update monitortable
+    set mptName = #{mptname,jdbcType=VARCHAR},
+      mptIP = #{mptip,jdbcType=VARCHAR},
+      height = #{height,jdbcType=DOUBLE},
+      poiID = #{poiid,jdbcType=INTEGER}
+    where mptID = #{mptid,jdbcType=INTEGER}
+  </update>
+</mapper>

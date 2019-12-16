@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bjfu.forestfiremonitor.dao.POIMapper" >
+  <resultMap id="BaseResultMap" type="com.bjfu.forestfiremonitor.entity.POI" >
+    <id column="poiID" property="poiid" jdbcType="INTEGER" />
+    <result column="poiPixX" property="poipixx" jdbcType="INTEGER" />
+    <result column="poiPixY" property="poipixy" jdbcType="INTEGER" />
+    <result column="poiType" property="poitype" jdbcType="INTEGER" />
+    <result column="rotID" property="rotid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    poiID, poiPixX, poiPixY, poiType, rotID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from poitable
+    where poiID = #{poiid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from poitable
+    where poiID = #{poiid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bjfu.forestfiremonitor.entity.POI" >
+    insert into poitable (poiID, poiPixX, poiPixY, 
+      poiType, rotID)
+    values (#{poiid,jdbcType=INTEGER}, #{poipixx,jdbcType=INTEGER}, #{poipixy,jdbcType=INTEGER}, 
+      #{poitype,jdbcType=INTEGER}, #{rotid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjfu.forestfiremonitor.entity.POI" >
+    insert into poitable
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="poiid != null" >
+        poiID,
+      </if>
+      <if test="poipixx != null" >
+        poiPixX,
+      </if>
+      <if test="poipixy != null" >
+        poiPixY,
+      </if>
+      <if test="poitype != null" >
+        poiType,
+      </if>
+      <if test="rotid != null" >
+        rotID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="poiid != null" >
+        #{poiid,jdbcType=INTEGER},
+      </if>
+      <if test="poipixx != null" >
+        #{poipixx,jdbcType=INTEGER},
+      </if>
+      <if test="poipixy != null" >
+        #{poipixy,jdbcType=INTEGER},
+      </if>
+      <if test="poitype != null" >
+        #{poitype,jdbcType=INTEGER},
+      </if>
+      <if test="rotid != null" >
+        #{rotid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjfu.forestfiremonitor.entity.POI" >
+    update poitable
+    <set >
+      <if test="poipixx != null" >
+        poiPixX = #{poipixx,jdbcType=INTEGER},
+      </if>
+      <if test="poipixy != null" >
+        poiPixY = #{poipixy,jdbcType=INTEGER},
+      </if>
+      <if test="poitype != null" >
+        poiType = #{poitype,jdbcType=INTEGER},
+      </if>
+      <if test="rotid != null" >
+        rotID = #{rotid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where poiID = #{poiid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjfu.forestfiremonitor.entity.POI" >
+    update poitable
+    set poiPixX = #{poipixx,jdbcType=INTEGER},
+      poiPixY = #{poipixy,jdbcType=INTEGER},
+      poiType = #{poitype,jdbcType=INTEGER},
+      rotID = #{rotid,jdbcType=INTEGER}
+    where poiID = #{poiid,jdbcType=INTEGER}
+  </update>
+</mapper>

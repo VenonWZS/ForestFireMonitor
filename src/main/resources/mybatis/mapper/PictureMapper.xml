@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bjfu.forestfiremonitor.dao.PictureMapper" >
+  <resultMap id="BaseResultMap" type="com.bjfu.forestfiremonitor.entity.Picture" >
+    <id column="imgID" property="imgid" jdbcType="INTEGER" />
+    <result column="imgName" property="imgname" jdbcType="VARCHAR" />
+    <result column="imgRes" property="imgres" jdbcType="VARCHAR" />
+    <result column="imgSktUrl" property="imgskturl" jdbcType="VARCHAR" />
+    <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="imgType" property="imgtype" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="mptID" property="mptid" jdbcType="INTEGER" />
+    <result column="userID" property="userid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    imgID, imgName, imgRes, imgSktUrl, imgUrl, imgType, createTime, mptID, userID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from picturetable
+    where imgID = #{imgid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from picturetable
+    where imgID = #{imgid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bjfu.forestfiremonitor.entity.Picture" >
+    insert into picturetable (imgID, imgName, imgRes, 
+      imgSktUrl, imgUrl, imgType, 
+      createTime, mptID, userID
+      )
+    values (#{imgid,jdbcType=INTEGER}, #{imgname,jdbcType=VARCHAR}, #{imgres,jdbcType=VARCHAR}, 
+      #{imgskturl,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}, #{imgtype,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{mptid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjfu.forestfiremonitor.entity.Picture" >
+    insert into picturetable
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="imgid != null" >
+        imgID,
+      </if>
+      <if test="imgname != null" >
+        imgName,
+      </if>
+      <if test="imgres != null" >
+        imgRes,
+      </if>
+      <if test="imgskturl != null" >
+        imgSktUrl,
+      </if>
+      <if test="imgurl != null" >
+        imgUrl,
+      </if>
+      <if test="imgtype != null" >
+        imgType,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="mptid != null" >
+        mptID,
+      </if>
+      <if test="userid != null" >
+        userID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="imgid != null" >
+        #{imgid,jdbcType=INTEGER},
+      </if>
+      <if test="imgname != null" >
+        #{imgname,jdbcType=VARCHAR},
+      </if>
+      <if test="imgres != null" >
+        #{imgres,jdbcType=VARCHAR},
+      </if>
+      <if test="imgskturl != null" >
+        #{imgskturl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgtype != null" >
+        #{imgtype,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mptid != null" >
+        #{mptid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjfu.forestfiremonitor.entity.Picture" >
+    update picturetable
+    <set >
+      <if test="imgname != null" >
+        imgName = #{imgname,jdbcType=VARCHAR},
+      </if>
+      <if test="imgres != null" >
+        imgRes = #{imgres,jdbcType=VARCHAR},
+      </if>
+      <if test="imgskturl != null" >
+        imgSktUrl = #{imgskturl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        imgUrl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgtype != null" >
+        imgType = #{imgtype,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mptid != null" >
+        mptID = #{mptid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userID = #{userid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where imgID = #{imgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjfu.forestfiremonitor.entity.Picture" >
+    update picturetable
+    set imgName = #{imgname,jdbcType=VARCHAR},
+      imgRes = #{imgres,jdbcType=VARCHAR},
+      imgSktUrl = #{imgskturl,jdbcType=VARCHAR},
+      imgUrl = #{imgurl,jdbcType=VARCHAR},
+      imgType = #{imgtype,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      mptID = #{mptid,jdbcType=INTEGER},
+      userID = #{userid,jdbcType=INTEGER}
+    where imgID = #{imgid,jdbcType=INTEGER}
+  </update>
+</mapper>
