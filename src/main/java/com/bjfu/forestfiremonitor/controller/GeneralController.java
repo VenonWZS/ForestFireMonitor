@@ -13,4 +13,39 @@ public class GeneralController {
     }
     @GetMapping("/professorMainpage")
     public String professorMainpage(){return "ProfessorManagement/MainPage";}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @GetMapping("/statisticMain")
+    public String statisticMainpage(){return "ProfessorManagement/StatisticMain";}
+
+
+
+
+
 }
