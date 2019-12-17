@@ -1,7 +1,9 @@
 package com.bjfu.forestfiremonitor.dao;
 
 import com.bjfu.forestfiremonitor.entity.Video;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface VideoMapper {
     int deleteByPrimaryKey(Integer vidid);
 

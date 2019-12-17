@@ -5,8 +5,7 @@ import java.util.Date;
 public class Alarmrecord {
     private Integer arecid;
 
-    private Date alarmtime
-alarmtime;
+    private Date alarmtime;
 
     private Double optlattitude;
 
@@ -22,6 +21,14 @@ alarmtime;
 
     private Double hrzangle;
 
+    public Date getAlarmtime() {
+        return alarmtime;
+    }
+
+    public void setAlarmtime(Date alarmtime) {
+        this.alarmtime = alarmtime;
+    }
+
     private Integer userid;
 
     public Integer getArecid() {
@@ -32,19 +39,8 @@ alarmtime;
         this.arecid = arecid;
     }
 
-    public Date getAlarmtime
-alarmtime() {
-        return alarmtime
-alarmtime;
-    }
 
-    public void setAlarmtime
-alarmtime(Date alarmtime
-alarmtime) {
-        this.alarmtime
-alarmtime = alarmtime
-alarmtime;
-    }
+
 
     public Double getOptlattitude() {
         return optlattitude;

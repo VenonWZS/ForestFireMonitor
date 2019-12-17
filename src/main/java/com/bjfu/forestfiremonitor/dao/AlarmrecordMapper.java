@@ -1,7 +1,9 @@
 package com.bjfu.forestfiremonitor.dao;
 
 import com.bjfu.forestfiremonitor.entity.Alarmrecord;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AlarmrecordMapper {
     int deleteByPrimaryKey(Integer arecid);
 

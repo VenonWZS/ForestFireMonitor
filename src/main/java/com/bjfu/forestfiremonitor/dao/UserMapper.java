@@ -1,7 +1,9 @@
 package com.bjfu.forestfiremonitor.dao;
 
 import com.bjfu.forestfiremonitor.entity.User;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserMapper {
     int deleteByPrimaryKey(String userid);
 

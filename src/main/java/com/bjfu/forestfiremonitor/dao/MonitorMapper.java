@@ -1,7 +1,9 @@
 package com.bjfu.forestfiremonitor.dao;
 
 import com.bjfu.forestfiremonitor.entity.Monitor;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MonitorMapper {
     int deleteByPrimaryKey(Integer mptid);
 

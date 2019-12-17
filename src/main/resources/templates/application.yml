@@ -3,7 +3,7 @@ spring:
   datasource:
     username: ruangong
     password: root
-    url: jdbc:mysql://39.97.252.94:3306/ruangong?useSSL=false
+    url: jdbc:mysql://39.97.252.94:3306/ruangong
     driver-class-name: com.mysql.jdbc.Driver
 
 

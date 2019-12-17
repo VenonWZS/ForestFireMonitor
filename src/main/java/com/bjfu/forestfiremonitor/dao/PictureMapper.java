@@ -1,7 +1,9 @@
 package com.bjfu.forestfiremonitor.dao;
 
 import com.bjfu.forestfiremonitor.entity.Picture;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PictureMapper {
     int deleteByPrimaryKey(Integer imgid);
 
