@@ -13,4 +13,5 @@ public class GeneralController {
     }
     @GetMapping("/professorMainpage")
     public String professorMainpage(){return "ProfessorManagement/MainPage";}
+    //myctest
 }
