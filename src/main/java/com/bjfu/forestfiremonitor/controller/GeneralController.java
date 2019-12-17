@@ -15,34 +15,6 @@ public class GeneralController {
     public String professorMainpage(){return "ProfessorManagement/MainPage";}
     @GetMapping("/unconfirmed_alarm")
     public String unconfirmed_alarm(){return "ProfessorManagement/unconfirmed_alarm";}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @GetMapping("/statisticMain")
     public String statisticMainpage(){return "ProfessorManagement/StatisticMain";}
 
