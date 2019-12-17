@@ -20,15 +20,16 @@ public class LoginController {
         if(loginService.loginService(user))
         {
             session.setAttribute("sessionUser", user);
-            return "login/loginok";
+            return "ProfessorManagement/MainPage";
         }
         else
             return "login/loginfail";
     }
-
     @GetMapping("/login")
     public String login()
     {
         return "login/login";
     }
+
+
 }

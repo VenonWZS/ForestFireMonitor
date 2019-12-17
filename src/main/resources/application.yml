@@ -1,14 +1,24 @@
-#连接mysql数据库
+#mysql
 spring:
   datasource:
     username: ruangong
     password: root
     url: jdbc:mysql://39.97.252.94:3306/ruangong
     driver-class-name: com.mysql.jdbc.Driver
+  devtools:
+    restart:
+      enabled: true  #璁剧疆寮�鍚儹閮ㄧ讲
+      additional-paths: src/main/java #閲嶅惎鐩綍
+      exclude: WEB-INF/**
+    freemarker:
+      cache: false    #椤甸潰涓嶅姞杞界紦瀛橈紝淇敼鍗虫椂鐢熸晥
 
-
-##整合mybatis
+##mybatis
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
+
+
+
+
 
