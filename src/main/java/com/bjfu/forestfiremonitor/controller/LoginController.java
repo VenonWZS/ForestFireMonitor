@@ -20,10 +20,10 @@ public class LoginController {
         if(loginService.loginService(user))
         {
             session.setAttribute("sessionUser", user);
-            return "loginok";
+            return "login/loginok";
         }
         else
-            return "loginfail";
+            return "login/loginfail";
     }
 
     @GetMapping("/login")
