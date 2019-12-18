@@ -28,7 +28,7 @@ public class StatisticsController {
 
         List<Alarmrecord> alarmrecordList=statisticsService.getAlarmrecordByYear("2018");
 
-        model.addAttribute("uid","123");
+        model.addAttribute("uid","123");//
 
         return "ProfessorManagement/StatisticMain";
     }
