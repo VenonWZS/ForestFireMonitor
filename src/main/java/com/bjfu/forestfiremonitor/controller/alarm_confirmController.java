@@ -7,6 +7,7 @@ import com.bjfu.forestfiremonitor.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public class alarm_confirmController {
     @Autowired
     AlarmrecordMapper alarmrecordMapper;
-    @RequestMapping(value = "/professorManagement/unconfirmed_alarm", method = RequestMethod.GET)
+    @GetMapping(value = "/professorManagement/unconfirmed_alarm")
     public String list(Model model) {
 
         List<Alarmrecord> unconfirmedrecord = new ArrayList<>();
@@ -25,6 +26,6 @@ public class alarm_confirmController {
 
         model.addAttribute("unconfirmed", unconfirmedrecord);
 
-        return "/professorManagement/unconfirmed_alarm";
+        return "ProfessorManagement/unconfirmed_alarm";
     }
 }
