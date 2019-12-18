@@ -17,10 +17,16 @@ public class StatisticsController {
     @GetMapping(value = "/showStatistics")
     public String showStatistics(Model model){
 
-        HashMap<String,Integer> countMap=statisticsService.getCountByYear();
+        HashMap<String,Integer> countByYearMap=statisticsService.getCountByYear();
+        HashMap<String,HashMap<String, Integer>> countByMonthMap=statisticsService.getCountByMonth();
+        HashMap<String,HashMap<String, Integer>> countBySeasonMap=statisticsService.getCountBySeason();
 
-        model.addAttribute("countmap",countMap);
 
+
+
+        model.addAttribute("countbyyearmap",countByYearMap);
+        model.addAttribute("countbymonthmap",countByMonthMap);
+        model.addAttribute("countbyseasonmap",countBySeasonMap);
         return "ProfessorManagement/StatisticMain";
     }
     @GetMapping(value = "/getByYearStatistics")

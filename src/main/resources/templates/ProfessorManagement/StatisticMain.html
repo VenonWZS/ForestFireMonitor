@@ -10,7 +10,27 @@
 
 
 
-<p th:each="userhead : ${countmap}" th:text="${userhead.key} +'次数为'+ ${userhead.value}"></p>
+<h1 th:each="yearcount : ${countbyyearmap}" th:text="${yearcount.key} +'年次数为'+ ${yearcount.value}"></h1>
+<li th:each="monthcount : ${countbymonthmap}">
+    <h2 th:text="${monthcount.key}+'年各月火灾次数' "></h2>
+    <ul>
+        <li th:each="count : ${monthcount.value}">
+            <h3 th:text="${count.key} +'月 : '+${count.value}">aaa</h3>
+        </li>
+    </ul>
+</li>
+
+<li th:each="seasoncount : ${countbyseasonmap}">
+    <h2 th:text="${seasoncount.key}+'年各季度火灾次数' "></h2>
+    <ul>
+        <li th:each="count : ${seasoncount.value}">
+            <h3 th:text="${count.key} +' : '+${count.value}">aaa</h3>
+        </li>
+    </ul>
+</li>
+
+
+
 
 
 
