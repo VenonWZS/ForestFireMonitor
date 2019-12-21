@@ -9,9 +9,28 @@
 <body>
 
 
+<h1 style="color: #0307c9">这开始时“误”的统计情况</h1>
+<h2 th:each="yearcount : ${countbyyeardenymap}" th:text="${yearcount.key} +'年“误”次数为'+ ${yearcount.value}"></h2>
+<li th:each="monthcount : ${countbymonthdenymap}">
+    <h2 th:text="${monthcount.key}+'年各月“误”次数' "></h2>
+    <ul>
+        <li th:each="count : ${monthcount.value}">
+            <h3 th:text="${count.key} +'月 : '+${count.value}">aaa</h3>
+        </li>
+    </ul>
+</li>
+<li th:each="seasoncount : ${countbyseasondenymap}">
+    <h2 th:text="${seasoncount.key}+'年各季度“误”次数' "></h2>
+    <ul>
+        <li th:each="count : ${seasoncount.value}">
+            <h3 th:text="${count.key} +' : '+${count.value}">aaa</h3>
+        </li>
+    </ul>
+</li>
 
-<h1 th:each="yearcount : ${countbyyearmap}" th:text="${yearcount.key} +'年次数为'+ ${yearcount.value}"></h1>
-<li th:each="monthcount : ${countbymonthmap}">
+<h1 style="color: #c90000">这开始时“正”的统计情况</h1>
+<h2 th:each="yearcount : ${countbyyearconfirmmap}" th:text="${yearcount.key} +'年次数为'+ ${yearcount.value}"></h2>
+<li th:each="monthcount : ${countbymonthconfirmmap}">
     <h2 th:text="${monthcount.key}+'年各月火灾次数' "></h2>
     <ul>
         <li th:each="count : ${monthcount.value}">
@@ -19,8 +38,7 @@
         </li>
     </ul>
 </li>
-
-<li th:each="seasoncount : ${countbyseasonmap}">
+<li th:each="seasoncount : ${countbyseasonconfirmmap}">
     <h2 th:text="${seasoncount.key}+'年各季度火灾次数' "></h2>
     <ul>
         <li th:each="count : ${seasoncount.value}">
@@ -29,7 +47,24 @@
     </ul>
 </li>
 
-
+<h1 style="color: #11c907">这开始时“漏”的统计情况</h1>
+<h2 th:each="yearcount : ${countbyyearmissmap}" th:text="${yearcount.key} +'年“漏”次数为'+ ${yearcount.value}"></h2>
+<li th:each="monthcount : ${countbymonthmissmap}">
+    <h2 th:text="${monthcount.key}+'年各月“漏”次数' "></h2>
+    <ul>
+        <li th:each="count : ${monthcount.value}">
+            <h3 th:text="${count.key} +'月 : '+${count.value}">aaa</h3>
+        </li>
+    </ul>
+</li>
+<li th:each="seasoncount : ${countbyseasonmissmap}">
+    <h2 th:text="${seasoncount.key}+'年各季度“漏”次数' "></h2>
+    <ul>
+        <li th:each="count : ${seasoncount.value}">
+            <h3 th:text="${count.key} +' : '+${count.value}">aaa</h3>
+        </li>
+    </ul>
+</li>
 
 
 

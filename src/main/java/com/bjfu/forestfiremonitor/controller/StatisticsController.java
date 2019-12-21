@@ -17,14 +17,29 @@ public class StatisticsController {
     @GetMapping(value = "/showStatistics")
     public String showStatistics(Model model){
 
-        HashMap<String,Integer> countByYearMap=statisticsService.getCountByYear();
-        HashMap<String,HashMap<String, Integer>> countByMonthMap=statisticsService.getCountByMonth();
-        HashMap<String,HashMap<String, Integer>> countBySeasonMap=statisticsService.getCountBySeason();
+        HashMap<String,Integer> countByYearMissMap=statisticsService.getCountByYear(0);
+        HashMap<String,HashMap<String, Integer>> countByMonthMissMap=statisticsService.getCountByMonth(0);
+        HashMap<String,HashMap<String, Integer>> countBySeasonMissMap=statisticsService.getCountBySeason(0);
 
+        HashMap<String,Integer> countByYearDenyMap=statisticsService.getCountByYear(-1);
+        HashMap<String,HashMap<String, Integer>> countByMonthDenyMap=statisticsService.getCountByMonth(-1);
+        HashMap<String,HashMap<String, Integer>> countBySeasonDenyMap=statisticsService.getCountBySeason(-1);
 
-        model.addAttribute("countbyyearmap",countByYearMap);
-        model.addAttribute("countbymonthmap",countByMonthMap);
-        model.addAttribute("countbyseasonmap",countBySeasonMap);
+        HashMap<String,Integer> countByYearConfirmMap=statisticsService.getCountByYear(1);
+        HashMap<String,HashMap<String, Integer>> countByMonthConfirmMap=statisticsService.getCountByMonth(1);
+        HashMap<String,HashMap<String, Integer>> countBySeasonConfirmMap=statisticsService.getCountBySeason(1);
+
+        model.addAttribute("countbyyearmissmap",countByYearMissMap);
+        model.addAttribute("countbymonthmissmap",countByMonthMissMap);
+        model.addAttribute("countbyseasonmissmap",countBySeasonMissMap);
+
+        model.addAttribute("countbyyeardenymap",countByYearDenyMap);
+        model.addAttribute("countbymonthdenymap",countByMonthDenyMap);
+        model.addAttribute("countbyseasondenymap",countBySeasonDenyMap);
+
+        model.addAttribute("countbyyearconfirmmap",countByYearConfirmMap);
+        model.addAttribute("countbymonthconfirmmap",countByMonthConfirmMap);
+        model.addAttribute("countbyseasonconfirmmap",countBySeasonConfirmMap);
         return "ProfessorManagement/StatisticMain";
     }
     @GetMapping(value = "/getByYearStatistics")
