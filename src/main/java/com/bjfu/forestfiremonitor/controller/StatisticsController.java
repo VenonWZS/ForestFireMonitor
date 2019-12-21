@@ -22,8 +22,6 @@ public class StatisticsController {
         HashMap<String,HashMap<String, Integer>> countBySeasonMap=statisticsService.getCountBySeason();
 
 
-
-
         model.addAttribute("countbyyearmap",countByYearMap);
         model.addAttribute("countbymonthmap",countByMonthMap);
         model.addAttribute("countbyseasonmap",countBySeasonMap);
