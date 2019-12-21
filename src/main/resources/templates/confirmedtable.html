@@ -27,34 +27,34 @@
                 <div class="layui-card-header">数据表格的重载</div>
                 <div class="layui-card-body layui-form">
 
-                    <div class="test-table-reload-btn" style="margin-bottom: 10px;">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">上传用户</label>
-                            <div class="layui-input-inline">
-                                <input class="layui-input" placeholder="可选填" name="essayid" id="test-table-demoReload" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">资源名</label>
-                            <div class="layui-input-inline">
-                                <input class="layui-input" placeholder="可选填" name="essayname" id="resourcename" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">资源种类</label>
-                            <div class="layui-input-inline">
-                                <select name="label" id="resourcetype">
-                                    <option value="">请选择标签</option>
-                                    <option value="0">论文</option>
-                                    <option value="1">代码</option>
-                                    <option value="2">数据集</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <button class="layui-btn" data-type="reload">搜索</button>
-                        </div>
-                    </div>
+<!--                    <div class="test-table-reload-btn" style="margin-bottom: 10px;">-->
+<!--                        <div class="layui-inline">-->
+<!--                            <label class="layui-form-label">上传用户</label>-->
+<!--                            <div class="layui-input-inline">-->
+<!--                                <input class="layui-input" placeholder="可选填" name="essayid" id="test-table-demoReload" autocomplete="off">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="layui-inline">-->
+<!--                            <label class="layui-form-label">资源名</label>-->
+<!--                            <div class="layui-input-inline">-->
+<!--                                <input class="layui-input" placeholder="可选填" name="essayname" id="resourcename" autocomplete="off">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="layui-inline">-->
+<!--                            <label class="layui-form-label">资源种类</label>-->
+<!--                            <div class="layui-input-inline">-->
+<!--                                <select name="label" id="resourcetype">-->
+<!--                                    <option value="">请选择标签</option>-->
+<!--                                    <option value="0">论文</option>-->
+<!--                                    <option value="1">代码</option>-->
+<!--                                    <option value="2">数据集</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="layui-inline">-->
+<!--                            <button class="layui-btn" data-type="reload">搜索</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <table class="layui-hide" id="test-table-reload" lay-filter="test-table-reload"></table>
                     <script type="text/html" id="test-table-reload-barDemo">
@@ -85,7 +85,7 @@
             ,size: 'lg'
             ,even: true
             ,cols: [[
-                {field:'arecid', title: '报警记录号', sort: true, fixed: true}
+                {field:'arecid', title: '报警记录ID', sort: true, fixed: true}
                 ,{field:'alarmtime', title: '报警时间',sort: true}
                 ,{field:'optlattitude', title: '纬度'}
                 ,{field:'optlongtitude', title: '经度'}
