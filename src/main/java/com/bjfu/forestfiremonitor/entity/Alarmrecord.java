@@ -29,7 +29,7 @@ public class Alarmrecord {
         this.alarmtime = alarmtime;
     }
 
-    private Integer userid;
+    private String userid;
 
     public Integer getArecid() {
         return arecid;
@@ -98,11 +98,11 @@ public class Alarmrecord {
         this.hrzangle = hrzangle;
     }
 
-    public Integer getUserid() {
+    public String getUserid() {
         return userid;
     }
 
-    public void setUserid(Integer userid) {
+    public void setUserid(String userid) {
         this.userid = userid;
     }
 }

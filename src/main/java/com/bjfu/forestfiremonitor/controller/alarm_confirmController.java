@@ -180,7 +180,7 @@ public String bing(String uploaduserid,String isconfirm,String ishandle) throws 
     {
         for (int i = alarmrecordList.size() - 1; i >= 0; i--) {
             Alarmrecord ar=alarmrecordList.get(i);
-            if (!(ar.getUserid().toString()).equals(uploaduserid)) {
+            if (!(ar.getUserid()).equals(uploaduserid)) {
                 alarmrecordList.remove(ar);
             }
         }

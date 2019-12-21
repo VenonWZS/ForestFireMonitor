@@ -11,7 +11,7 @@
     <result column="isHandled" property="ishandled" jdbcType="INTEGER" />
     <result column="mptID" property="mptid" jdbcType="INTEGER" />
     <result column="hrzAngle" property="hrzangle" jdbcType="DOUBLE" />
-    <result column="userID" property="userid" jdbcType="INTEGER" />
+    <result column="userID" property="userid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     aRecId, alarmTime, optLattitude, optLongtitude, optHeight, isConfirm,
@@ -50,7 +50,7 @@
     values (#{arecid,jdbcType=INTEGER}, #{alarmtime,jdbcType=DATE}, #{optlattitude,jdbcType=DOUBLE},
       #{optlongtitude,jdbcType=DOUBLE}, #{optheight,jdbcType=DOUBLE}, #{isconfirm,jdbcType=INTEGER}, 
       #{ishandled,jdbcType=INTEGER}, #{mptid,jdbcType=INTEGER}, #{hrzangle,jdbcType=DOUBLE}, 
-      #{userid,jdbcType=INTEGER})
+      #{userid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bjfu.forestfiremonitor.entity.Alarmrecord" >
     insert into alarmrecordtable
@@ -115,7 +115,7 @@
         #{hrzangle,jdbcType=DOUBLE},
       </if>
       <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
+        #{userid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -147,7 +147,7 @@
         hrzAngle = #{hrzangle,jdbcType=DOUBLE},
       </if>
       <if test="userid != null" >
-        userID = #{userid,jdbcType=INTEGER},
+        userID = #{userid,jdbcType=VARCHAR},
       </if>
     </set>
     where aRecId = #{arecid,jdbcType=INTEGER}
@@ -163,7 +163,7 @@ alarmTime = #{alarmtime,jdbcType=DATE},
       isHandled = #{ishandled,jdbcType=INTEGER},
       mptID = #{mptid,jdbcType=INTEGER},
       hrzAngle = #{hrzangle,jdbcType=DOUBLE},
-      userID = #{userid,jdbcType=INTEGER}
+      userID = #{userid,jdbcType=VARCHAR}
     where aRecId = #{arecid,jdbcType=INTEGER}
   </update>
 </mapper>
