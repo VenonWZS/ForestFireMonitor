@@ -16,6 +16,7 @@ public class MediaService {
     @Autowired
     VideoMapper videoMapper;
 
+
     @Autowired
     PictureMapper pictureMapper;
 
@@ -31,6 +32,8 @@ public class MediaService {
         return videoMapper.selectByPrimaryKey(vidid);
     }
 
-
+    public Picture getPictureByID(Integer picid){
+        return pictureMapper.selectByPrimaryKey(picid);
+    }
 
 }

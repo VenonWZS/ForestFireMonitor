@@ -138,4 +138,10 @@ public class VideoController {
     {
         return "videotable";
     }
+
+    @GetMapping("/videodetailpage")
+    public String picturedetailpage()
+    {
+        return "videodetailpage";
+    }
 }
