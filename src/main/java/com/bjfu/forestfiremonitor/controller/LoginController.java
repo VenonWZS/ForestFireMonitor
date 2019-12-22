@@ -25,7 +25,10 @@ public class LoginController {
         else
             return "login/loginfail";
     }
-
+    @RequestMapping("/oldindex")
+    public String  oldindex(){
+        return "oldindex";
+    }
 
 
 }
