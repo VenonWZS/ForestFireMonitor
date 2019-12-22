@@ -201,11 +201,12 @@ public String bing(String uploaduserid,String isconfirm,String ishandle) throws 
 
 // @@@@@@@@@@@@@@@@@@@@表格内按钮事件接口@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-    //按钮查看详情数据接口
+    //按钮查看详情数据接口myc
     @RequestMapping(value = "/gettableid")
     @ResponseBody
     public String gettableid(@RequestParam Map<String,String> reqMap, HttpSession session){
-        String s=reqMap.get("arecid");
+        String s=reqMap.get("alecid");
+
 //        AllResource allResource=new AllResource();
 //        allResource.setId(Integer.parseInt(s));
 //        allResource.setWriter(reqMap.get("writer"));
