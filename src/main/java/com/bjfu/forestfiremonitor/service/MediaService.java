@@ -27,4 +27,10 @@ public class MediaService {
         return pictureMapper.allPicture();
     }
 
+    public Video getVideoByID(Integer vidid){
+        return videoMapper.selectByPrimaryKey(vidid);
+    }
+
+
+
 }
