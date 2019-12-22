@@ -1,7 +1,11 @@
 package com.bjfu.forestfiremonitor.dao;
 
 import com.bjfu.forestfiremonitor.entity.Log;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface LogMapper {
     int deleteByPrimaryKey(Integer logid);
 
@@ -14,4 +18,8 @@ public interface LogMapper {
     int updateByPrimaryKeySelective(Log record);
 
     int updateByPrimaryKey(Log record);
+
+    List<Log> getAllLog();
+
+    void insertLog(String userclass,int userid,String logContent);
 }

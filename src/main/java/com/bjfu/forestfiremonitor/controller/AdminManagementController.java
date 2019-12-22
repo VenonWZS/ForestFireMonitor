@@ -23,6 +23,7 @@ public class AdminManagementController {
 
     @Autowired
     AdminManagementService adminService;
+
     //用户表数据接口
     @RequestMapping(value = "/getuserdata")
     @ResponseBody
@@ -43,6 +44,7 @@ public class AdminManagementController {
 
 //        return null;
     }
+
     //表格搜索的数据接口
     @RequestMapping("/reloadusertable")
     @ResponseBody

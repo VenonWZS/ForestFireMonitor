@@ -16,7 +16,6 @@ public class LoginService {
         {
             System.out.println("nullo");
             return false;
-
         }
         else
         {
@@ -30,7 +29,6 @@ public class LoginService {
                 return false;
             }
         }
-
     }
 
 }
