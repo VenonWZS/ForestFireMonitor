@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>数据表格的重载 - 数据表格</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb">
+        <a lay-href="">主页</a>
+        <a><cite>组件</cite></a>
+        <a><cite>数据表格</cite></a>
+        <a><cite>数据表格的重载</cite></a>
+    </div>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">数据表格的重载</div>
+                <div class="layui-card-body layui-form">
+
+                    <div class="test-table-reload-btn" style="margin-bottom: 10px;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">视频名</label>
+                            <div class="layui-input-inline">
+                                <input class="layui-input" placeholder="可选填" name="essayid" id="test-table-demoReload" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">日期</label>
+                            <div class="layui-input-inline">
+                                <input class="layui-input" placeholder="可选填" name="essayname" id="resourcename" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">视频类型</label>
+                            <div class="layui-input-inline">
+                                <select name="label" id="resourcetype">
+                                    <option value="">请选择标签</option>
+                                    <option value="0">监控照片</option>
+                                    <option value="1">手动拍摄照片</option>
+                                    <option value="2">报警照片</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn" data-type="reload">搜索</button>
+                        </div>
+                    </div>
+
+                    <table class="layui-hide" id="test-table-reload" lay-filter="test-table-reload"></table>
+                    <script type="text/html" id="test-table-reload-barDemo">
+                        <a class="layui-btn layui-btn-radius layui-btn-sm" lay-event="detail">查看大图</a>
+                        <!--                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">注销用户</a>-->
+                        <!--                        <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="edit">推送火情</a>-->
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../../layuiadmin/layui/layui.js"></script>
+<script th:inline="none">
+    layui.config({
+        base: '../../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'table'], function(){
+        var table = layui.table;
+
+        //方法级渲染
+        table.render({
+            elem: '#test-table-reload'
+            ,url: 'getpicturedata'
+            ,size: 'lg'
+            ,even: true
+            ,cols: [[
+                {field:'imgid', title: '图片id', sort: true, fixed: true}
+                ,{field:'imgname', title: '图片名称',sort: true}
+                ,{field:'createtime', title: '拍摄时间'}
+                ,{field:'imgskturl', title: '视频物理地址'}
+                ,{field:'imgurl', title: '缩略图地址', sort: true}
+                ,{field:'imgtype', title: '视频类型', sort: true}
+                ,{field:'mptid', title: 'mptid', sort: true}
+                ,{field:'userid', title: '上传用户', sort: true}
+                ,{ width:200,title: '操作',align:'center', fixed: 'right', toolbar: '#test-table-reload-barDemo'}
+
+            ]]
+            ,page: false
+            ,height: 'full-200'
+        });
+
+        //监听工具条
+        table.on('tool(test-table-reload)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+
+                layui.$.ajax({
+                    cache:false,
+                    url:"getpictureDetail",
+                    async: false,
+                    type:"POST",
+                    dataType: "text",
+                    data:data,
+                    type:'POST',
+                    success :function (data) {
+                        layer.msg(data)
+                        //这后边写跳转到哪里
+                        //后边跳转到对应视频下边
+                        window.location.href = "/picturedetailpage"
+                    },
+                    error: function(){
+                        layer.msg("上传发生错误，请重新上传")
+                    }
+                });
+
+
+                //layer.msg('ID：'+ data.id + data.field);
+            } else if(obj.event === 'del'){
+                layer.confirm('是否确认此火情', function(index){
+                    //obj.del();
+                    layui.$.ajax({
+                        cache:false,
+                        url:"getDeleteUserConfirm",
+                        async: false,
+                        type:"POST",
+                        dataType: "text",
+                        data:data,
+                        type:'POST',
+                        success :function (data) {
+                            layer.msg(data)
+                            //这后边写跳转到哪里
+                            //后边跳转到对应视频下边
+                            //window.location.href = "/resourcedetailpage"
+                        },
+                        error: function(){
+                            layer.msg("发生错误，请重试")
+                        }
+                    });
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                layer.alert('编辑行：<br>'+ JSON.stringify(data))
+            }
+        });
+
+
+        var $ = layui.$, active = {
+            reload: function(){
+                var demoReload = $('#test-table-demoReload');
+                var resourcename=$('#resourcename');
+                var resourcetype=$('#resourcetype');
+
+                //执行重载
+                table.reload('test-table-reload', {
+                    url:'reloadpicturetable'
+                    ,page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+
+                        picturename: demoReload.val(),
+                        pictime:resourcename.val(),
+                        type:resourcetype.val()
+
+                    }
+                });
+
+            }
+        };
+
+        $('.test-table-reload-btn .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+    });
+</script>
+</body>
+</html>
