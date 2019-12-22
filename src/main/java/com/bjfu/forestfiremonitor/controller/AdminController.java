@@ -42,4 +42,6 @@ public class AdminController {
         session.setAttribute("users",users);
         return "AdminManagement/search_user";
     }
+
+
 }

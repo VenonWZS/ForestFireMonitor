@@ -21,4 +21,9 @@ public class AdminService {
     {
         userMapper.deleteByPrimaryKey(userid);
     }
+    public void ChangeUserInfo(User user)
+    {
+        userMapper.updateByPrimaryKey(user);
+    }
+
 }

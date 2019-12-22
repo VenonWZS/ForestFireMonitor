@@ -135,8 +135,9 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <form action="" name="form1">
+                                    <form name="form1">
                                     <tr th:each="c,State : ${session.users}">
+                                        <form th:name="${c.getUsername()}">
                                         <td><input name="userid" th:value="${c.getUserid()}" readonly="readonly"></td>
                                         <td th:text="${c.getUsername()}"></td>
                                         <td th:text="${c.getUserright()}"></td>
@@ -148,6 +149,7 @@
 <!--                                            <button type="submit" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>-->
 <!--                                            <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i><a href="/adminUserDelete"></a></button>-->
                                         </td>
+                                        </form>
                                     </tr>
                                     </form>
 <!--                                    <tr>-->
