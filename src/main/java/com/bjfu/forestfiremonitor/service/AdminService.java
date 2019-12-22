@@ -26,4 +26,18 @@ public class AdminService {
         userMapper.updateByPrimaryKey(user);
     }
 
+    public User getUserByName(String name)
+    {
+        User user = new User();
+        user =userMapper.selectByUserName(name);
+        return user;
+    }
+
+    public User getUserByID(String id)
+    {
+        User user = new User();
+        user =userMapper.selectByUserName(id);
+        return user;
+    }
+
 }
