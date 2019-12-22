@@ -3,6 +3,8 @@ package com.bjfu.forestfiremonitor.dao;
 import com.bjfu.forestfiremonitor.entity.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserMapper {
     int deleteByPrimaryKey(String userid);
@@ -16,4 +18,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<User> selectAllUser();
+
+
 }
