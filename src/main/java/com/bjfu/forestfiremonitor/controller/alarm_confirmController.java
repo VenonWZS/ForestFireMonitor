@@ -1,9 +1,10 @@
 package com.bjfu.forestfiremonitor.controller;
 
-import com.bjfu.forestfiremonitor.dao.AlarmrecordMapper;
-import com.bjfu.forestfiremonitor.dao.UserMapper;
+import com.bjfu.forestfiremonitor.dao.*;
 import com.bjfu.forestfiremonitor.entity.Alarmrecord;
+import com.bjfu.forestfiremonitor.entity.Picture;
 import com.bjfu.forestfiremonitor.entity.User;
+import com.bjfu.forestfiremonitor.entity.Video;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class alarm_confirmController {
 
         return "ProfessorManagement/unconfirmed_alarm";
     }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@页面路径配置@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@页面路径配置@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     //全部火情页面路径配置
     @GetMapping(value = "/searchtable")
     public String prosearchTable(Model model) {
@@ -65,7 +66,7 @@ public class alarm_confirmController {
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@页面路径配置结束@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
-//@@@@@@@@@@@@@@@@@@@@初始化数据接口@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@@@@@@@@@@@@@@@@@@@@初始化数据接口@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     //全部火情的数据接口
     @RequestMapping(value = "/gettabledata")
     @ResponseBody
@@ -142,70 +143,96 @@ public class alarm_confirmController {
     }
 //@@@@@@@@@@@@@@@@@@@@初始化数据接口结束@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-//
+    //
 //表格搜索的数据接口
-@RequestMapping("/reloadtable")
-@ResponseBody
-public String bing(String uploaduserid,String isconfirm,String ishandle) throws JsonProcessingException {
+    @RequestMapping("/reloadtable")
+    @ResponseBody
+    public String bing(String uploaduserid,String isconfirm,String ishandle) throws JsonProcessingException {
 
 
 
-    System.out.println(uploaduserid);
-    System.out.println(isconfirm);
-    System.out.println(ishandle);
-    List<Alarmrecord> alarmrecordList= alarmrecordMapper.selectAll();
-    //进行转json处理
+        System.out.println(uploaduserid);
+        System.out.println(isconfirm);
+        System.out.println(ishandle);
+        List<Alarmrecord> alarmrecordList= alarmrecordMapper.selectAll();
+        //进行转json处理
 
 
-    if(!isconfirm.equals(""))
-    {
-        for (int i = alarmrecordList.size() - 1; i >= 0; i--) {
+        if(!isconfirm.equals(""))
+        {
+            for (int i = alarmrecordList.size() - 1; i >= 0; i--) {
                 Alarmrecord ar=alarmrecordList.get(i);
                 if (!(ar.getIsconfirm().toString()).equals(isconfirm)) {
                     alarmrecordList.remove(ar);
                 }
             }
 
-    }
-    if(!ishandle.equals(""))
-    {
-        for (int i = alarmrecordList.size() - 1; i >= 0; i--) {
-            Alarmrecord ar=alarmrecordList.get(i);
-            if (!(ar.getIshandled().toString()).equals(ishandle)) {
-                alarmrecordList.remove(ar);
+        }
+        if(!ishandle.equals(""))
+        {
+            for (int i = alarmrecordList.size() - 1; i >= 0; i--) {
+                Alarmrecord ar=alarmrecordList.get(i);
+                if (!(ar.getIshandled().toString()).equals(ishandle)) {
+                    alarmrecordList.remove(ar);
+                }
             }
         }
-    }
-    if(!uploaduserid.equals(""))
-    {
-        for (int i = alarmrecordList.size() - 1; i >= 0; i--) {
-            Alarmrecord ar=alarmrecordList.get(i);
-            if (!(ar.getUserid()).equals(uploaduserid)) {
-                alarmrecordList.remove(ar);
+        if(!uploaduserid.equals(""))
+        {
+            for (int i = alarmrecordList.size() - 1; i >= 0; i--) {
+                Alarmrecord ar=alarmrecordList.get(i);
+                if (!(ar.getUserid()).equals(uploaduserid)) {
+                    alarmrecordList.remove(ar);
+                }
             }
         }
+
+
+        String jsonString="{\"code\":0,\"message\":\"ok\", \"count\":"+alarmrecordList.size()+",\"data\":";
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(alarmrecordList);
+        jsonString+=json;
+        jsonString+="}";
+        //System.out.println(jsonString);
+        return jsonString;
+
     }
-
-
-    String jsonString="{\"code\":0,\"message\":\"ok\", \"count\":"+alarmrecordList.size()+",\"data\":";
-    ObjectMapper mapper = new ObjectMapper();
-    String json = mapper.writeValueAsString(alarmrecordList);
-    jsonString+=json;
-    jsonString+="}";
-    //System.out.println(jsonString);
-    return jsonString;
-
-}
 
 //
 
 // @@@@@@@@@@@@@@@@@@@@表格内按钮事件接口@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     //按钮查看详情数据接口myc
+    @Autowired
+    AlarmVideoMapper alarmVideoMapper;
+    @Autowired
+    VideoMapper videoMapper;
+    @Autowired
+    AlarmPictureMapper alarmPictureMapper;
+    @Autowired
+    PictureMapper pictureMapper;
     @RequestMapping(value = "/gettableid")
     @ResponseBody
     public String gettableid(@RequestParam Map<String,String> reqMap, HttpSession session){
         String s=reqMap.get("alecid");
+       List<Integer> videolist=alarmVideoMapper.selectbyarecid(Integer.parseInt(s));
+       List<Video> videos=new ArrayList<Video>();
+       for(int one:videolist)
+       {
+           Video video=videoMapper.selectByPrimaryKey(one);
+           videos.add(video);
+       }
+       session.setAttribute("videos",videos);
+
+        List<Integer> imglist=alarmPictureMapper.selectbyarecid(Integer.parseInt(s));
+        List<Picture> pictures=new ArrayList<Picture>();
+        for(int one:imglist)
+        {
+            Picture picture=pictureMapper.selectByPrimaryKey(one);
+            pictures.add(picture);
+        }
+
+        session.setAttribute("pictures",pictures);
 
 //        AllResource allResource=new AllResource();
 //        allResource.setId(Integer.parseInt(s));
@@ -228,8 +255,11 @@ public String bing(String uploaduserid,String isconfirm,String ishandle) throws 
     @ResponseBody
     public  String getConfirm(@RequestParam Map<String,String> reqMap)
     {
-        String s=reqMap.get("arecid");
 
+        String s=reqMap.get("arecid");
+        Alarmrecord alarmrecord=alarmrecordMapper.selectByPrimaryKey(Integer.parseInt(s));
+        alarmrecord.setIsconfirm(1);
+        alarmrecordMapper.updateByPrimaryKey(alarmrecord);
         System.out.println(s);
         return "上传成功，请刷新页面查看";
     }
