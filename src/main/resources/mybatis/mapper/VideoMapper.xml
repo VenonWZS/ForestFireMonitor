@@ -14,6 +14,19 @@
   <sql id="Base_Column_List" >
     vidID, vidName, vidStartTime, vipUrl, vidSkchImgUrl, vidType, mptID, userID
   </sql>
+
+  <select id="allVideo" resultType="com.bjfu.forestfiremonitor.entity.Video">
+    select * from videotable
+  </select>
+
+
+
+  <select id="selectByName" resultType="Video" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+    from videotable
+    where vidName = #{videoName,jdbcType=VARCHAR}
+
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
