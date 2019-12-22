@@ -18,7 +18,7 @@
     select 
     <include refid="Base_Column_List" />
     from usertable
-    where user = #{userid,jdbcType=VARCHAR}
+    where userID = #{userid,jdbcType=VARCHAR}
   </select>
 
   <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
