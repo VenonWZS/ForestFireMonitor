@@ -132,7 +132,6 @@ public class VideoController {
         System.out.println(s);
         return "后台得到了id："+s;
     }
-
     @GetMapping("/videotable")
     public String videotable()
     {
