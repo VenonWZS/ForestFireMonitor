@@ -121,7 +121,25 @@
 
                         </dl>
                     </li>
+                    <!--火情统计-->
+                    <li data-name="home" class="layui-nav-item ">
+                        <a href="javascript:;" lay-tips="主页" lay-direction="2">
+                            <i class="layui-icon layui-icon-home"></i>
+                            <cite>火情统计</cite>
+                        </a>
 
+                        <dl class="layui-nav-child">
+                            <dd data-name="console">
+                                <a lay-href="videotable">年统计</a>
+                            </dd>
+                            <dd data-name="console">
+                                <a lay-href="picturetable">季度统计</a>
+                            </dd>
+                            <dd data-name="console">
+                                <a lay-href="picturetable">月统计</a>
+                            </dd>
+                        </dl>
+                    </li>
                     <!--个人中心-->
                     <li data-name="home" class="layui-nav-item ">
                         <a href="javascript:;" lay-tips="主页" lay-direction="2">
@@ -142,6 +160,8 @@
                         </dl>
                     </li>
 
+
+
                     <!--用户设置-->
                     <li data-name="user" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="用户" lay-direction="2">
@@ -153,7 +173,7 @@
                                 <a lay-href="adminpage">信息管理</a>
                             </dd>
                             <dd>
-                                <a lay-href="user/administrators/list.html">日志管理</a>
+                                <a lay-href="logtable">日志管理</a>
                             </dd>
 
                         </dl>

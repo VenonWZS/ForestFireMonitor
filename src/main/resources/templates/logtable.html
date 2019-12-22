@@ -81,21 +81,21 @@
         //方法级渲染
         table.render({
             elem: '#test-table-reload'
-            ,url: 'getmissdata'
+            ,url: 'getlogdata'
             ,size: 'lg'
             ,even: true
             ,cols: [[
-                {field:'arecid', title: '报警记录号', sort: true, fixed: true}
-                ,{field:'alarmtime', title: '报警时间',sort: true}
-                ,{field:'optlattitude', title: '纬度'}
-                ,{field:'optlongtitude', title: '经度'}
-                ,{field:'optheight', title: '高度', sort: true}
-                ,{field:'isconfirm', title: '是否确认', sort: true}
-                ,{field:'ishandled', title: '是否被解决', sort: true}
-                ,{field:'mptid', title: 'mptid'}
-                ,{field:'hrzangle', title: '旋转角度', sort: true}
-                ,{field:'userid', title: '报警用户', sort: true}
-                ,{ width:200,title: '操作',align:'center', fixed: 'right', toolbar: '#test-table-reload-barDemo'}
+                {field:'logid', title: '日志ID', sort: true, fixed: true}
+                ,{field:'logtime', title: '操作时间',sort: true}
+                ,{field:'loguserid', title: '操作用户id'}
+                ,{field:'logcontent', title: '操作详情'}
+                ,{field:'logclass', title: '操作用户身份', sort: true}
+                // ,{field:'isconfirm', title: '是否确认', sort: true}
+                // ,{field:'ishandled', title: '是否被解决', sort: true}
+                // ,{field:'mptid', title: 'mptid'}
+                // ,{field:'hrzangle', title: '旋转角度', sort: true}
+                // ,{field:'userid', title: '报警用户', sort: true}
+                // ,{ width:200,title: '操作',align:'center', fixed: 'right', toolbar: '#test-table-reload-barDemo'}
 
             ]]
             ,page: false
