@@ -18,8 +18,16 @@
     select 
     <include refid="Base_Column_List" />
     from usertable
-    where userID = #{userid,jdbcType=VARCHAR}
+    where user = #{userid,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from usertable
+    where userName = #{username,jdbcType=VARCHAR}
+  </select>
+
   <select id="selectAllUser" resultType="com.bjfu.forestfiremonitor.entity.User" >
     select * from usertable
   </select>
