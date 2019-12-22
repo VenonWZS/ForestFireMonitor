@@ -17,6 +17,8 @@ public class GeneralController {
     public String unconfirmed_alarm(){return "ProfessorManagement/unconfirmed_alarm";}
     @GetMapping("/statisticMain")
     public String statisticMainpage(){return "ProfessorManagement/StatisticMain";}
+    @GetMapping("/zshmain")
+    public String zshpage() {return "ProfessorManagement/index";}
 
     //myctest
 }

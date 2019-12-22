@@ -16,7 +16,6 @@ public class LoginService {
         {
             System.out.println("nullo");
             return false;
-
         }
         else
         {
