@@ -15,6 +15,12 @@
   <sql id="Base_Column_List" >
     imgID, imgName, imgRes, imgSktUrl, imgUrl, imgType, createTime, mptID, userID
   </sql>
+  <select id="allPicture" resultType="com.bjfu.forestfiremonitor.entity.Picture" >
+    select
+    <include refid="Base_Column_List" />
+    from picturetable
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
