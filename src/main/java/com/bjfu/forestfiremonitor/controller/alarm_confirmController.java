@@ -213,16 +213,17 @@ public class alarm_confirmController {
     PictureMapper pictureMapper;
     @RequestMapping(value = "/gettableid")
     @ResponseBody
-    public String gettableid(@RequestParam Map<String,String> reqMap, HttpSession session){
+    public String gettableid(@RequestParam Map<String,String> reqMap, HttpSession session)
+    {
         String s=reqMap.get("alecid");
-       List<Integer> videolist=alarmVideoMapper.selectbyarecid(Integer.parseInt(s));
-       List<Video> videos=new ArrayList<Video>();
-       for(int one:videolist)
-       {
-           Video video=videoMapper.selectByPrimaryKey(one);
-           videos.add(video);
-       }
-       session.setAttribute("videos",videos);
+        List<Integer> videolist=alarmVideoMapper.selectbyarecid(Integer.parseInt(s));
+        List<Video> videos=new ArrayList<Video>();
+        for(int one:videolist)
+        {
+            Video video=videoMapper.selectByPrimaryKey(one);
+            videos.add(video);
+        }
+        session.setAttribute("videos",videos);
 
         List<Integer> imglist=alarmPictureMapper.selectbyarecid(Integer.parseInt(s));
         List<Picture> pictures=new ArrayList<Picture>();
