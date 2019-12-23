@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+</head>
+<body>
+<table>
+    <tr><td>No.</td><td>UID</td><td>姓名</td><td>年龄</td><td>偶数</td><td>奇数</td></tr>
+    <tr th:each="one,memberStat:${unconfirmed}">
+        <td th:text="${one.arecid}"/>
+        <td th:text="${one.alarmtime}"/>
+        <td th:text="${one.optlattitude}"/>
+        <td th:text="${one.optlongtitude}"/>
+        <td th:text="${one.optheight}"/>
+        <td th:text="${one.isconfirm}"/>
+        <td th:text="${one.ishandled}"/>
+        <td th:text="${one.mptid}"/>
+        <td th:text="${one.hrzangle}"/>
+        <td th:text="${one.userid}"/>
+    </tr>
+</table>
+</body>
+</html>

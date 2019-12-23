@@ -13,5 +13,13 @@ public class GeneralController {
     }
     @GetMapping("/professorMainpage")
     public String professorMainpage(){return "ProfessorManagement/MainPage";}
-    //myctest
+    @GetMapping("/unconfirmed_alarm")
+    public String unconfirmed_alarm(){return "ProfessorManagement/unconfirmed_alarm";}
+    @GetMapping("/statisticMain")
+    public String statisticMainpage(){return "ProfessorManagement/StatisticMain";}
+
+
+
+
+
 }

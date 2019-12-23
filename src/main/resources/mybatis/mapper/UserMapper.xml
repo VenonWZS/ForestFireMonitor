@@ -20,6 +20,17 @@
     from usertable
     where userID = #{userid,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from usertable
+    where userName = #{username,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllUser" resultType="com.bjfu.forestfiremonitor.entity.User" >
+    select * from usertable
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from usertable
     where userID = #{userid,jdbcType=VARCHAR}

@@ -25,10 +25,9 @@ public class LoginController {
         else
             return "login/loginfail";
     }
-    @GetMapping("/login")
-    public String login()
-    {
-        return "login/login";
+    @RequestMapping("/oldindex")
+    public String  oldindex(){
+        return "oldindex";
     }
 
 

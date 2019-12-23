@@ -3,9 +3,7 @@
 <mapper namespace="com.bjfu.forestfiremonitor.dao.AlarmrecordMapper" >
   <resultMap id="BaseResultMap" type="com.bjfu.forestfiremonitor.entity.Alarmrecord" >
     <id column="aRecId" property="arecid" jdbcType="INTEGER" />
-    <result column="alarmTime
-alarmTime" property="alarmtime
-alarmtime" jdbcType="TIMESTAMP" />
+    <result column="alarmTime" property="alarmtime" jdbcType="DATE" />
     <result column="optLattitude" property="optlattitude" jdbcType="DOUBLE" />
     <result column="optLongtitude" property="optlongtitude" jdbcType="DOUBLE" />
     <result column="optHeight" property="optheight" jdbcType="DOUBLE" />
@@ -13,11 +11,10 @@ alarmtime" jdbcType="TIMESTAMP" />
     <result column="isHandled" property="ishandled" jdbcType="INTEGER" />
     <result column="mptID" property="mptid" jdbcType="INTEGER" />
     <result column="hrzAngle" property="hrzangle" jdbcType="DOUBLE" />
-    <result column="userID" property="userid" jdbcType="INTEGER" />
+    <result column="userID" property="userid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    aRecId, alarmTime
-alarmTime, optLattitude, optLongtitude, optHeight, isConfirm, 
+    aRecId, alarmTime, optLattitude, optLongtitude, optHeight, isConfirm,
     isHandled, mptID, hrzAngle, userID
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -26,21 +23,34 @@ alarmTime, optLattitude, optLongtitude, optHeight, isConfirm,
     from alarmrecordtable
     where aRecId = #{arecid,jdbcType=INTEGER}
   </select>
+    <select id="selectAll" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from alarmrecordtable
+
+    </select>
+
+    <select id="selectByisConfirm" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from alarmrecordtable
+        where isConfirm = #{isconfirm,jdbcType=INTEGER}
+    </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from alarmrecordtable
     where aRecId = #{arecid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.bjfu.forestfiremonitor.entity.Alarmrecord" >
-    insert into alarmrecordtable (aRecId, alarmTime
-alarmTime, optLattitude, 
+    insert into alarmrecordtable (aRecId, alarmTime, optLattitude,
       optLongtitude, optHeight, isConfirm, 
       isHandled, mptID, hrzAngle, 
       userID)
-    values (#{arecid,jdbcType=INTEGER}, #{alarmtime
-alarmtime,jdbcType=TIMESTAMP}, #{optlattitude,jdbcType=DOUBLE}, 
+    values (#{arecid,jdbcType=INTEGER}, #{alarmtime,jdbcType=DATE}, #{optlattitude,jdbcType=DOUBLE},
       #{optlongtitude,jdbcType=DOUBLE}, #{optheight,jdbcType=DOUBLE}, #{isconfirm,jdbcType=INTEGER}, 
       #{ishandled,jdbcType=INTEGER}, #{mptid,jdbcType=INTEGER}, #{hrzangle,jdbcType=DOUBLE}, 
-      #{userid,jdbcType=INTEGER})
+      #{userid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bjfu.forestfiremonitor.entity.Alarmrecord" >
     insert into alarmrecordtable
@@ -48,10 +58,8 @@ alarmtime,jdbcType=TIMESTAMP}, #{optlattitude,jdbcType=DOUBLE},
       <if test="arecid != null" >
         aRecId,
       </if>
-      <if test="alarmtime
-alarmtime != null" >
-        alarmTime
-alarmTime,
+      <if test="alarmtime != null" >
+        alarmTime,
       </if>
       <if test="optlattitude != null" >
         optLattitude,
@@ -82,10 +90,8 @@ alarmTime,
       <if test="arecid != null" >
         #{arecid,jdbcType=INTEGER},
       </if>
-      <if test="alarmtime
-alarmtime != null" >
-        #{alarmtime
-alarmtime,jdbcType=TIMESTAMP},
+      <if test="alarmtime != null" >
+        #{alarmtime,jdbcType=DATE},
       </if>
       <if test="optlattitude != null" >
         #{optlattitude,jdbcType=DOUBLE},
@@ -109,18 +115,15 @@ alarmtime,jdbcType=TIMESTAMP},
         #{hrzangle,jdbcType=DOUBLE},
       </if>
       <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
+        #{userid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.bjfu.forestfiremonitor.entity.Alarmrecord" >
     update alarmrecordtable
     <set >
-      <if test="alarmtime
-alarmtime != null" >
-        alarmTime
-alarmTime = #{alarmtime
-alarmtime,jdbcType=TIMESTAMP},
+      <if test="alarmtime != null" >
+        alarmTime = #{alarmtime,jdbcType=DATE},
       </if>
       <if test="optlattitude != null" >
         optLattitude = #{optlattitude,jdbcType=DOUBLE},
@@ -144,7 +147,7 @@ alarmtime,jdbcType=TIMESTAMP},
         hrzAngle = #{hrzangle,jdbcType=DOUBLE},
       </if>
       <if test="userid != null" >
-        userID = #{userid,jdbcType=INTEGER},
+        userID = #{userid,jdbcType=VARCHAR},
       </if>
     </set>
     where aRecId = #{arecid,jdbcType=INTEGER}
@@ -152,8 +155,7 @@ alarmtime,jdbcType=TIMESTAMP},
   <update id="updateByPrimaryKey" parameterType="com.bjfu.forestfiremonitor.entity.Alarmrecord" >
     update alarmrecordtable
     set alarmTime
-alarmTime = #{alarmtime
-alarmtime,jdbcType=TIMESTAMP},
+alarmTime = #{alarmtime,jdbcType=DATE},
       optLattitude = #{optlattitude,jdbcType=DOUBLE},
       optLongtitude = #{optlongtitude,jdbcType=DOUBLE},
       optHeight = #{optheight,jdbcType=DOUBLE},
@@ -161,7 +163,7 @@ alarmtime,jdbcType=TIMESTAMP},
       isHandled = #{ishandled,jdbcType=INTEGER},
       mptID = #{mptid,jdbcType=INTEGER},
       hrzAngle = #{hrzangle,jdbcType=DOUBLE},
-      userID = #{userid,jdbcType=INTEGER}
+      userID = #{userid,jdbcType=VARCHAR}
     where aRecId = #{arecid,jdbcType=INTEGER}
   </update>
 </mapper>

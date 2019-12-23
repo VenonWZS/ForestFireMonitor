@@ -5,6 +5,11 @@
     <id column="aRecID" property="arecid" jdbcType="INTEGER" />
     <id column="vidID" property="vidid" jdbcType="INTEGER" />
   </resultMap>
+  <select id="selectbyarecid" resultType="int" parameterType="int">
+    select vidID
+    from alarm_video
+    where aRecID = #{arecid,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.bjfu.forestfiremonitor.entity.AlarmVideoKey" >
     delete from alarm_video
     where aRecID = #{arecid,jdbcType=INTEGER}
