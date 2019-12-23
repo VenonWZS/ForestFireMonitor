@@ -20,5 +20,7 @@ public class GeneralController {
     public String statisticMainpage(){return "ProfessorManagement/StatisticMain";}
     @GetMapping("/zshmain")
     public String zshpage() {return "ProfessorManagement/index";}
+    @GetMapping("/zshshow")
+    public String showzsh() {return "stasticShow";}
 
 }
