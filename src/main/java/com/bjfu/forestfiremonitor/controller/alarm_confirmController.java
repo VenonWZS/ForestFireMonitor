@@ -223,7 +223,7 @@ public class alarm_confirmController {
             Video video=videoMapper.selectByPrimaryKey(one);
             videos.add(video);
         }
-        session.setAttribute("videos",videos);
+        session.setAttribute("RelatedVideos",videos);
 
         List<Integer> imglist=alarmPictureMapper.selectbyarecid(Integer.parseInt(s));
         List<Picture> pictures=new ArrayList<Picture>();
@@ -233,21 +233,8 @@ public class alarm_confirmController {
             pictures.add(picture);
         }
 
-        session.setAttribute("pictures",pictures);
+        session.setAttribute("RelatedPictures",pictures);
 
-//        AllResource allResource=new AllResource();
-//        allResource.setId(Integer.parseInt(s));
-//        allResource.setWriter(reqMap.get("writer"));
-//        allResource.setType(reqMap.get("type"));
-//        allResource.setUserid(reqMap.get("userid"));
-//        allResource.setUploadtime(reqMap.get("uploadtime"));
-//        allResource.setSummary(reqMap.get("summary"));
-//        allResource.setLocation(reqMap.get("location"));
-//        allResource.setSource(reqMap.get("source"));
-//        allResource.setName(reqMap.get("name"));
-//        allResource.setAreaname(reqMap.get("areaname"));
-//
-//        session.setAttribute("sessionDetailedAllResource",allResource);
         System.out.println(s);
         return "后台得到了id："+s;
     }
@@ -262,7 +249,7 @@ public class alarm_confirmController {
         alarmrecord.setIsconfirm(1);
         alarmrecordMapper.updateByPrimaryKey(alarmrecord);
         System.out.println(s);
-        return "上传成功，请刷新页面查看";
+        return "火情已确认，请刷新查看";
     }
 // @@@@@@@@@@@@@@@@@@@@表格内按钮事件接口结束@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 }
