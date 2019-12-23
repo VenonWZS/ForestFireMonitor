@@ -32,7 +32,7 @@ public class alarm_confirmController {
 
         return "ProfessorManagement/unconfirmed_alarm";
     }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@页面路径配置@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@页面路径配置@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     //全部火情页面路径配置
     @GetMapping(value = "/searchtable")
     public String prosearchTable(Model model) {
@@ -66,7 +66,7 @@ public class alarm_confirmController {
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@页面路径配置结束@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
-//@@@@@@@@@@@@@@@@@@@@初始化数据接口@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@@@@@@@@@@@@@@@@@@@@初始化数据接口@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     //全部火情的数据接口
     @RequestMapping(value = "/gettabledata")
     @ResponseBody
@@ -143,60 +143,60 @@ public class alarm_confirmController {
     }
 //@@@@@@@@@@@@@@@@@@@@初始化数据接口结束@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-//
+    //
 //表格搜索的数据接口
-@RequestMapping("/reloadtable")
-@ResponseBody
-public String bing(String uploaduserid,String isconfirm,String ishandle) throws JsonProcessingException {
+    @RequestMapping("/reloadtable")
+    @ResponseBody
+    public String bing(String uploaduserid,String isconfirm,String ishandle) throws JsonProcessingException {
 
 
 
-    System.out.println(uploaduserid);
-    System.out.println(isconfirm);
-    System.out.println(ishandle);
-    List<Alarmrecord> alarmrecordList= alarmrecordMapper.selectAll();
-    //进行转json处理
+        System.out.println(uploaduserid);
+        System.out.println(isconfirm);
+        System.out.println(ishandle);
+        List<Alarmrecord> alarmrecordList= alarmrecordMapper.selectAll();
+        //进行转json处理
 
 
-    if(!isconfirm.equals(""))
-    {
-        for (int i = alarmrecordList.size() - 1; i >= 0; i--) {
+        if(!isconfirm.equals(""))
+        {
+            for (int i = alarmrecordList.size() - 1; i >= 0; i--) {
                 Alarmrecord ar=alarmrecordList.get(i);
                 if (!(ar.getIsconfirm().toString()).equals(isconfirm)) {
                     alarmrecordList.remove(ar);
                 }
             }
 
-    }
-    if(!ishandle.equals(""))
-    {
-        for (int i = alarmrecordList.size() - 1; i >= 0; i--) {
-            Alarmrecord ar=alarmrecordList.get(i);
-            if (!(ar.getIshandled().toString()).equals(ishandle)) {
-                alarmrecordList.remove(ar);
+        }
+        if(!ishandle.equals(""))
+        {
+            for (int i = alarmrecordList.size() - 1; i >= 0; i--) {
+                Alarmrecord ar=alarmrecordList.get(i);
+                if (!(ar.getIshandled().toString()).equals(ishandle)) {
+                    alarmrecordList.remove(ar);
+                }
             }
         }
-    }
-    if(!uploaduserid.equals(""))
-    {
-        for (int i = alarmrecordList.size() - 1; i >= 0; i--) {
-            Alarmrecord ar=alarmrecordList.get(i);
-            if (!(ar.getUserid()).equals(uploaduserid)) {
-                alarmrecordList.remove(ar);
+        if(!uploaduserid.equals(""))
+        {
+            for (int i = alarmrecordList.size() - 1; i >= 0; i--) {
+                Alarmrecord ar=alarmrecordList.get(i);
+                if (!(ar.getUserid()).equals(uploaduserid)) {
+                    alarmrecordList.remove(ar);
+                }
             }
         }
+
+
+        String jsonString="{\"code\":0,\"message\":\"ok\", \"count\":"+alarmrecordList.size()+",\"data\":";
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(alarmrecordList);
+        jsonString+=json;
+        jsonString+="}";
+        //System.out.println(jsonString);
+        return jsonString;
+
     }
-
-
-    String jsonString="{\"code\":0,\"message\":\"ok\", \"count\":"+alarmrecordList.size()+",\"data\":";
-    ObjectMapper mapper = new ObjectMapper();
-    String json = mapper.writeValueAsString(alarmrecordList);
-    jsonString+=json;
-    jsonString+="}";
-    //System.out.println(jsonString);
-    return jsonString;
-
-}
 
 //
 
