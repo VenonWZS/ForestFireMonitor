@@ -8,6 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="../../../layuiadmin/style/admin.css" media="all">
+    <style>
+
+        .layui-table-view .layui-table[lay-size=lg] .layui-table-cell {
+            height: auto;
+            line-height: 40px;
+            text-align:center;
+
+        }
+        .layui-table img{
+            max-width:300px
+        }
+    </style>
 </head>
 <body>
 
@@ -83,9 +95,19 @@
             elem: '#test-table-reload'
             ,url: 'getpicturedata'
             ,size: 'lg'
-            ,even: true
+            ,even: false
             ,cols: [[
-                {field:'imgid', title: '图片id', sort: true, fixed: true}
+                {
+                    field: 'imgskturl',
+                    title: '缩略图',
+                    width:160,
+                    sort: true,
+                    templet: function(d){
+                        return '<div οnclick="show_img(this)" ><img src="'+d.imgskturl+'" alt="" height="90px" width="160px"></a></div>';
+                    },
+
+                }
+                ,{field:'imgid', title: '图片id', sort: true,}
                 ,{field:'imgname', title: '图片名称',sort: true}
                 ,{field:'createtime', title: '拍摄时间'}
                 ,{field:'imgskturl', title: '视频物理地址'}
@@ -93,11 +115,12 @@
                 ,{field:'imgtype', title: '视频类型', sort: true}
                 ,{field:'mptid', title: 'mptid', sort: true}
                 ,{field:'userid', title: '上传用户', sort: true}
-                ,{ width:200,title: '操作',align:'center', fixed: 'right', toolbar: '#test-table-reload-barDemo'}
+                ,{ width:200,title: '操作',align:'center',  toolbar: '#test-table-reload-barDemo'}
 
             ]]
             ,page: false
-            ,height: 'full-200'
+            ,height: 'full-150'
+            ,skin:'line'
         });
 
         //监听工具条

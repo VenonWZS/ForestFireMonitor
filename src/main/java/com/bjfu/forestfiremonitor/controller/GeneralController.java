@@ -23,4 +23,5 @@ public class GeneralController {
     @GetMapping("/zshshow")
     public String showzsh() {return "stasticShow";}
 
+
 }
