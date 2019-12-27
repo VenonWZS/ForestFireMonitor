@@ -22,6 +22,9 @@ public class GeneralController {
     public String zshpage() {return "ProfessorManagement/index";}
     @GetMapping("/zshshow")
     public String showzsh() {return "stasticShow";}
+    @GetMapping("/getlocation")
+    public String getlocation() {return "getlocation";}
+
 
 
 }

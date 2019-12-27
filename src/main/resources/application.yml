@@ -18,6 +18,11 @@ mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
 
+  ##push
+push:
+  appkey: 1ea3302dbc8f9e67e497c75c
+  secret: aa025a0f1bc7c7108fb4489d
+
 
 
 
