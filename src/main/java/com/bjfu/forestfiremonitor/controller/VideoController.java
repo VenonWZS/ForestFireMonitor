@@ -145,11 +145,5 @@ public class VideoController {
 
         return "videodetailpage";
     }
-    @GetMapping("/appvideotable")
-    public String appvideotable(Model model)
-    {
-        List<Video> videolist = mediaService.getAllVideo();
-        model.addAttribute(videolist);
-        return "appvideotable";
-    }
+
 }

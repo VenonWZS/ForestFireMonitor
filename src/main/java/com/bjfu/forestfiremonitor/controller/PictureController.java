@@ -144,12 +144,6 @@ public class PictureController {
     {
         return "picturedetailpage";
     }
-    @GetMapping("/apppicturetable")
-    public String apppicturetable(Model model)
-    {
-        List<Picture> picturelist = mediaService.getAllPicture();
-        model.addAttribute(picturelist);
-        return "apppicturetable";
-    }
+
 
 }

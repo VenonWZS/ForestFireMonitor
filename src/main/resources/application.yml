@@ -20,8 +20,8 @@ mybatis:
 
   ##push
 push:
-  appkey: 1ea3302dbc8f9e67e497c75c
-  secret: aa025a0f1bc7c7108fb4489d
+  appkey: e642cd56a37c2d5777bbc664
+  secret: 802ee1a8dd3fd21cb34f62f5
 
 
 
