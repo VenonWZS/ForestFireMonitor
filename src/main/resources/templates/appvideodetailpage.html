@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>视频详情</title>
+</head>
+<body>
+<div class="layui-fluid" style="font-size: 2em" >
+    <h3>视频详情</h3>
+    <p th:text="${detailvideo.getVidname()}"></p>
+    <video th:src="${detailvideo.getVipurl()}"></video>
+</div>
+
+</body>
+</html>

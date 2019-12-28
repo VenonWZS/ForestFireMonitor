@@ -43,4 +43,12 @@ public class AppGeneralController {
         model.addAttribute(picturelist);
         return "apppicturetable";
     }
+    @GetMapping(value = "/appvideodetailpage")
+    public String appvideodetailpage(Video video,Model model)
+    {
+        int id=video.getVidid();
+        video=mediaService.getVideoByID(id);
+        model.addAttribute("detailvideo",video);
+        return "appvideodetailpage";
+    }
 }

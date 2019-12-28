@@ -95,13 +95,13 @@
                     <span>森林火险视频监测系统</span>
                 </div>
 
-                <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+                <ul class="layui-nav layui-nav-tree"  id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
 
 
 
                     <!--资源管理-->
-                    <li data-name="template" class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="页面" lay-direction="2">
+                    <li data-name="template" class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;" lay-tips="页面">
                             <i class="layui-icon layui-icon-template"></i>
                             <cite>火情中心</cite>
                         </a>
@@ -122,36 +122,36 @@
                         </dl>
                     </li>
                     <!--火情统计-->
-                    <li data-name="home" class="layui-nav-item ">
-                        <a href="javascript:;" lay-tips="主页" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
+                    <li data-name="statistic" class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;" lay-tips="用户" >
+                            <i class="layui-icon layui-icon-user"></i>
                             <cite>火情统计</cite>
                         </a>
-
                         <dl class="layui-nav-child">
-                            <dd data-name="console">
-                                <a lay-href="videotable">年统计</a>
+                            <dd data-name="niantongji">
+                                <a lay-href="b">年统计</a>
                             </dd>
-                            <dd data-name="console">
-                                <a lay-href="picturetable">季度统计</a>
+                            <dd data-name="judutongji">
+                                <a lay-href="a">季度统计</a>
                             </dd>
-                            <dd data-name="console">
-                                <a lay-href="picturetable">月统计</a>
+                            <dd data-name="yuetongji">
+                                <a lay-href="c">月统计</a>
                             </dd>
+
                         </dl>
                     </li>
-                    <!--个人中心-->
-                    <li data-name="home" class="layui-nav-item ">
-                        <a href="javascript:;" lay-tips="主页" lay-direction="2">
+                    <!--影像数据-->
+                    <li data-name="yingxiang" class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;" lay-tips="影像">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>影像数据中心</cite>
                         </a>
 
                         <dl class="layui-nav-child">
-                            <dd data-name="console">
+                            <dd data-name="shipin">
                                 <a lay-href="videotable">视频数据</a>
                             </dd>
-                            <dd data-name="console">
+                            <dd data-name="tuxiang">
                                 <a lay-href="picturetable">图像数据</a>
                             </dd>
                         </dl>
@@ -159,8 +159,11 @@
 
 
 
+
+
+
                     <!--用户设置-->
-                    <li data-name="user" class="layui-nav-item">
+                    <li data-name="user" class="layui-nav-item layui-nav-itemed">
                         <a href="javascript:;" lay-tips="用户" lay-direction="2">
                             <i class="layui-icon layui-icon-user"></i>
                             <cite>用户管理</cite>
