@@ -6,11 +6,29 @@
     <title>视频详情</title>
 </head>
 <body>
-<div class="layui-fluid" style="font-size: 2em" >
-    <h3>视频详情</h3>
-    <p th:text="${detailvideo.getVidname()}"></p>
-    <video th:src="${detailvideo.getVipurl()}"></video>
+<div class="layui-fluid"  >
+    <div class="nav-collapse"><h1>视频详情</h1></div>
+    <div class="layui-col-lg1" >
+<!--        style="height: "-->
+        <video width="100%" height="auto" controls="controls" autoplay="autoplay">
+            <source th:src="${detailvideo.getVipurl()}" type="video/mp4" />
+            <source th:src="${detailvideo.getVipurl()}" type="video/ogg" />
+            <source th:src="${detailvideo.getVipurl()}" type="video/webm" />
+            <object th:src="${detailvideo.getVipurl()}" width="320" height="240">
+                <embed src="movie.swf" width="320" height="240" />
+            </object>
+        </video>
+    </div>
+    <div class="layui-word-aux" style="font-size: 2.1em;margin: 25px">
+        <h3 style="padding-bottom: 5px" th:text="${detailvideo.getVidname()}"></h3>
+        视频类型:<span th:text="${detailvideo.getVidtype()}"></span><br>
+        值班人员ID:<span th:text="${detailvideo.getUserid()}"></span><br>
+        视频拍摄时间:<span th:text="${detailvideo.getVidstarttime()}"></span><br>
+        拍摄该视频的监控点ID:<span th:text="${detailvideo.getMptid()}"></span><br>
+    </div>
+
 </div>
+
 
 </body>
 </html>

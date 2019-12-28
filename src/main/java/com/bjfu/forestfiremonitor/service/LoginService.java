@@ -11,7 +11,8 @@ public class LoginService {
     UserMapper userMapper;
     public boolean loginService(User user)
     {
-        User u=userMapper.selectByPrimaryKey(user.getUserid());
+        String userid=user.getUserid();
+        User u=userMapper.selectByPrimaryKey(userid);
         if(u==null)
         {
             System.out.println("nullo");

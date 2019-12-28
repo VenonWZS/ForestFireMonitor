@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片详情</title>
+</head>
+<body>
+<div class="layui-fluid"  >
+    <div class="nav-collapse"><h1>图片详情</h1></div>
+    <div class="layui-col-lg1">
+        <img th:src="${detailpicture.getImgurl()}" style="width: 100%; height: auto">
+    </div>
+    <div class="layui-word-aux" style="font-size: 2.1em;margin: 25px">
+        <h3 style="padding-bottom: 5px" th:text="${detailpicture.getImgname()}"></h3>
+        视频类型:<span th:text="${detailpicture.getImgtype()}"></span><br>
+        值班人员ID:<span th:text="${detailpicture.getUserid()}"></span><br>
+        视频拍摄时间:<span th:text="${detailpicture.getCreatetime()}"></span><br>
+        拍摄该图片的监控点ID:<span th:text="${detailpicture.getMptid()}"></span><br>
+    </div>
+
+</div>
+
+
+</body>
+</html>
