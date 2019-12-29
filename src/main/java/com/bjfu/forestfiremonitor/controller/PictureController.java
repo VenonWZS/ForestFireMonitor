@@ -120,7 +120,7 @@ public class PictureController {
     @RequestMapping(value = "/getpictureDetail")
     @ResponseBody
     public String getpictureDetail(@RequestParam Map<String,String> reqMap, HttpSession session){
-        String s=reqMap.get("picid");
+        String s=reqMap.get("imgid");
         //fzj这里把new一个picture然后放到session 起名字要保证别的地方用不到 sessionpictureToBeView
         //参照下边这个写
         Picture picture = new Picture();
