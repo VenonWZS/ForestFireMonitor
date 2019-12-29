@@ -12,20 +12,30 @@
 <body>
 
 <div class="layui-fluid" >
-    <div class="layui-row layui-col-space10" th:each="picture:${pictureList}">
-        <div class="layui-row" >
-            <div class="layui-card">
-                <div class="layui-col-sm6">
-                    <img th:src="${picture.getImgurl()}" width="100%" height="auto">
-                </div>
-                <div class="layui-col-sm6" style="font-size: 2.5em " >
-                    图片名称：<p th:text="${picture.getImgname()}"></p>
-                    上传时间：<p th:text="${picture.getCreatetime()}"></p>
-                </div>
+    <div class="layui-row layui-col-space30" th:each="picture,pictureStat:${pictureList}" th:name="picture">
+        <div class="layui-row" style="margin-bottom: 0.5em;">
+            <div class="layui-bg-white"style="font-size: 2.3em ;background-color: white">
+                <a th:href="@{/apppicturedetailpage(imgid=${picture.getImgid()})}">
+                    <div class="layui-col-sm5" style="height:280px ; background-color: white" >
+                        <img th:src="${picture.getImgurl()}" width="95%" height="85%" style="margin-top: 5.5%;margin-left: 0.5em">
+                    </div>
+                    <div class="layui-col-sm7"  style=" height:280px ; background-color: white;padding: 20px;" >
+                        <strong th:text="${picture.getImgname()}"></strong>
+                        <div class="layui-word-aux">
+                            值班人员：<span class="layui-word-aux" th:text="${picture.getUserid()}"></span>
+                            上传时间：<span class="layui-word-aux" th:text="${picture.getCreatetime()}"></span>
+                            截图类型：<span class="layui-word-aux" th:text="${picture.getImgtype()}"></span>
+                            ID：<span class="layui-word-aux" th:text="${picture.getImgid()}"></span>
+                        </div>
+                    </div>
+                </a>
             </div>
+            <br>
         </div>
     </div>
 
 </div>
+
+
 </body>
 </html>

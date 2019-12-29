@@ -215,7 +215,7 @@ public class alarm_confirmController {
     @ResponseBody
     public String gettableid(@RequestParam Map<String,String> reqMap, HttpSession session)
     {
-        String s=reqMap.get("alecid");
+        String s=reqMap.get("arecid");
         List<Integer> videolist=alarmVideoMapper.selectbyarecid(Integer.parseInt(s));
         List<Video> videos=new ArrayList<Video>();
         for(int one:videolist)
@@ -247,6 +247,7 @@ public class alarm_confirmController {
         String s=reqMap.get("arecid");
         Alarmrecord alarmrecord=alarmrecordMapper.selectByPrimaryKey(Integer.parseInt(s));
         alarmrecord.setIsconfirm(1);
+        //myc下边这句话报错
         alarmrecordMapper.updateByPrimaryKey(alarmrecord);
         System.out.println(s);
         return "火情已确认，请刷新查看";

@@ -114,4 +114,20 @@ public class StatisticsController {
     }
 
 
+    @GetMapping(value = "/statisticbyyear")
+    public String statisticbyyear (Model model)
+    {
+        return "statisticbyyear";
+    }
+    @GetMapping(value = "/statisticbyseason")
+    public String statisticbyseason (Model model)
+    {
+        return "statisticbyseason";
+    }
+    @GetMapping(value = "/statisticbymonth")
+    public String statisticbymonth (Model model)
+    {
+        return "statisticbymonth";
+    }
+
 }
