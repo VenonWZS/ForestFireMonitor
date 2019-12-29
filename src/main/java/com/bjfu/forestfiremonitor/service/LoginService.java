@@ -9,25 +9,34 @@ import org.springframework.stereotype.Service;
 public class LoginService {
     @Autowired
     UserMapper userMapper;
-    public boolean loginService(User user)
+
+
+    public User getLogin(User user)
     {
         User u=userMapper.selectByPrimaryKey(user.getUserid());
-        if(u==null)
+        if(u==null)//为空
         {
             System.out.println("nullo");
-            return false;
+            return null;
         }
-        else
+        else//不为空
         {
             if(u.getUserpwd().equals(user.getUserpwd()))
             {
                 System.out.println("passwordok");
-                return true;
+                return u;
             }
-            else {
+            else {//密码错误
                 System.out.println("passwordno");
-                return false;
+                return null;
             }
         }
+    }
+
+    public void getRegister(User user)
+    {
+
+        user.setUserright(-1);
+        userMapper.insert(user);
     }
 }
