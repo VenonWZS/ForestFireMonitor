@@ -44,6 +44,7 @@ public class AppGeneralController {
         //fzj@@@@@@在这写获得所有1.发出警报的火情（isconfirm==1 and ishandled==-1）2.待确认火情个数（isconfirmed==0）3.已处理火情个数（ishandled==1）4.alarmrecordtable总火情个数
         //四个int
         return "apptodo";
+
     }
     @GetMapping("/appacceptfire")
     public String appacceptfire()
