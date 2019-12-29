@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
-<html >
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="utf-8">
     <title>layuiAdmin 主页示例模板一</title>
@@ -15,17 +16,20 @@
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md8">
-            <div class="layui-card">
+            <div class="layui-card" th:each="unhandeled,unhandeledsStat:${unhandeleds}" >
 
                 <div class="layui-card-body">
                     <div class="layui-row layui-col-space10">
                         <div class="layui-col-xs12 layui-col-sm4">
-                            <div class="layuiadmin-card-text">
-                                <div class="layui-text-top"><i class="layui-icon layui-icon-water"></i>火情一</div>
+                            <div class="layuiadmin-card-text" >
+                                <div class="layui-text-top"><i class="layui-icon layui-icon-water"></i><span>报警记录ID </span><span th:text="${unhandeled.getArecid()}"></div>
                                 <hr class="layui-bg-green">
-                                <p style="line-height:1.8em">火情信息1</p>
-                                <p style="line-height:1.8em">火情信息2</p>
-                                <p style="line-height:1.8em">火情信息3</p>
+                                <strong style="line-height:1.8em">报警时间：</strong>
+                                <span style="line-height:1.8em" th:text="${unhandeled.getAlarmtime()}">火情信息1</span><br>
+                                <strong style="line-height:1.8em">巡值员工ID：</strong>
+                                <span style="line-height:1.8em" th:text="${unhandeled.getUserid()}">火情信息2</span><br>
+                                <strong style="line-height:1.8em">监控点ID：</strong>
+                                <span style="line-height:1.8em" th:text="${unhandeled.getMptid()}">火情信息3</span>
                                 <br>
                                 <button type="button" class="layui-btn layui-btn-danger layui-btn-fluid">接警</button>
                             </div>
@@ -45,6 +49,7 @@
     }).extend({
         index: 'lib/index' //主入口模块
     }).use(['index', 'sample']);
+    layui.use()
 </script>
 </body>
 </html>

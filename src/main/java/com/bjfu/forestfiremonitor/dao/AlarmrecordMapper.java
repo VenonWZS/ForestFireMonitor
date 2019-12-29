@@ -14,6 +14,7 @@ public interface AlarmrecordMapper {
     int insertSelective(Alarmrecord record);
 
     List<Alarmrecord> selectAll();
+
     Alarmrecord selectByPrimaryKey(Integer arecid);
 
     List<Alarmrecord> selectByisConfirm(Integer isconfirm);
@@ -22,4 +23,5 @@ public interface AlarmrecordMapper {
 
     int updateByPrimaryKey(Alarmrecord record);
 
+    List<Alarmrecord> selectunhandeleds();
 }

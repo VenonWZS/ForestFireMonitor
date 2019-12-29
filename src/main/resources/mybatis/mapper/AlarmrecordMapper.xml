@@ -166,4 +166,9 @@ alarmTime = #{alarmtime,jdbcType=DATE},
       userID = #{userid,jdbcType=VARCHAR}
     where aRecId = #{arecid,jdbcType=INTEGER}
   </update>
+  <select id="selectunhandeleds" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from ruangong.alarmrecordtable
+    where ruangong.alarmrecordtable.isHandled=-1
+  </select>
 </mapper>

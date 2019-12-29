@@ -1,10 +1,12 @@
 package com.bjfu.forestfiremonitor.controller;
 
+import com.bjfu.forestfiremonitor.entity.Alarmrecord;
 import com.bjfu.forestfiremonitor.entity.Picture;
 import com.bjfu.forestfiremonitor.entity.User;
 import com.bjfu.forestfiremonitor.entity.Video;
 import com.bjfu.forestfiremonitor.service.LoginService;
 import com.bjfu.forestfiremonitor.service.MediaService;
+import com.bjfu.forestfiremonitor.service.StatisticsService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class AppGeneralController {
@@ -26,32 +26,89 @@ public class AppGeneralController {
     MediaService mediaService;
     @Autowired
     LoginService loginService;
+    @Autowired
+    StatisticsService statisticsService;
+
     @GetMapping("/applogin")
     public String login()
     {
         return "applogin";
     }
     @GetMapping("/appindex")
-    public String appindex()
+    public String appindex(Model model)
     {
+        List<Alarmrecord> alarmrecordList = statisticsService.selectAll();
+        //所有火情个数
+        int allAlarm = alarmrecordList.size();
+        //发出警报的火情
+        int soundAlarm = 0;
+        //待确认火情个数
+        int unconfirmed = 0;
+        //已处理火情个数
+        int handledAlarm = 0;
+        for (Alarmrecord alarmrecord:alarmrecordList) {
+            if(alarmrecord.getIsconfirm() == 1 && alarmrecord.getIshandled() == -1){
+                soundAlarm++;
+            }
+            else if(alarmrecord.getIsconfirm() == 0){
+                unconfirmed++;
+            }
+            else if(alarmrecord.getIshandled() == 1){
+                handledAlarm++;
+            }
+        }
+        model.addAttribute("allAlarm",allAlarm);
+        model.addAttribute("soundAlarm",soundAlarm);
+        model.addAttribute("unconfirmed",unconfirmed);
+        model.addAttribute("handledAlarm",handledAlarm);
         //fzj@@@@@@在这写获得所有1.发出警报的火情（isconfirm==1 and ishandled==-1）2.待确认火情个数（isconfirmed==0）3.已处理火情个数（ishandled==1）4.alarmrecordtable总火情个数
         //四个int
         return "appindex";
     }
+
+
     @GetMapping("/apptodo")
-    public String apptodo()
+    public String apptodo(Model model)
     {
+        List<Alarmrecord> alarmrecordList = statisticsService.selectAll();
+        //所有火情个数
+        int allAlarm = alarmrecordList.size();
+        //发出警报的火情
+        int soundAlarm = 0;
+        //待确认火情个数
+        int unconfirmed = 0;
+        //已处理火情个数
+        int handledAlarm = 0;
+        for (Alarmrecord alarmrecord:alarmrecordList) {
+            if(alarmrecord.getIsconfirm() == 1 && alarmrecord.getIshandled() == -1){
+                soundAlarm++;
+            }
+            else if(alarmrecord.getIsconfirm() == 0){
+                unconfirmed++;
+            }
+            else if(alarmrecord.getIshandled() == 1){
+                handledAlarm++;
+            }
+        }
+        model.addAttribute("allAlarm",allAlarm);
+        model.addAttribute("soundAlarm",soundAlarm);
+        model.addAttribute("unconfirmed",unconfirmed);
+        model.addAttribute("handledAlarm",handledAlarm);
         //fzj@@@@@@在这写获得所有1.发出警报的火情（isconfirm==1 and ishandled==-1）2.待确认火情个数（isconfirmed==0）3.已处理火情个数（ishandled==1）4.alarmrecordtable总火情个数
         //四个int
         return "apptodo";
-
     }
-    @GetMapping("/appacceptfire")
-    public String appacceptfire()
+    @GetMapping(value = "/appacceptfire")
+    public String appacceptfire(Model model)
     {
+        List<Alarmrecord> unhandeleds = statisticsService.selectunhandeleds();
+
+        model.addAttribute("unhandeleds",unhandeleds);
         //fzj@@@@@@在这获取所有的ishandeled==-1的alarmrecord 形式为List<alarmrecord>传到model里在appacceptfire.html里进行循环显示,前端框架已经搭好了
         return "appacceptfire";
     }
+
+
     @GetMapping("/appunconfirmtable")
     public String appunconfirmtable()
     {
