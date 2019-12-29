@@ -256,7 +256,6 @@ public class alarm_confirmController {
     @ResponseBody
     public  String getConfirm(@RequestParam Map<String,String> reqMap)
     {
-
         String s=reqMap.get("arecid");
         Alarmrecord alarmrecord=alarmrecordMapper.selectByPrimaryKey(Integer.parseInt(s));
         alarmrecord.setIsconfirm(1);
