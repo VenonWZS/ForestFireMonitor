@@ -95,13 +95,13 @@
                     <span>森林火险视频监测系统</span>
                 </div>
 
-                <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+                <ul class="layui-nav layui-nav-tree"  id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
 
 
 
                     <!--资源管理-->
-                    <li data-name="template" class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="页面" lay-direction="2">
+                    <li data-name="template" class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;" lay-tips="页面">
                             <i class="layui-icon layui-icon-template"></i>
                             <cite>火情中心</cite>
                         </a>
@@ -121,39 +121,59 @@
 
                         </dl>
                     </li>
+                    <!--火情统计-->
+                    <li data-name="statistic" class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;" lay-tips="用户" >
+                            <i class="layui-icon layui-icon-user"></i>
+                            <cite>火情统计</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd data-name="niantongji">
+                                <a lay-href="statisticbyyear">年统计</a>
+                            </dd>
+                            <dd data-name="judutongji">
+                                <a lay-href="statisticbyseason">季度统计</a>
+                            </dd>
+                            <dd data-name="yuetongji">
+                                <a lay-href="statisticbymonth">月统计</a>
+                            </dd>
 
-                    <!--个人中心-->
-                    <li data-name="home" class="layui-nav-item ">
-                        <a href="javascript:;" lay-tips="主页" lay-direction="2">
+                        </dl>
+                    </li>
+                    <!--影像数据-->
+                    <li data-name="yingxiang" class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;" lay-tips="影像">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>影像数据中心</cite>
                         </a>
 
                         <dl class="layui-nav-child">
-                            <dd data-name="console">
-                                <a lay-href="resourcedetailpage">视频数据</a>
+                            <dd data-name="shipin">
+                                <a lay-href="videotable">视频数据</a>
                             </dd>
-                            <dd data-name="console">
-                                <a lay-href="home/homepage1.html">图像数据</a>
-                            </dd>
-                            <dd data-name="console">
-                                <a lay-href="home/homepage2.html">历史下载</a>
+                            <dd data-name="tuxiang">
+                                <a lay-href="picturetable">图像数据</a>
                             </dd>
                         </dl>
                     </li>
 
+
+
+
+
+
                     <!--用户设置-->
-                    <li data-name="user" class="layui-nav-item">
+                    <li data-name="user" class="layui-nav-item layui-nav-itemed">
                         <a href="javascript:;" lay-tips="用户" lay-direction="2">
                             <i class="layui-icon layui-icon-user"></i>
-                            <cite>用户设置</cite>
+                            <cite>用户管理</cite>
                         </a>
                         <dl class="layui-nav-child">
                             <dd>
-                                <a lay-href="user/user/list.html">基本资料</a>
+                                <a lay-href="adminpage">信息管理</a>
                             </dd>
                             <dd>
-                                <a lay-href="user/administrators/list.html">修改密码</a>
+                                <a lay-href="logtable">日志管理</a>
                             </dd>
 
                         </dl>

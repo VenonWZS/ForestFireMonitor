@@ -29,21 +29,14 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <div class="layui-card-header"> <a href="videotable" class=" layui-btn layui-btn-normal">返回</a></div>
+                <div class="layui-card-header"> <a href="picturetable" class=" layui-btn layui-btn-normal">返回</a></div>
                 <div class="layui-card-body">
-<!--                    <blockquote class="layui-elem-quote" >火情视频</blockquote>-->
-<!--                    <br>-->
+                    <!--                    <blockquote class="layui-elem-quote" >火情视频</blockquote>-->
+                    <!--                    <br>-->
                     <blockquote class="layui-elem-quote" th:text="${session.sessionVideoToBeView.getVidname()}"></blockquote>
                     <blockquote class="layui-elem-quote layui-quote-nm">
 
-                        <video width="100%" height="auto" controls="controls" autoplay="autoplay">
-                            <source th:src="${session.sessionVideoToBeView.getVipurl()}" type="video/mp4" />
-                            <source th:src="${session.sessionVideoToBeView.getVipurl()}" type="video/ogg" />
-                            <source th:src="${session.sessionVideoToBeView.getVipurl()}" type="video/webm" />
-                            <object th:src="${session.sessionVideoToBeView.getVipurl()}" width="320" height="240">
-                                <embed src="movie.swf" width="320" height="240" />
-                            </object>
-                        </video>
+                        <img th:src="${session.sessionPictureToBeView.getImgurl()}" style="width: 100%; height:auto;">
                     </blockquote>
                 </div>
             </div>
@@ -55,10 +48,10 @@
                     <fieldset class="layui-elem-field">
                         <legend>火情详细信息</legend>
                         <div class="layui-field-box">
-                            <p>视频类型:<span th:text="${session.sessionVideoToBeView.getVidtype()}"></span></p>
-                            <p>值班人员ID:<span th:text="${session.sessionVideoToBeView.getUserid()}"></span></p>
-                            <p>视频拍摄时间:<span th:text="${session.sessionVideoToBeView.getVidstarttime()}"></span></p>
-                            <p>拍摄该视频的监控点ID:<span th:text="${session.sessionVideoToBeView.getMptid()}"></span></p>
+                            <p>视频类型:<span th:text="${session.sessionPictureToBeView.getImgtype()}"></span></p>
+                            <p>值班人员ID:<span th:text="${session.sessionPictureToBeView.getUserid()}"></span></p>
+                            <p>视频拍摄时间:<span th:text="${session.sessionPictureToBeView.getCreatetime()}"></span></p>
+                            <p>拍摄该图片的监控点ID:<span th:text="${session.sessionPictureToBeView.getMptid()}"></span></p>
                         </div>
                     </fieldset>
                     <br>

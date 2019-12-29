@@ -5,6 +5,8 @@ import com.bjfu.forestfiremonitor.entity.Alarmrecord;
 import com.bjfu.forestfiremonitor.entity.Picture;
 import com.bjfu.forestfiremonitor.entity.User;
 import com.bjfu.forestfiremonitor.entity.Video;
+import com.bjfu.forestfiremonitor.jiguang.JiGuangPushService;
+import com.bjfu.forestfiremonitor.jiguang.PushBean;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -202,7 +204,6 @@ public class alarm_confirmController {
 
 // @@@@@@@@@@@@@@@@@@@@表格内按钮事件接口@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-    //按钮查看详情数据接口myc
     @Autowired
     AlarmVideoMapper alarmVideoMapper;
     @Autowired
@@ -215,7 +216,7 @@ public class alarm_confirmController {
     @ResponseBody
     public String gettableid(@RequestParam Map<String,String> reqMap, HttpSession session)
     {
-        String s=reqMap.get("alecid");
+        String s=reqMap.get("arecid");
         List<Integer> videolist=alarmVideoMapper.selectbyarecid(Integer.parseInt(s));
         List<Video> videos=new ArrayList<Video>();
         for(int one:videolist)
@@ -223,7 +224,7 @@ public class alarm_confirmController {
             Video video=videoMapper.selectByPrimaryKey(one);
             videos.add(video);
         }
-        session.setAttribute("videos",videos);
+        session.setAttribute("RelatedVideos",videos);
 
         List<Integer> imglist=alarmPictureMapper.selectbyarecid(Integer.parseInt(s));
         List<Picture> pictures=new ArrayList<Picture>();
@@ -233,21 +234,8 @@ public class alarm_confirmController {
             pictures.add(picture);
         }
 
-        session.setAttribute("pictures",pictures);
+        session.setAttribute("RelatedPictures",pictures);
 
-//        AllResource allResource=new AllResource();
-//        allResource.setId(Integer.parseInt(s));
-//        allResource.setWriter(reqMap.get("writer"));
-//        allResource.setType(reqMap.get("type"));
-//        allResource.setUserid(reqMap.get("userid"));
-//        allResource.setUploadtime(reqMap.get("uploadtime"));
-//        allResource.setSummary(reqMap.get("summary"));
-//        allResource.setLocation(reqMap.get("location"));
-//        allResource.setSource(reqMap.get("source"));
-//        allResource.setName(reqMap.get("name"));
-//        allResource.setAreaname(reqMap.get("areaname"));
-//
-//        session.setAttribute("sessionDetailedAllResource",allResource);
         System.out.println(s);
         return "后台得到了id："+s;
     }
@@ -259,9 +247,36 @@ public class alarm_confirmController {
         String s=reqMap.get("arecid");
         Alarmrecord alarmrecord=alarmrecordMapper.selectByPrimaryKey(Integer.parseInt(s));
         alarmrecord.setIsconfirm(1);
+        //myc下边这句话报错
         alarmrecordMapper.updateByPrimaryKey(alarmrecord);
         System.out.println(s);
-        return "上传成功，请刷新页面查看";
+        return "火情已确认，请刷新查看";
+    }
+    @Autowired
+    private JiGuangPushService jiGuangPushService;
+    //按钮推送火情数据接口
+    @RequestMapping(value = "/getPush")
+    @ResponseBody
+    public  String getPush(@RequestParam Map<String,String> reqMap)
+    {
+
+        String s=reqMap.get("arecid");
+
+        //myc获得了arecid，然后在这把对应报警信息的ishandled位置成-1
+
+
+        //myc把火情的横纵坐标获得到下边两个string里
+        String latitude="";
+        String longtitude="";
+
+        //这里我写jpush推送到手机端
+        PushBean pushBean = new PushBean();
+        pushBean.setTitle("紧急！有新的火情！");
+        String content="经过专家的确认，在纬度："+latitude+",经度："+longtitude+"发生了火灾！请尽快接警！";
+        pushBean.setAlert(content);
+        boolean flag = jiGuangPushService.pushAndroid(pushBean);
+        System.out.println(flag);
+        return "火情已经推送至APP！";
     }
 // @@@@@@@@@@@@@@@@@@@@表格内按钮事件接口结束@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 }

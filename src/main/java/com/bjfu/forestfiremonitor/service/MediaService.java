@@ -4,7 +4,6 @@ import com.bjfu.forestfiremonitor.dao.PictureMapper;
 import com.bjfu.forestfiremonitor.dao.VideoMapper;
 import com.bjfu.forestfiremonitor.entity.Picture;
 import com.bjfu.forestfiremonitor.entity.Video;
-import com.sun.xml.internal.org.jvnet.fastinfoset.stax.LowLevelFastInfosetStreamWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +14,7 @@ public class MediaService {
 
     @Autowired
     VideoMapper videoMapper;
+
 
     @Autowired
     PictureMapper pictureMapper;
@@ -31,6 +31,8 @@ public class MediaService {
         return videoMapper.selectByPrimaryKey(vidid);
     }
 
-
+    public Picture getPictureByID(Integer picid){
+        return pictureMapper.selectByPrimaryKey(picid);
+    }
 
 }

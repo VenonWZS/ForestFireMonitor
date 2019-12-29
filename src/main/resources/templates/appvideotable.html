@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html" xmlns:max-width="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>视频</title>
+    <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../../layuiadmin/style/admin.css" media="all">
+    <script src="../../../layuiadmin/layui/layui.js"></script>
+</head>
+<body>
+
+<div class="layui-fluid" >
+
+    <div class="layui-row layui-col-space30" th:each="video,videoStat:${videoList}" th:name="video">
+        <div class="layui-row" style="margin-bottom: 0.5em;">
+            <div class="layui-bg-white"style="font-size: 2.3em ;background-color: white">
+                <a th:href="@{/appvideodetailpage(vidid=${video.vidid})}">
+                    <div class="layui-col-sm5" style="height:280px ; background-color: white" >
+                        <img th:src="${video.getVidskchimgurl()}" width="95%" height="85%" style="margin-top: 5.5%;margin-left: 0.5em">
+                    </div>
+                    <div class="layui-col-sm7"  style=" height:280px ; background-color: white;padding: 20px;" >
+                        <strong th:text="${video.getVidname()}"></strong>
+                        <div class="layui-word-aux">
+                            值班人员：<span class="layui-word-aux" th:text="${video.getUserid()}"></span>
+                            上传时间：<span class="layui-word-aux" th:text="${video.getVidstarttime()}"></span>
+                            视频类型：<span class="layui-word-aux" th:text="${video.getVidtype()}"></span>
+                            ID：<span class="layui-word-aux" th:text="${video.getVidid()}"></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <br>
+        </div>
+    </div>
+
+</div>
+
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'sample']);
+</script>
+</body>
+</html>

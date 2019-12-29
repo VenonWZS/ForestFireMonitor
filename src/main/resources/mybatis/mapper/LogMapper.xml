@@ -17,6 +17,12 @@
     from logtable
     where logID = #{logid,jdbcType=INTEGER}
   </select>
+  <select id="getAllLog" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from logtable
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from logtable
     where logID = #{logid,jdbcType=INTEGER}
@@ -27,6 +33,8 @@
     values (#{logid,jdbcType=INTEGER}, #{logtime,jdbcType=VARCHAR}, #{loguserid,jdbcType=VARCHAR}, 
       #{logcontent,jdbcType=VARCHAR}, #{logclass,jdbcType=INTEGER})
   </insert>
+
+
   <insert id="insertSelective" parameterType="com.bjfu.forestfiremonitor.entity.Log" >
     insert into logtable
     <trim prefix="(" suffix=")" suffixOverrides="," >
