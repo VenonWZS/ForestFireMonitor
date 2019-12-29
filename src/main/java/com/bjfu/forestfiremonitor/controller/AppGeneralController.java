@@ -34,21 +34,21 @@ public class AppGeneralController {
     @GetMapping("/appindex")
     public String appindex()
     {
-        //@@@@@@在这写获得所有1.发出警报的火情（isconfirm==1 and ishandled==-1）2.待确认火情个数（isconfirmed==0）3.已处理火情个数（ishandled==1）4.alarmrecordtable总火情个数
+        //fzj@@@@@@在这写获得所有1.发出警报的火情（isconfirm==1 and ishandled==-1）2.待确认火情个数（isconfirmed==0）3.已处理火情个数（ishandled==1）4.alarmrecordtable总火情个数
         //四个int
         return "appindex";
     }
     @GetMapping("/apptodo")
     public String apptodo()
     {
-        //@@@@@@在这写获得所有1.发出警报的火情（isconfirm==1 and ishandled==-1）2.待确认火情个数（isconfirmed==0）3.已处理火情个数（ishandled==1）4.alarmrecordtable总火情个数
+        //fzj@@@@@@在这写获得所有1.发出警报的火情（isconfirm==1 and ishandled==-1）2.待确认火情个数（isconfirmed==0）3.已处理火情个数（ishandled==1）4.alarmrecordtable总火情个数
         //四个int
         return "apptodo";
     }
     @GetMapping("/appacceptfire")
     public String appacceptfire()
     {
-        //@@@@@@在这获取所有的ishandeled==-1的alarmrecord 形式为List<alarmrecord>
+        //fzj@@@@@@在这获取所有的ishandeled==-1的alarmrecord 形式为List<alarmrecord>传到model里在appacceptfire.html里进行循环显示,前端框架已经搭好了
         return "appacceptfire";
     }
     @GetMapping("/appunconfirmtable")
@@ -104,7 +104,7 @@ public class AppGeneralController {
     public String getapplogin(@RequestParam Map<String,String> reqMap, HttpSession session) throws JsonProcessingException {
         String username=reqMap.get("username");
         String password=reqMap.get("password");
-        //@@@@@@在这获得了username和password进行登录处理
+        //zsh@@@@@@在这获得了username和password进行登录处理
 
         int ok=0;
         User user=new User();
