@@ -5,6 +5,8 @@ import com.bjfu.forestfiremonitor.entity.Alarmrecord;
 import com.bjfu.forestfiremonitor.entity.Picture;
 import com.bjfu.forestfiremonitor.entity.User;
 import com.bjfu.forestfiremonitor.entity.Video;
+import com.bjfu.forestfiremonitor.jiguang.JiGuangPushService;
+import com.bjfu.forestfiremonitor.jiguang.PushBean;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -202,7 +204,6 @@ public class alarm_confirmController {
 
 // @@@@@@@@@@@@@@@@@@@@表格内按钮事件接口@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-    //按钮查看详情数据接口myc
     @Autowired
     AlarmVideoMapper alarmVideoMapper;
     @Autowired
@@ -251,6 +252,32 @@ public class alarm_confirmController {
         alarmrecordMapper.updateByPrimaryKey(alarmrecord);
         System.out.println(s);
         return "火情已确认，请刷新查看";
+    }
+    @Autowired
+    private JiGuangPushService jiGuangPushService;
+    //按钮推送火情数据接口
+    @RequestMapping(value = "/getPush")
+    @ResponseBody
+    public  String getPush(@RequestParam Map<String,String> reqMap)
+    {
+
+        String s=reqMap.get("arecid");
+
+        //myc获得了arecid，然后在这把对应报警信息的ishandled位置成-1
+
+
+        //myc把火情的横纵坐标获得到下边两个string里
+        String latitude="";
+        String longtitude="";
+
+        //这里我写jpush推送到手机端
+        PushBean pushBean = new PushBean();
+        pushBean.setTitle("紧急！有新的火情！");
+        String content="经过专家的确认，在纬度："+latitude+",经度："+longtitude+"发生了火灾！请尽快接警！";
+        pushBean.setAlert(content);
+        boolean flag = jiGuangPushService.pushAndroid(pushBean);
+        System.out.println(flag);
+        return "火情已经推送至APP！";
     }
 // @@@@@@@@@@@@@@@@@@@@表格内按钮事件接口结束@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 }

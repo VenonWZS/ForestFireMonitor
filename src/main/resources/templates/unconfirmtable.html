@@ -116,10 +116,10 @@
                     data:data,
                     type:'POST',
                     success :function (data) {
-                        layer.msg(data)
+                        //layer.msg(data)
                         //这后边写跳转到哪里
                         //后边跳转到对应视频下边
-                        //window.location.href = "/resourcedetailpage"
+                        window.location.href = "/alarmrecorddetailpage"
                     },
                     error: function(){
                         layer.msg("上传发生错误，请重新上传")
@@ -152,7 +152,29 @@
                     layer.close(index);
                 });
             } else if(obj.event === 'edit'){
-                layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                //layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                layer.confirm('是否推送火情', function(index){
+                    //obj.del();
+                    layui.$.ajax({
+                        cache:false,
+                        url:"getPush",
+                        async: false,
+                        type:"POST",
+                        dataType: "text",
+                        data:data,
+                        type:'POST',
+                        success :function (data) {
+                            layer.msg(data)
+                            //这后边写跳转到哪里
+                            //后边跳转到对应视频下边
+                            //window.location.href = "/resourcedetailpage"
+                        },
+                        error: function(){
+                            layer.msg("发生错误，请重试")
+                        }
+                    });
+                    layer.close(index);
+                });
             }
         });
 
