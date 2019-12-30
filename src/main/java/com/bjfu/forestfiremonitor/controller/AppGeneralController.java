@@ -107,7 +107,26 @@ public class AppGeneralController {
         //fzj@@@@@@在这获取所有的ishandeled==-1的alarmrecord 形式为List<alarmrecord>传到model里在appacceptfire.html里进行循环显示,前端框架已经搭好了
         return "appacceptfire";
     }
+    @RequestMapping("/doappacceptfire")
+    @ResponseBody
+    public String doappacceptfire(@RequestParam Map<String,String> reqMap)
+    {
+        //得到了arecid
+        //从session获取userid
+        String rawString="";
+        for (String s : reqMap.keySet()) {
+            System.out.println("key:" + s);
+            rawString=s;
+            System.out.println("values:" + reqMap.get(s));
+        }
+        String[] subString=rawString.split("\\\"");
+        String Longtitude=subString[3];
+        String Latitude=subString[7];
+        //到这就得到了经度和纬度
+        //需要将arecid+用户id+经度+纬度写入firefiter表
 
+        return "recieve"+Longtitude+";"+Latitude;
+    }
 
     @GetMapping("/appunconfirmtable")
     public String appunconfirmtable()
@@ -127,6 +146,7 @@ public class AppGeneralController {
 
         return "apphandledtable";
     }
+
     @GetMapping("/appvideotable")
     public String appvideotable(Model model)
     {

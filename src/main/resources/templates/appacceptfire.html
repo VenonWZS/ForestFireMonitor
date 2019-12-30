@@ -31,7 +31,10 @@
                                 <strong style="line-height:1.8em">监控点ID：</strong>
                                 <span style="line-height:1.8em" th:text="${unhandeled.getMptid()}">火情信息3</span>
                                 <br>
-                                <button type="button" class="layui-btn layui-btn-danger layui-btn-fluid">接警</button>
+                                <hr>
+<!--                                <a th:href="@{/doappacceptfireform(arecid=${unhandeled.getArecid()})}" onclick="BSL.GPS('gps')"  type="button" class="layui-btn layui-btn-danger layui-btn-fluid">接警</a>-->
+                                <button onclick="BSL.GPS('gps')"  type="button" class="layui-btn layui-btn-danger layui-btn-fluid">接警</button>
+
                             </div>
                         </div>
                     </div>
@@ -48,8 +51,36 @@
         base: '../../layuiadmin/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'sample']);
-    layui.use()
+    }).use(['index', 'sample'])
+
+    function gps(result){
+        var val= JSON.parse(result);
+        alert("经度："+val.Longitude);
+        alert("纬度："+val.Latitude);
+        layui.$.ajax({
+            cache:false,
+            url:"doappacceptfire",
+            async: false,
+            type:"POST",
+            dataType: "text",
+            data:result,
+            type:'POST',
+            success :function (data) {
+                layer.msg(data)
+                //这后边写跳转到哪里
+                //后边跳转到对应视频下边
+                //window.location.href = "/resourcedetailpage"
+            },
+            error: function(){
+                layer.msg("发生错误，请重试")
+            }
+        });
+
+    }
+</script>
+<script type="text/javascript">
+
+
 </script>
 </body>
 </html>
