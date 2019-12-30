@@ -65,6 +65,11 @@ public class alarm_confirmController {
     {
         return "wrongtable";
     }
+    @GetMapping(value = "/alarmrecorddetailpage")
+    public String alarmrecorddetailpage()
+    {
+        return "alarmrecorddetailpage";
+    }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@页面路径配置结束@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
@@ -236,6 +241,8 @@ public class alarm_confirmController {
 
         session.setAttribute("RelatedPictures",pictures);
 
+        //fzj这把RelatedVideos/RelatedPictures放到了session里 将跳转到/alarmrecorddetailpage 循环一下显示图片和视频 最上边显示这个alarmrecord的信息
+        //测试的话去/oldindex左侧未确认火情点查看详情就跳转到这个页面 数据库里现在没有关联 需要去alarm_picture和alarm_video添加几个关联再查看
         System.out.println(s);
         return "后台得到了id："+s;
     }
@@ -280,4 +287,6 @@ public class alarm_confirmController {
         return "火情已经推送至APP！";
     }
 // @@@@@@@@@@@@@@@@@@@@表格内按钮事件接口结束@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
 }
