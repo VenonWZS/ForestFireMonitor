@@ -248,7 +248,7 @@ public class alarm_confirmController {
         Alarmrecord alarmrecord=alarmrecordMapper.selectByPrimaryKey(Integer.parseInt(s));
         alarmrecord.setIsconfirm(1);
         //myc下边这句话报错
-        alarmrecordMapper.updateByPrimaryKey(alarmrecord);
+        alarmrecordMapper.updateByPrimaryKeySelective(alarmrecord);
         System.out.println(s);
         return "火情已确认，请刷新查看";
     }
@@ -263,11 +263,14 @@ public class alarm_confirmController {
         String s=reqMap.get("arecid");
 
         //myc获得了arecid，然后在这把对应报警信息的ishandled位置成-1
+        Alarmrecord alarmrecord=alarmrecordMapper.selectByPrimaryKey(Integer.parseInt(s));
+        alarmrecord.setIshandled(-1);
+        alarmrecordMapper.updateByPrimaryKeySelective(alarmrecord);
 
 
         //myc把火情的横纵坐标获得到下边两个string里
-        String latitude="";
-        String longtitude="";
+        String latitude=alarmrecord.getOptlattitude().toString();
+        String longtitude=alarmrecord.getOptlongtitude().toString();
 
         //这里我写jpush推送到手机端
         PushBean pushBean = new PushBean();

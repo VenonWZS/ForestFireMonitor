@@ -3,7 +3,7 @@
 <mapper namespace="com.bjfu.forestfiremonitor.dao.AlarmrecordMapper" >
   <resultMap id="BaseResultMap" type="com.bjfu.forestfiremonitor.entity.Alarmrecord" >
     <id column="aRecId" property="arecid" jdbcType="INTEGER" />
-    <result column="alarmTime" property="alarmtime" jdbcType="DATE" />
+    <result column="alarmTime" property="alarmtime" jdbcType="TIMESTAMP" />
     <result column="optLattitude" property="optlattitude" jdbcType="DOUBLE" />
     <result column="optLongtitude" property="optlongtitude" jdbcType="DOUBLE" />
     <result column="optHeight" property="optheight" jdbcType="DOUBLE" />
@@ -47,7 +47,7 @@
       optLongtitude, optHeight, isConfirm, 
       isHandled, mptID, hrzAngle, 
       userID)
-    values (#{arecid,jdbcType=INTEGER}, #{alarmtime,jdbcType=DATE}, #{optlattitude,jdbcType=DOUBLE},
+    values (#{arecid,jdbcType=INTEGER}, #{alarmtime,jdbcType=TIMESTAMP}, #{optlattitude,jdbcType=DOUBLE},
       #{optlongtitude,jdbcType=DOUBLE}, #{optheight,jdbcType=DOUBLE}, #{isconfirm,jdbcType=INTEGER}, 
       #{ishandled,jdbcType=INTEGER}, #{mptid,jdbcType=INTEGER}, #{hrzangle,jdbcType=DOUBLE}, 
       #{userid,jdbcType=VARCHAR})
@@ -91,7 +91,7 @@
         #{arecid,jdbcType=INTEGER},
       </if>
       <if test="alarmtime != null" >
-        #{alarmtime,jdbcType=DATE},
+        #{alarmtime,jdbcType=TIMESTAMP},
       </if>
       <if test="optlattitude != null" >
         #{optlattitude,jdbcType=DOUBLE},
@@ -123,7 +123,7 @@
     update alarmrecordtable
     <set >
       <if test="alarmtime != null" >
-        alarmTime = #{alarmtime,jdbcType=DATE},
+        alarmTime = #{alarmtime,jdbcType=TIMESTAMP},
       </if>
       <if test="optlattitude != null" >
         optLattitude = #{optlattitude,jdbcType=DOUBLE},
@@ -155,7 +155,7 @@
   <update id="updateByPrimaryKey" parameterType="com.bjfu.forestfiremonitor.entity.Alarmrecord" >
     update alarmrecordtable
     set alarmTime
-alarmTime = #{alarmtime,jdbcType=DATE},
+alarmTime = #{alarmtime,jdbcType=TIMESTAMP},
       optLattitude = #{optlattitude,jdbcType=DOUBLE},
       optLongtitude = #{optlongtitude,jdbcType=DOUBLE},
       optHeight = #{optheight,jdbcType=DOUBLE},
