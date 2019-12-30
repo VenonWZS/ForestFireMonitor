@@ -1,5 +1,6 @@
 package com.bjfu.forestfiremonitor.controller;
 
+import com.bjfu.forestfiremonitor.dao.AlarmrecordMapper;
 import com.bjfu.forestfiremonitor.entity.Alarmrecord;
 import com.bjfu.forestfiremonitor.entity.Picture;
 import com.bjfu.forestfiremonitor.entity.User;
@@ -29,6 +30,8 @@ public class AppGeneralController {
     @Autowired
     StatisticsService statisticsService;
 
+    @Autowired
+    AlarmrecordMapper alarmrecordMapper;
     @GetMapping("/applogin")
     public String login()
     {
@@ -107,27 +110,35 @@ public class AppGeneralController {
         //fzj@@@@@@在这获取所有的ishandeled==-1的alarmrecord 形式为List<alarmrecord>传到model里在appacceptfire.html里进行循环显示,前端框架已经搭好了
         return "appacceptfire";
     }
+    @RequestMapping("/appacceptfiredetailpage")
+    public String appacceptfiredetailpage(@RequestParam String arecid,Model model)
+    {
+        System.out.println(arecid);
+        Alarmrecord alarmrecord= alarmrecordMapper.selectByPrimaryKey(Integer.parseInt(arecid));
+        model.addAttribute("unhandeled",alarmrecord);
+        return "appacceptfiredetailpage";
+
+    }
     @RequestMapping("/doappacceptfire")
     @ResponseBody
     public String doappacceptfire(@RequestParam Map<String,String> reqMap)
     {
-        //得到了arecid
-        //从session获取userid
-        String rawString="";
         for (String s : reqMap.keySet()) {
             System.out.println("key:" + s);
-            rawString=s;
+
             System.out.println("values:" + reqMap.get(s));
         }
-        String[] subString=rawString.split("\\\"");
-        String Longtitude=subString[3];
-        String Latitude=subString[7];
-        //到这就得到了经度和纬度
-        //需要将arecid+用户id+经度+纬度写入firefiter表
 
-        return "recieve"+Longtitude+";"+Latitude;
+        String x=reqMap.get("x");
+        String y=reqMap.get("y");
+        String arecid=reqMap.get("arecid");
+
+//        myc到这就得到了经度和纬度
+//        需要将arecid+用户id+经度+纬度写入firefiter表
+        //从session获取userid
+
+        return "recieve : x/y/arecid"+x+";"+y+";"+arecid;
     }
-
     @GetMapping("/appunconfirmtable")
     public String appunconfirmtable()
     {
