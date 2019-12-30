@@ -134,6 +134,8 @@ public class alarm_confirmController {
         return jsonString;
     }
 
+
+
     //误上传火情的数据接口
     @RequestMapping(value = "/getwrongdata")
     @ResponseBody
@@ -223,6 +225,8 @@ public class alarm_confirmController {
     {
         String s=reqMap.get("arecid");
         List<Integer> videolist=alarmVideoMapper.selectbyarecid(Integer.parseInt(s));
+        Alarmrecord alarmrecord  = alarmrecordMapper.selectByPrimaryKey(Integer.parseInt(s));
+        session.setAttribute("alarmselected",alarmrecord);
         List<Video> videos=new ArrayList<Video>();
         for(int one:videolist)
         {
