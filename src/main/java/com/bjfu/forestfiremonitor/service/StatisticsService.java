@@ -13,6 +13,14 @@ import java.util.*;
 public class StatisticsService {
     @Autowired
     AlarmrecordMapper alarmrecordMapper;
+
+    public List<Alarmrecord> selectAll(){
+        return alarmrecordMapper.selectAll();
+    }
+    public List<Alarmrecord> selectunhandeleds(){
+        return alarmrecordMapper.selectunhandeleds();
+    }
+
     public List<Alarmrecord> getAlarmrecordByYear(String targetYear)
     {
         List<Alarmrecord> alarmrecords=alarmrecordMapper.selectAll();
@@ -163,7 +171,7 @@ public class StatisticsService {
                     if (key.equals(splitdate[0]))//年相等
                     {
                         if (splitdate[1].equals("01") || splitdate[1].equals("02") || splitdate[1].equals("03")) {
-                            String mykey = "spring";
+                            String mykey = "春";
                             if (countbyseason.containsKey(mykey)) {
                                 int value = countbyseason.get(mykey);
                                 value++;
@@ -174,7 +182,7 @@ public class StatisticsService {
                             }
                         }
                         else if (splitdate[1].equals("04") || splitdate[1].equals("05") || splitdate[1].equals("06")) {
-                            String mykey = "summer";
+                            String mykey = "夏";
                             if (countbyseason.containsKey(mykey)) {
                                 int value = countbyseason.get(mykey);
                                 value++;
@@ -185,7 +193,7 @@ public class StatisticsService {
                             }
                         }
                         else if (splitdate[1].equals("07") || splitdate[1].equals("08") || splitdate[1].equals("09")) {
-                            String mykey = "autum";
+                            String mykey = "秋";
                             if (countbyseason.containsKey(mykey)) {
                                 int value = countbyseason.get(mykey);
                                 value++;
@@ -196,7 +204,7 @@ public class StatisticsService {
                             }
                         }
                         else if (splitdate[1].equals("10") || splitdate[1].equals("11") || splitdate[1].equals("12")) {
-                            String mykey = "winter";
+                            String mykey = "冬";
                             if (countbyseason.containsKey(mykey)) {
                                 int value = countbyseason.get(mykey);
                                 value++;

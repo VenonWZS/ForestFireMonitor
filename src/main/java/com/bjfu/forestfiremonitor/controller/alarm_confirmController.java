@@ -5,6 +5,8 @@ import com.bjfu.forestfiremonitor.entity.Alarmrecord;
 import com.bjfu.forestfiremonitor.entity.Picture;
 import com.bjfu.forestfiremonitor.entity.User;
 import com.bjfu.forestfiremonitor.entity.Video;
+import com.bjfu.forestfiremonitor.jiguang.JiGuangPushService;
+import com.bjfu.forestfiremonitor.jiguang.PushBean;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +64,11 @@ public class alarm_confirmController {
     public String wrongtable()
     {
         return "wrongtable";
+    }
+    @GetMapping(value = "/alarmrecorddetailpage")
+    public String alarmrecorddetailpage()
+    {
+        return "alarmrecorddetailpage";
     }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@页面路径配置结束@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -202,7 +209,6 @@ public class alarm_confirmController {
 
 // @@@@@@@@@@@@@@@@@@@@表格内按钮事件接口@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-    //按钮查看详情数据接口myc
     @Autowired
     AlarmVideoMapper alarmVideoMapper;
     @Autowired
@@ -235,6 +241,8 @@ public class alarm_confirmController {
 
         session.setAttribute("RelatedPictures",pictures);
 
+        //fzj这把RelatedVideos/RelatedPictures放到了session里 将跳转到/alarmrecorddetailpage 循环一下显示图片和视频 最上边显示这个alarmrecord的信息
+        //测试的话去/oldindex左侧未确认火情点查看详情就跳转到这个页面 数据库里现在没有关联 需要去alarm_picture和alarm_video添加几个关联再查看
         System.out.println(s);
         return "后台得到了id："+s;
     }
@@ -243,14 +251,44 @@ public class alarm_confirmController {
     @ResponseBody
     public  String getConfirm(@RequestParam Map<String,String> reqMap)
     {
-
         String s=reqMap.get("arecid");
         Alarmrecord alarmrecord=alarmrecordMapper.selectByPrimaryKey(Integer.parseInt(s));
         alarmrecord.setIsconfirm(1);
         //myc下边这句话报错
-        alarmrecordMapper.updateByPrimaryKey(alarmrecord);
+        alarmrecordMapper.updateByPrimaryKeySelective(alarmrecord);
         System.out.println(s);
         return "火情已确认，请刷新查看";
     }
+    @Autowired
+    private JiGuangPushService jiGuangPushService;
+    //按钮推送火情数据接口
+    @RequestMapping(value = "/getPush")
+    @ResponseBody
+    public  String getPush(@RequestParam Map<String,String> reqMap)
+    {
+
+        String s=reqMap.get("arecid");
+
+        //myc获得了arecid，然后在这把对应报警信息的ishandled位置成-1
+        Alarmrecord alarmrecord=alarmrecordMapper.selectByPrimaryKey(Integer.parseInt(s));
+        alarmrecord.setIshandled(-1);
+        alarmrecordMapper.updateByPrimaryKeySelective(alarmrecord);
+
+
+        //myc把火情的横纵坐标获得到下边两个string里
+        String latitude=alarmrecord.getOptlattitude().toString();
+        String longtitude=alarmrecord.getOptlongtitude().toString();
+
+        //这里我写jpush推送到手机端
+        PushBean pushBean = new PushBean();
+        pushBean.setTitle("紧急！有新的火情！");
+        String content="经过专家的确认，在纬度："+latitude+",经度："+longtitude+"发生了火灾！请尽快接警！";
+        pushBean.setAlert(content);
+        boolean flag = jiGuangPushService.pushAndroid(pushBean);
+        System.out.println(flag);
+        return "火情已经推送至APP！";
+    }
 // @@@@@@@@@@@@@@@@@@@@表格内按钮事件接口结束@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
 }

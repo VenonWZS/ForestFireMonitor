@@ -1,7 +1,5 @@
-
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>layuiAdmin 主页示例模板二</title>
@@ -23,7 +21,7 @@
                     <span class="layui-badge layui-bg-red layuiadmin-badge">急</span>
                 </div>
                 <div class="layui-card-body layuiadmin-card-list">
-                    <p class="layuiadmin-big-font">9,999,666</p>
+                    <p class="layuiadmin-big-font" th:text="${soundAlarm}"></p>
                     <p>
                         总计访问量
                         <span class="layuiadmin-span-color">88万 <i class="layui-inline layui-icon layui-icon-flag"></i></span>
@@ -41,7 +39,7 @@
                     <span class="layui-badge layui-bg-blue layuiadmin-badge">总</span>
                 </div>
                 <div class="layui-card-body layuiadmin-card-list">
-                    <p class="layuiadmin-big-font">9,999,666</p>
+                    <p class="layuiadmin-big-font" th:text="${allAlarm}"></p>
                     <p>
                         总计访问量
                         <span class="layuiadmin-span-color">88万 <i class="layui-inline layui-icon layui-icon-flag"></i></span>
@@ -59,7 +57,7 @@
                     <span class="layui-badge layui-bg-blue layuiadmin-badge">专家</span>
                 </div>
                 <div class="layui-card-body layuiadmin-card-list">
-                    <p class="layuiadmin-big-font">9,999,666</p>
+                    <p class="layuiadmin-big-font" th:text="${unconfirmed}"></p>
                     <p>
                         总计访问量
                         <span class="layuiadmin-span-color">88万 <i class="layui-inline layui-icon layui-icon-flag"></i></span>
@@ -77,7 +75,7 @@
                     <span class="layui-badge layui-bg-blue layuiadmin-badge">周</span>
                 </div>
                 <div class="layui-card-body layuiadmin-card-list">
-                    <p class="layuiadmin-big-font">9,999,666</p>
+                    <p class="layuiadmin-big-font" th:text="${handledAlarm}"></p>
                     <p>
                         总计访问量
                         <span class="layuiadmin-span-color">88万 <i class="layui-inline layui-icon layui-icon-flag"></i></span>

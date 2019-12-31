@@ -16,8 +16,7 @@
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md8">
-            <div class="layui-card" th:each="unhandeled,unhandeledsStat:${unhandeleds}" >
-
+            <div class="layui-card" >
                 <div class="layui-card-body">
                     <div class="layui-row layui-col-space10">
                         <div class="layui-col-xs12 layui-col-sm4">
@@ -32,8 +31,8 @@
                                 <span style="line-height:1.8em" th:text="${unhandeled.getMptid()}">火情信息3</span>
                                 <br>
                                 <hr>
-                                <a th:href="@{/appacceptfiredetailpage(arecid=${unhandeled.getArecid()})}"  type="button" class="layui-btn layui-btn-danger layui-btn-fluid">查看详情</a>
-<!--                                <button id="getarecid" th:value="${unhandeled.getArecid()}" onclick="BSL.GPS('gps')"  type="button" class="layui-btn layui-btn-danger layui-btn-fluid">接警</button>-->
+<!--                                <a th:href="@{/appacceptfiredetailpage(arecid=${unhandeled.getArecid()})}"  type="button" class="layui-btn layui-btn-danger layui-btn-fluid">接警</a>-->
+                                <button id="getarecid" th:value="${unhandeled.getArecid()}" onclick="BSL.GPS('gps')"  type="button" class="layui-btn layui-btn-danger layui-btn-fluid">接警</button>
 
                             </div>
                         </div>
