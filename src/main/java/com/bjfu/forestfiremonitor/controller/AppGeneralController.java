@@ -1,16 +1,15 @@
 package com.bjfu.forestfiremonitor.controller;
 
 import com.bjfu.forestfiremonitor.dao.AlarmrecordMapper;
-import com.bjfu.forestfiremonitor.entity.Alarmrecord;
-import com.bjfu.forestfiremonitor.entity.Picture;
-import com.bjfu.forestfiremonitor.entity.User;
-import com.bjfu.forestfiremonitor.entity.Video;
+import com.bjfu.forestfiremonitor.entity.*;
+import com.bjfu.forestfiremonitor.service.FirefightersRecordService;
 import com.bjfu.forestfiremonitor.service.LoginService;
 import com.bjfu.forestfiremonitor.service.MediaService;
 import com.bjfu.forestfiremonitor.service.StatisticsService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.jws.soap.SOAPBinding;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
@@ -29,6 +30,9 @@ public class AppGeneralController {
     LoginService loginService;
     @Autowired
     StatisticsService statisticsService;
+
+    @Autowired
+    FirefightersRecordService firefightersRecordService;
 
     @Autowired
     AlarmrecordMapper alarmrecordMapper;
@@ -121,7 +125,7 @@ public class AppGeneralController {
     }
     @RequestMapping("/doappacceptfire")
     @ResponseBody
-    public String doappacceptfire(@RequestParam Map<String,String> reqMap)
+    public String doappacceptfire(@RequestParam Map<String,String> reqMap, HttpSession httpSession)
     {
         for (String s : reqMap.keySet()) {
             System.out.println("key:" + s);
@@ -132,6 +136,14 @@ public class AppGeneralController {
         String x=reqMap.get("x");
         String y=reqMap.get("y");
         String arecid=reqMap.get("arecid");
+
+        User user = (User) httpSession.getAttribute("sessionUser");
+        FirefightersRecord firefightersRecord= new FirefightersRecord();
+        firefightersRecord.setArecid(Integer.parseInt(arecid));
+        firefightersRecord.setUserid(user.getUserid());
+        firefightersRecord.setXlocation(Double.parseDouble(x));
+        firefightersRecord.setYlocation(Double.parseDouble(y));
+        firefightersRecordService.insertFirefightersRecord(firefightersRecord);
 
 //        newfzj到这就得到了经度和纬度
 //        需要将arecid+用户id+经度+纬度写入firefiter表
@@ -204,8 +216,6 @@ public class AppGeneralController {
             session.setAttribute("sessionUser", user);
             ok=1;
         }
-
-
 
 
         //忽略之下的
