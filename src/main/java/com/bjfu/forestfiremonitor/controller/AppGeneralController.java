@@ -133,7 +133,7 @@ public class AppGeneralController {
         String y=reqMap.get("y");
         String arecid=reqMap.get("arecid");
 
-//        fzj到这就得到了经度和纬度
+//        newfzj到这就得到了经度和纬度
 //        需要将arecid+用户id+经度+纬度写入firefiter表
 //        从session获取userid
 
