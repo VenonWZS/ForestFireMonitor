@@ -20,7 +20,7 @@ public class LoginController {
     {
         User u = loginService.getLogin(user);
         System.out.println("正在登陆ing11111。。。。。。");
-        if(u == null)
+        if(u != null)
         {
             if(u.getUserright()==-1)
             {
@@ -43,6 +43,8 @@ public class LoginController {
             }
             else if(u.getUserright()==3){
                 session.setAttribute("sessionUser", user);
+                //是否有第三类普通用户？
+                return null;
             }
             return "ProfessorManagement/MainPage";
         }
