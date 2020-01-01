@@ -211,9 +211,10 @@ public class AppGeneralController {
         User user=new User();
         user.setUserid(username);
         user.setUserpwd(password);
-        if(loginService.loginService(user))
+        User uu = loginService.getLogin(user);
+        if(uu!=null)
         {
-            session.setAttribute("sessionUser", user);
+            session.setAttribute("sessionUser", uu);
             ok=1;
         }
 

@@ -11,4 +11,5 @@ public class PushBean {
     //android专用// 可选, 通知标题,如果指定了，则通知里原来展示 App名称的地方，将展示成这个字段。
     private String title;
 
+
 }
