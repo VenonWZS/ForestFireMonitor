@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bjfu.forestfiremonitor.dao.FirefightersRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.bjfu.forestfiremonitor.entity.FirefightersRecord" >
+    <id column="aRecId" property="arecid" jdbcType="INTEGER" />
+    <id column="userID" property="userid" jdbcType="VARCHAR" />
+    <result column="xLocation" property="xlocation" jdbcType="DOUBLE" />
+    <result column="yLocation" property="ylocation" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    aRecId, userID, xLocation, yLocation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from firefighters_record
+    where aRecId = #{arecid,jdbcType=INTEGER}
+      and userID = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from firefighters_record
+    where aRecId = #{arecid,jdbcType=INTEGER}
+      and userID = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bjfu.forestfiremonitor.entity.FirefightersRecord" >
+    insert into firefighters_record (aRecId, userID, xLocation, 
+      yLocation)
+    values (#{arecid,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{xlocation,jdbcType=DOUBLE}, 
+      #{ylocation,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjfu.forestfiremonitor.entity.FirefightersRecord" >
+    insert into firefighters_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="arecid != null" >
+        aRecId,
+      </if>
+      <if test="userid != null" >
+        userID,
+      </if>
+      <if test="xlocation != null" >
+        xLocation,
+      </if>
+      <if test="ylocation != null" >
+        yLocation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="arecid != null" >
+        #{arecid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="xlocation != null" >
+        #{xlocation,jdbcType=DOUBLE},
+      </if>
+      <if test="ylocation != null" >
+        #{ylocation,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjfu.forestfiremonitor.entity.FirefightersRecord" >
+    update firefighters_record
+    <set >
+      <if test="xlocation != null" >
+        xLocation = #{xlocation,jdbcType=DOUBLE},
+      </if>
+      <if test="ylocation != null" >
+        yLocation = #{ylocation,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where aRecId = #{arecid,jdbcType=INTEGER}
+      and userID = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjfu.forestfiremonitor.entity.FirefightersRecord" >
+    update firefighters_record
+    set xLocation = #{xlocation,jdbcType=DOUBLE},
+      yLocation = #{ylocation,jdbcType=DOUBLE}
+    where aRecId = #{arecid,jdbcType=INTEGER}
+      and userID = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>

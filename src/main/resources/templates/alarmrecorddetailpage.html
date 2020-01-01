@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../../layuiadmin/style/admin.css" media="all">
 </head>
 <body>
-/alarmrecorddetailpage
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+
+                <h3><strong>警报ID：</strong><span class="layui-text" th:text="${session.alarmselected.getArecid()}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>报警时间：</strong><span class="layui-text" th:text="${session.alarmselected.getAlarmtime()}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>监控点ID：</strong><span class="layui-text" th:text="${session.alarmselected.getMptid()}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </h3>
+                <hr class="layui-bg-green">
+            <strong>图片信息</strong></div>
+
+            <div class="layui-card">
+                <div class="layui-card" th:each="picture:${session.RelatedPictures}">
+                    <div class="layui-card-header">
+                        <p th:text="${picture.getImgid()}"></p>
+                    </div>
+                    <div class="layui-card-body">
+                        <img th:src="${picture.getImgurl()}" width="auto" height="auto">
+                    </div>
+                </div>
+            </div>
+        <div style="padding:10px"><strong>视频信息</strong></div>
+            <div class="layui-card">
+                <div class="layui-card" th:each="video:${session.RelatedVideos}">
+                    <div class="layui-card-header">
+                        <p th:text="${video.getVidname()}"></p>
+                    </div>
+                    <div class="layui-card-body">
+                        <blockquote class="layui-elem-quote layui-quote-nm">
+
+                            <video width="100%" height="auto" controls="controls" autoplay="autoplay">
+                                <source th:src="${video.getVipurl()}" type="video/mp4" />
+                                <source th:src="${video.getVipurl()}" type="video/ogg" />
+                                <source th:src="${video.getVipurl()}" type="video/webm" />
+                                <object th:src="${video.getVipurl()}" width="320" height="240">
+                                    <embed src="movie.swf" width="320" height="240" />
+                                </object>
+                            </video>
+                        </blockquote>
+                    </div>
+                </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script src="../../../layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '../../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index']);
+</script>
+
+
 </body>
 </html>
