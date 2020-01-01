@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +119,7 @@ public class AdminManagementController {
         //newzsh获取到了要修改信息的user了然后前端跳转到usermodifypage.html在那里写表单然后提交到后台(就在这个java里)进行用户的信息更新
         //其他不用做
         System.out.println(s);
-        return "后台得到了id："+s;
+        return "AdminManagement/usermodifypage.html";
     }
 
     @GetMapping("/usermodifypage")
@@ -127,6 +128,28 @@ public class AdminManagementController {
         return "usermodifypage";
     }
 
+    @RequestMapping(value = "/getUserInfoChange")
+    public String getUserInfoChange(HttpSession session, HttpServletRequest request)
+    {
+        User user = new User();
+        user=(User)session.getAttribute("sessionUserToBeChange");
+        String usermail = request.getParameter("usermail");
+        String phone = request.getParameter("userphone");
+        String userright = request.getParameter("userright");
+        String userdept = request.getParameter("userdept");
+        String emptime = request.getParameter("emptime");
+
+        int right = Integer.parseInt(userright);
+
+        user.setUserright(right);
+        user.setUsermail(usermail);
+        user.setEmptime(emptime);
+        user.setUserdept(userdept);
+        user.setUserphone(phone);
+        adminService.ChangeUserInfo(user);
+        //跳转页面
+        return "";
+    }
     @GetMapping("/adminpage")
     public String adminPage()
     {

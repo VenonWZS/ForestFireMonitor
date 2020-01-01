@@ -67,4 +67,5 @@ public class AdminManagementService {
         alllog = logMapper.getAllLog();
         return alllog;
     }
+
 }

@@ -1,11 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
     <title>Title</title>
 </head>
 <body>
 <!--这里写一个修改的form-->
-<h1>修改用户表单</h1>
+<div class="layui-card">
+    <div class="layui-card-header">
+        修改用户信息
+    </div>
+    <div class="layui-card-body">
+        <form class="layui-form" action="/getUserInfoChange">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        用户ID：<label th:text="${session.sessionUserToBeChange.getUserid()}"></label>
+                    </div>
+                    <div class="layui-input-inline">
+                        用户名：<label th:text="${session.sessionUserToBeChange.getUsername()}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户权限</label><div class="layui-input-inline">
+                    <select name="userright">
+                        <option>A</option>
+                        <option value="1">火灾事件确认专家</option>
+                        <option value="2">森林防火工作人员</option>
+                        <option value="3">一般用户</option>
+                    </select>
+                </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户邮箱</label><div class="layui-input-block">
+                <input name="usermail" class="layui-input" style="width: 50%;" type="text" autocomplete="off" placeholder="请输入邮箱" />
+            </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户手机</label><div class="layui-input-block">
+                <input name="userphone" class="layui-input" style="width: 50%;" type="text" autocomplete="off" placeholder="请输入手机" />
+            </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户部门</label><div class="layui-input-block">
+                <input name="userdept" class="layui-input" style="width: 50%;" type="text" autocomplete="off" placeholder="请输入部门名称" />
+            </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">日期</label><div class="layui-input-block">
+                <input name="emptime" class="magicalcoder-laydate layui-input" style="width: 50%;" type="text" autocomplete="off" lay-verify="magicalCoderVerify" mc-attr-bool-is-init-value="true" />
+            </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="submit" class="layui-btn layui-btn-radius layui-btn-normal layui-btn-lg" value="确定">
+                    <input type="reset" class="layui-btn layui-btn-radius layui-btn-normal layui-btn-lg" value="重置">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
 </html>
