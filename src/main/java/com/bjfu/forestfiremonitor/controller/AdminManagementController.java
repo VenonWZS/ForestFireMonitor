@@ -119,7 +119,7 @@ public class AdminManagementController {
         //newzsh获取到了要修改信息的user了然后前端跳转到usermodifypage.html在那里写表单然后提交到后台(就在这个java里)进行用户的信息更新
         //其他不用做
         System.out.println(s);
-        return "AdminManagement/usermodifypage.html";
+        return "modifyok";
     }
 
     @GetMapping("/usermodifypage")

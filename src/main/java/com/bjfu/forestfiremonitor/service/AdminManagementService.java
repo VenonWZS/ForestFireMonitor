@@ -46,8 +46,7 @@ public class AdminManagementService {
 
     public User getUserByID(String id)
     {
-        User user = new User();
-        user =userMapper.selectByUserName(id);
+        User user = userMapper.selectByPrimaryKey(id);
         return user;
     }
 
