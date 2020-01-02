@@ -54,7 +54,8 @@ public class AppGeneralController {
         //已处理火情个数
         int handledAlarm = 0;
         for (Alarmrecord alarmrecord:alarmrecordList) {
-            if(alarmrecord.getIsconfirm() == 1 && alarmrecord.getIshandled() == -1){
+            //alarmrecord.getIsconfirm() == 1 &&
+            if( alarmrecord.getIshandled() == -1){
                 soundAlarm++;
             }
             else if(alarmrecord.getIsconfirm() == 0){
@@ -87,7 +88,8 @@ public class AppGeneralController {
         //已处理火情个数
         int handledAlarm = 0;
         for (Alarmrecord alarmrecord:alarmrecordList) {
-            if(alarmrecord.getIsconfirm() == 1 && alarmrecord.getIshandled() == -1){
+            //alarmrecord.getIsconfirm() == 1 &&
+            if(alarmrecord.getIshandled() == -1){
                 soundAlarm++;
             }
             else if(alarmrecord.getIsconfirm() == 0){
