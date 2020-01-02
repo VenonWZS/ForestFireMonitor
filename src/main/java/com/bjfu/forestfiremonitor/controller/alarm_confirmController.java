@@ -71,6 +71,28 @@ public class alarm_confirmController {
         return "alarmrecorddetailpage";
     }
 
+    @GetMapping(value = "/confirmedtabledetailedpage")
+    public String confirmedtabledetailedpage()
+    {
+        return "confirmedtabledetailedpage";
+    }
+    @GetMapping(value = "/searchtabledetailedpage")
+    public String searchtabledetailedpage()
+    {
+        return "searchtabledetailedpage";
+    }
+    @GetMapping(value = "/wrongdetailedpage")
+    public String wrongdetailedpage()
+    {
+        return "wrongdetailedpage";
+    }
+    @GetMapping(value = "/missdetailedpage")
+    public String missdetailedpage()
+    {
+        return "missdetailedpage";
+    }
+
+
 
     @GetMapping(value = "/alarmedtable")
     public String alarmedtable()
@@ -286,6 +308,19 @@ public class alarm_confirmController {
         System.out.println(s);
         return "火情已确认，请刷新查看";
     }
+    @RequestMapping(value = "/getConfirm2")
+    @ResponseBody
+    public  String getConfirm2(@RequestParam String s)
+    {
+
+        Alarmrecord alarmrecord=alarmrecordMapper.selectByPrimaryKey(Integer.parseInt(s));
+        alarmrecord.setIsconfirm(1);
+        //myc下边这句话报错
+        alarmrecordMapper.updateByPrimaryKeySelective(alarmrecord);
+        System.out.println(s);
+        return "火情已确认，请刷新查看";
+    }
+
     @Autowired
     private JiGuangPushService jiGuangPushService;
     //按钮推送火情数据接口

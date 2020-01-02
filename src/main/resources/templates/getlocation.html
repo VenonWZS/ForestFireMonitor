@@ -1,11 +1,24 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<html xmlns:th="http://www.thymeleaf.org">
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Title</title>&ndash;&gt;-->
+<!--&lt;!&ndash;    <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">&ndash;&gt;-->
+<!--&lt;!&ndash;    <link rel="stylesheet" href="../../../layuiadmin/style/admin.css" media="all">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta name="renderer" content="webkit">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">&ndash;&gt;-->
+<!--&lt;!&ndash;    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">&ndash;&gt;-->
+<!--&lt;!&ndash;    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">&ndash;&gt;-->
+<!--&lt;!&ndash;    <style type="text/css">&ndash;&gt;-->
+<!--&lt;!&ndash;        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}&ndash;&gt;-->
+<!--&lt;!&ndash;    </style>&ndash;&gt;-->
+<!--&lt;!&ndash;    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=37XbOfTkRpHCikFtKZ3qEDBWzRAByFom"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
 <!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--    <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">-->
-<!--    <link rel="stylesheet" href="../../../layuiadmin/style/admin.css" media="all">-->
 <!--    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
 <!--    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />-->
 <!--    <meta name="renderer" content="webkit">-->
@@ -16,104 +29,208 @@
 <!--    <style type="text/css">-->
 <!--        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}-->
 <!--    </style>-->
+<!--    <meta name="renderer" content="webkit">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
+<!--    <meta name="viewport"-->
+<!--          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">-->
+<!--    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">-->
+<!--    <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">-->
 <!--    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=37XbOfTkRpHCikFtKZ3qEDBWzRAByFom"></script>-->
+<!--    <title>GPS转百度</title>-->
 <!--</head>-->
+<!--<body>-->
+
+<!--<div class="layui-fluid">-->
+<!--    <div class="layui-row layui-col-space15">-->
+<!--        <div class="layui-col-md12">-->
+<!--            <blockquote class="layui-elem-quote layui-bg-white">-->
+<!--                <strong>报警信息详情</strong>-->
+<!--            </blockquote>-->
+<!--        </div>-->
+<!--        <div class="layui-col-md12">-->
+
+<!--            <div class="layui-card">-->
+<!--                <div class="layui-card-header">-->
+<!--                    <p>警报ID：<span class="layui-text" th:text="${session.alarmselected.getArecid()}"></span>&nbsp;</p>&nbsp;&nbsp;&nbsp;-->
+<!--                </div>-->
+<!--                <div class="layui-card-body">-->
+<!--                    <strong>报警时间：</strong><span class="layui-text" th:text="${session.alarmselected.getAlarmtime()}"></span>&nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--                    <strong>监控点ID：</strong><span class="layui-text" th:text="${session.alarmselected.getMptid()}"></span>&nbsp&nbsp;&nbsp;&nbsp;-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="layui-col-md12">-->
+<!--            <blockquote class="layui-elem-quote layui-bg-white">-->
+<!--                <strong>接警人员位置信息</strong>-->
+<!--            </blockquote>-->
+<!--        </div>-->
+<!--        <div class="layui-col-md12">-->
+<!--            <div class="layui-card">-->
+<!--                <div class="layui-card-header">坐标显示</div>-->
+<!--                <div class="layui-card-body">-->
+<!--                    <div style="min-height: 500px; width: 100%;" id="allmap">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--&lt;!&ndash;        <div class="layui-col-md12">&ndash;&gt;-->
+<!--&lt;!&ndash;            <blockquote class="layui-elem-quote layui-bg-white">&ndash;&gt;-->
+<!--&lt;!&ndash;                <strong>相关视频图像</strong>&ndash;&gt;-->
+<!--&lt;!&ndash;            </blockquote>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="layui-row layui-col-space15">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="layui-col-md4" th:each="picture:${session.RelatedPictures}">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="layui-card">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="layui-card-header">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <p th:text="${picture.getImgid()}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="layui-card-body">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <img th:src="${picture.getImgurl()}" width="500px" height="306px">&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="layui-col-md4" th:each="video:${session.RelatedVideos}">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="layui-card">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="layui-card-header">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <p th:text="${video.getVidname()}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="layui-card-body">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <video width="500px" height="300px" controls="controls" autoplay="autoplay">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <source th:src="${video.getVipurl()}" type="video/mp4" />&ndash;&gt;-->
+<!--&lt;!&ndash;                            <source th:src="${video.getVipurl()}" type="video/ogg" />&ndash;&gt;-->
+<!--&lt;!&ndash;                            <source th:src="${video.getVipurl()}" type="video/webm" />&ndash;&gt;-->
+<!--&lt;!&ndash;                            <object th:src="${video.getVipurl()}" width="320" height="240">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <embed src="movie.swf" width="320" height="240" />&ndash;&gt;-->
+<!--&lt;!&ndash;                            </object>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </video>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+
+
+
+<!--    </div>-->
+
+<!--</div>-->
+
+<!--<script type="text/javascript">-->
+<!--    // 百度地图API功能-->
+<!--    //GPS坐标-->
+<!--    // var x = 116.32715863448607;-->
+<!--    // var y = 39.990912172420714;-->
+<!--    var markerArr = [-->
+<!--        { title: "名称：广州动物园", point: "116.341813,40.005089", address: "广东省广州市广州动物园", tel: "18500000000" },-->
+<!--        { title: "名称：学研大厦", point: "116.342416,40.000460", address: "北京", tel: "18500000000" }-->
+<!--    ];-->
+<!--    //地图初始化-->
+<!--    console.log(markerArr);-->
+<!--    var bm = new BMap.Map("allmap");-->
+<!--    var point = new BMap.Point(116.3425028900,39.9995918800); //地图中心点，广州市-->
+<!--    bm.centerAndZoom(point, 15); // 初始化地图,设置中心点坐标和地图级别。-->
+<!--    bm.enableScrollWheelZoom(true); //启用滚轮放大缩小-->
+<!--    bm.addControl(new BMap.NavigationControl());-->
+<!--    function a(i){-->
+<!--        var convertor = new BMap.Convertor();-->
+<!--        var pointArr = [];-->
+<!--        pointArr.push(ggPoint);-->
+<!--        convertor.translate(pointArr, 1, 5,function (data){-->
+<!--            if(data.status === 0) {-->
+<!--                var marker = new BMap.Marker(data.points[0]);-->
+<!--                bm.addOverlay(marker);-->
+<!--                console.log(i);-->
+<!--                console.log(markerArr[i].title);-->
+<!--                var label = new BMap.Label('111',{offset:new BMap.Size(20,-10)});-->
+<!--                marker.setLabel(label); //添加百度label-->
+<!--                bm.setCenter(data.points[0]);-->
+<!--            }-->
+<!--        })-->
+
+<!--    }-->
+
+<!--    for (var i = 0; i < markerArr.length; i++) {-->
+<!--        var p0 = markerArr[i].point.split(",")[0]; //-->
+<!--        var p1 = markerArr[i].point.split(",")[1]; //按照原数组的point格式将地图点坐标的经纬度分别提出来-->
+<!--        var ggPoint = new BMap.Point(p0,p1);-->
+<!--        var marker  = new window.BMap.Marker(ggPoint);-->
+<!--        // bm.addOverlay(marker);-->
+<!--        // var label = new window.BMap.Label(markerArr[i].title, {offset: new window.BMap.Size(20, -10)});-->
+<!--        // marker.setLabel(label);-->
+<!--        a(i);-->
+
+<!--    }-->
+
+
+<!--</script>-->
+
+<!--<script src="../../../layuiadmin/layui/layui.js"></script>-->
+<!--<script>-->
+<!--    layui.config({-->
+<!--        base: '../../../layuiadmin/' //静态资源所在路径-->
+<!--    }).extend({-->
+<!--        index: 'lib/index' //主入口模块-->
+<!--    }).use(['index']);-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
-    <style type="text/css">
-        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
-    </style>
+    <meta charset="utf-8">
+    <title>Forest Fire Monitor</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
-    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=37XbOfTkRpHCikFtKZ3qEDBWzRAByFom"></script>
-    <title>GPS转百度</title>
-</head>
-<body>
 
-<div class="layui-fluid" id="scrolldiv">
+    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=37XbOfTkRpHCikFtKZ3qEDBWzRAByFom"></script>
+<!--    <style type="text/css">-->
+<!--        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}-->
+<!--    </style>-->
+</head>
+
+<body>
+<div class="layui-fluid">
     <div class="layui-row layui-col-space15">
-        <div class="layui-col-md12">
-            <blockquote class="layui-elem-quote layui-bg-white">
-                <strong>报警信息详情</strong>
-            </blockquote>
-        </div>
         <div class="layui-col-md12">
 
             <div class="layui-card">
                 <div class="layui-card-header">
-                    <p>警报ID：<span class="layui-text" th:text="${session.alarmselected.getArecid()}"></span>&nbsp;</p>&nbsp;&nbsp;&nbsp;
+                    报警详情信息
                 </div>
                 <div class="layui-card-body">
+                    <strong>警报ID：</strong><span class="layui-text" th:text="${session.alarmselected.getArecid()}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <strong>报警时间：</strong><span class="layui-text" th:text="${session.alarmselected.getAlarmtime()}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <strong>监控点ID：</strong><span class="layui-text" th:text="${session.alarmselected.getMptid()}"></span>&nbsp&nbsp;&nbsp;&nbsp;
                 </div>
             </div>
         </div>
-        <div class="layui-col-md12">
-            <blockquote class="layui-elem-quote layui-bg-white">
-                <strong>接警人员位置信息</strong>
-            </blockquote>
-        </div>
+
         <div class="layui-col-md12">
             <div class="layui-card">
-                <div class="layui-card-header">坐标显示</div>
+                <div class="layui-card-header">接警人员坐标显示</div>
                 <div class="layui-card-body">
-                    <div style="min-height: 500px; width: 100%;" id="allmap">
+                    <div style="min-height: 600px; width: 100%;" id="allmap">
                     </div>
                 </div>
             </div>
         </div>
-<!--        <div class="layui-col-md12">-->
-<!--            <blockquote class="layui-elem-quote layui-bg-white">-->
-<!--                <strong>相关视频图像</strong>-->
-<!--            </blockquote>-->
-<!--        </div>-->
-<!--        <div class="layui-row layui-col-space15">-->
-<!--            <div class="layui-col-md4" th:each="picture:${session.RelatedPictures}">-->
-<!--                <div class="layui-card">-->
-<!--                    <div class="layui-card-header">-->
-<!--                        <p th:text="${picture.getImgid()}"></p>-->
-<!--                    </div>-->
-<!--                    <div class="layui-card-body">-->
-<!--                        <img th:src="${picture.getImgurl()}" width="500px" height="306px">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="layui-col-md4" th:each="video:${session.RelatedVideos}">-->
-<!--                <div class="layui-card">-->
-<!--                    <div class="layui-card-header">-->
-<!--                        <p th:text="${video.getVidname()}"></p>-->
-<!--                    </div>-->
-<!--                    <div class="layui-card-body">-->
+    </div>
+    <div class="layui-layout-admin">
 
-<!--                        <video width="500px" height="300px" controls="controls" autoplay="autoplay">-->
-<!--                            <source th:src="${video.getVipurl()}" type="video/mp4" />-->
-<!--                            <source th:src="${video.getVipurl()}" type="video/ogg" />-->
-<!--                            <source th:src="${video.getVipurl()}" type="video/webm" />-->
-<!--                            <object th:src="${video.getVipurl()}" width="320" height="240">-->
-<!--                                <embed src="movie.swf" width="320" height="240" />-->
-<!--                            </object>-->
-<!--                        </video>-->
-
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
+        <div class="layui-footer" style="left: 0;">
+            <!--                <button class="layui-btn layui-btn-danger">立即确认</button>-->
+            <a type="button" href="/alarmedtable" class="layui-btn ">返回列表</a>
+        </div>
 
     </div>
-
 </div>
 
 <script type="text/javascript">
@@ -164,15 +281,14 @@
 
 
 </script>
-
-<script src="../../../layuiadmin/layui/layui.js"></script>
+<script src="../../layuiadmin/layui/layui.js"></script>
 <script>
     layui.config({
-        base: '../../../layuiadmin/' //静态资源所在路径
+        base: '../../layuiadmin/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index']);
+    }).use(['index', 'sample']);
 </script>
-
 </body>
+
 </html>
