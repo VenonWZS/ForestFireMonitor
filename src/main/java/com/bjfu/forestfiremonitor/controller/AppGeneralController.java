@@ -149,7 +149,7 @@ public class AppGeneralController {
 //        需要将arecid+用户id+经度+纬度写入firefiter表
 //        从session获取userid
 
-        return "recieve : x/y/arecid"+x+";"+y+";"+arecid;
+        return "接警成功recieve : x/y/arecid"+x+";"+y+";"+arecid;
     }
     @GetMapping("/appunconfirmtable")
     public String appunconfirmtable()

@@ -28,20 +28,7 @@ public class GeneralController {
     public String zshpage() {return "ProfessorManagement/index";}
     @GetMapping("/zshshow")
     public String showzsh() {return "stasticShow";}
-    @RequestMapping("/getlocation")
-    public String getlocation(HttpSession session) {
 
-//        List <POI> p = new ArrayList<>();
-//        POI p1 = new POI();
-//        POI p2 = new POI();
-//        POI p3 = new POI();
-//        p1.setPoipixx(39);
-//        p1.setPoipixy(116);
-////        p1.set
-////
-////        session.setAttribute();
-        return "getlocation";
-    }
 
 
 

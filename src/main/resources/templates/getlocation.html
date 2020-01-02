@@ -1,5 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--    <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">-->
+<!--    <link rel="stylesheet" href="../../../layuiadmin/style/admin.css" media="all">-->
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<!--    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />-->
+<!--    <meta name="renderer" content="webkit">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">-->
+<!--    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">-->
+<!--    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">-->
+<!--    <style type="text/css">-->
+<!--        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}-->
+<!--    </style>-->
+<!--    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=37XbOfTkRpHCikFtKZ3qEDBWzRAByFom"></script>-->
+<!--</head>-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -11,27 +29,93 @@
     <style type="text/css">
         body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
     </style>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
     <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=37XbOfTkRpHCikFtKZ3qEDBWzRAByFom"></script>
     <title>GPS转百度</title>
 </head>
 <body>
 
-<div class="layui-fluid">
+<div class="layui-fluid" id="scrolldiv">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
-    <div class="layui-card">
-        <div class="layui-card-header">坐标显示</div>
-        <div class="layui-card-body">
-            <div style="min-height: 500px; width: 100%;" id="allmap">
+            <blockquote class="layui-elem-quote layui-bg-white">
+                <strong>报警信息详情</strong>
+            </blockquote>
+        </div>
+        <div class="layui-col-md12">
+
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    <p>警报ID：<span class="layui-text" th:text="${session.alarmselected.getArecid()}"></span>&nbsp;</p>&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="layui-card-body">
+                    <strong>报警时间：</strong><span class="layui-text" th:text="${session.alarmselected.getAlarmtime()}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>监控点ID：</strong><span class="layui-text" th:text="${session.alarmselected.getMptid()}"></span>&nbsp&nbsp;&nbsp;&nbsp;
+                </div>
             </div>
         </div>
-    </div>
+        <div class="layui-col-md12">
+            <blockquote class="layui-elem-quote layui-bg-white">
+                <strong>接警人员位置信息</strong>
+            </blockquote>
         </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">坐标显示</div>
+                <div class="layui-card-body">
+                    <div style="min-height: 500px; width: 100%;" id="allmap">
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="layui-col-md12">-->
+<!--            <blockquote class="layui-elem-quote layui-bg-white">-->
+<!--                <strong>相关视频图像</strong>-->
+<!--            </blockquote>-->
+<!--        </div>-->
+<!--        <div class="layui-row layui-col-space15">-->
+<!--            <div class="layui-col-md4" th:each="picture:${session.RelatedPictures}">-->
+<!--                <div class="layui-card">-->
+<!--                    <div class="layui-card-header">-->
+<!--                        <p th:text="${picture.getImgid()}"></p>-->
+<!--                    </div>-->
+<!--                    <div class="layui-card-body">-->
+<!--                        <img th:src="${picture.getImgurl()}" width="500px" height="306px">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="layui-col-md4" th:each="video:${session.RelatedVideos}">-->
+<!--                <div class="layui-card">-->
+<!--                    <div class="layui-card-header">-->
+<!--                        <p th:text="${video.getVidname()}"></p>-->
+<!--                    </div>-->
+<!--                    <div class="layui-card-body">-->
+
+<!--                        <video width="500px" height="300px" controls="controls" autoplay="autoplay">-->
+<!--                            <source th:src="${video.getVipurl()}" type="video/mp4" />-->
+<!--                            <source th:src="${video.getVipurl()}" type="video/ogg" />-->
+<!--                            <source th:src="${video.getVipurl()}" type="video/webm" />-->
+<!--                            <object th:src="${video.getVipurl()}" width="320" height="240">-->
+<!--                                <embed src="movie.swf" width="320" height="240" />-->
+<!--                            </object>-->
+<!--                        </video>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+
+
     </div>
+
 </div>
-    <a href="#" onclick="BSL.GPS('gps')">GPS</a>
-</body>
-</html>
+
 <script type="text/javascript">
     // 百度地图API功能
     //GPS坐标
@@ -74,9 +158,21 @@
         // bm.addOverlay(marker);
         // var label = new window.BMap.Label(markerArr[i].title, {offset: new window.BMap.Size(20, -10)});
         // marker.setLabel(label);
-       a(i);
+        a(i);
 
-        }
+    }
 
 
 </script>
+
+<script src="../../../layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '../../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index']);
+</script>
+
+</body>
+</html>

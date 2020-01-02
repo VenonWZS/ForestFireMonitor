@@ -19,6 +19,8 @@ public interface AlarmrecordMapper {
 
     List<Alarmrecord> selectByisConfirm(Integer isconfirm);
 
+    List<Alarmrecord> selectByisHandled(Integer ishandled);
+
     int updateByPrimaryKeySelective(Alarmrecord record);
 
     int updateByPrimaryKey(Alarmrecord record);

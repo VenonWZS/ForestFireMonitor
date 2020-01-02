@@ -22,31 +22,27 @@ public class LoginController {
         System.out.println("正在登陆ing11111。。。。。。");
         if(u != null)
         {
-            if(u.getUserright()==-1)
+            if(u.getUserright()==0)
+            {
+                session.setAttribute("sessionUser", u);
+                return "indexadmin";
+            }
+            else if (u.getUserright()==1)
+            {
+                session.setAttribute("sessionUser", u);
+                return "indexprofessor";
+            }
+            else if(u.getUserright()==2){
+                session.setAttribute("sessionUser", u);
+                return "indexstaff";
+            }
+            else
             {
                 //弹框提示没有权限
                 return "/login";//返回登录页面
             }
-            else if(u.getUserright()==0)
-            {
-                session.setAttribute("sessionUser", user);
-                return "AdminManagement/indexadmin";
-            }
-            else if (u.getUserright()==1)
-            {
-                session.setAttribute("sessionUser", user);
-                return "ProfessorManagement/indexprofessor";
-            }
-            else if(u.getUserright()==2){
-                session.setAttribute("sessionUser", user);
-                return "StaffUserManagement/indexstaff";
-            }
-            else if(u.getUserright()==3){
-                session.setAttribute("sessionUser", user);
-                //是否有第三类普通用户？
-                return null;
-            }
-            return "ProfessorManagement/MainPage";
+
+
         }
         else
             //弹框提示登录信息错误
@@ -59,10 +55,29 @@ public class LoginController {
         return "/login";
     }
 
-    @RequestMapping("/oldindex")
-    public String  oldindex(){
-        return "oldindex";
+    @RequestMapping("/indexprofessor")
+    public String  professorindex(){
+        return "indexprofessor";
     }
-
+    @RequestMapping("/indexprofessorcontent")
+    public String  professorindexcontent(){
+        return "indexprofessorcontent";
+    }
+    @RequestMapping("/indexadmin")
+    public String  indexadmin(){
+        return "indexadmin";
+    }
+    @RequestMapping("/indexadmincontent")
+    public String  indexadmincontent(){
+        return "indexadmincontent";
+    }
+    @RequestMapping("/indexstaff")
+    public String  indexstaff(){
+        return "indexstaff";
+    }
+    @RequestMapping("/indexstaffcontent")
+    public String  indexstaffcontent(){
+        return "indexstaffcontent";
+    }
 
 }

@@ -2,7 +2,9 @@ package com.bjfu.forestfiremonitor.dao;
 
 import com.bjfu.forestfiremonitor.entity.FirefightersRecord;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FirefightersRecordMapper {
     int deleteByPrimaryKey(@Param("arecid") Integer arecid, @Param("userid") String userid);
 
