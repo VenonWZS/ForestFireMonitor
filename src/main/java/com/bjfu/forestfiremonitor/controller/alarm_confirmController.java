@@ -2,8 +2,9 @@ package com.bjfu.forestfiremonitor.controller;
 
 import com.bjfu.forestfiremonitor.dao.*;
 import com.bjfu.forestfiremonitor.entity.*;
-//import com.bjfu.forestfiremonitor.jiguang.JiGuangPushService;
-//import com.bjfu.forestfiremonitor.jiguang.PushBean;
+import com.bjfu.forestfiremonitor.jiguang.JiGuangPushService;
+import com.bjfu.forestfiremonitor.jiguang.PushBean;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
