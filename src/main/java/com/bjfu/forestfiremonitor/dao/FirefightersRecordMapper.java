@@ -4,6 +4,8 @@ import com.bjfu.forestfiremonitor.entity.FirefightersRecord;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface FirefightersRecordMapper {
     int deleteByPrimaryKey(@Param("arecid") Integer arecid, @Param("userid") String userid);
@@ -13,6 +15,8 @@ public interface FirefightersRecordMapper {
     int insertSelective(FirefightersRecord record);
 
     FirefightersRecord selectByPrimaryKey(@Param("arecid") Integer arecid, @Param("userid") String userid);
+
+    List<FirefightersRecord> selectLocation(@Param("arecid") Integer arecid);
 
     int updateByPrimaryKeySelective(FirefightersRecord record);
 
