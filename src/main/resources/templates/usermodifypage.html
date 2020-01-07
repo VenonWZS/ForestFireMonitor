@@ -25,15 +25,14 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">用户权限</label><div class="layui-input-inline">
-                    <select name="userright">
-                        <option>A</option>
+                    <label class="layui-form-label">用户权限</label>
+                <div class="layui-input-block">
+                    <select name="userright" style="width: 50%;" >
+                        <option></option>
                         <option value="1">火灾事件确认专家</option>
                         <option value="2">森林防火工作人员</option>
                         <option value="3">一般用户</option>
                     </select>
-                </div>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -66,9 +65,12 @@
     </div>
 </div>
 </body>
+<script src="../../../layuiadmin/layui/layui.js"></script>
 <script>
     layui.use('form', function(){
         var form = layui.form;
+        var layer = layui.layer;
+        form.render();
         form.on('submit(formDemo)', function(data){
             layer.msg(JSON.stringify(data.field));
             return false;

@@ -144,11 +144,13 @@ public class AdminManagementController {
         user.setUserright(right);
         user.setUsermail(usermail);
         user.setEmptime(emptime);
-        user.setUserdept(userdept);
+        if(userdept!="") {
+            user.setUserdept(userdept);
+        }
         user.setUserphone(phone);
         adminService.ChangeUserInfo(user);
         //跳转页面
-        return "";
+        return "usermodifypage";
     }
     @GetMapping("/adminpage")
     public String adminPage()
