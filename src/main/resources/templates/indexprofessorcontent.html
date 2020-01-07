@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -10,6 +10,13 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+    <style>
+
+        .img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,7 +29,7 @@
                     待确认火情
                 </div>
                 <div class="layui-card-body layuiadmin-card-list">
-                    <p class="layuiadmin-big-font">9,999,666
+                    <p class="layuiadmin-big-font" th:text="${unconfirmed}">
                         <span class="layuiadmin-span-color"> <i class="layui-inline layui-icon layui-icon-fire"></i></span><br>
                     </p>
                 </div>
@@ -31,11 +38,10 @@
         <div class="layui-col-sm6 layui-col-md3">
             <div class="layui-card">
                 <div class="layui-card-header">
-                    已确认火情
-
+                    已处理火情
                 </div>
                 <div class="layui-card-body layuiadmin-card-list">
-                    <p class="layuiadmin-big-font">33,555
+                    <p class="layuiadmin-big-font" th:text="${handledAlarm}">33,555
                         <span class="layuiadmin-span-color"><i class="layui-inline layui-icon layui-icon-flag"></i></span><br>
                     </p>
                 </div>
@@ -44,12 +50,11 @@
         <div class="layui-col-sm6 layui-col-md3">
             <div class="layui-card">
                 <div class="layui-card-header">
-                    漏上传火情
-
+                    总报警火情
                 </div>
                 <div class="layui-card-body layuiadmin-card-list">
 
-                    <p class="layuiadmin-big-font">999,666
+                    <p class="layuiadmin-big-font" th:text="${soundAlarm}">999,666
                         <span class="layuiadmin-span-color"><i class="layui-inline layui-icon layui-icon-water"></i></span><br>
                     </p>
                 </div>
@@ -58,10 +63,10 @@
         <div class="layui-col-sm6 layui-col-md3">
             <div class="layui-card">
                 <div class="layui-card-header">
-                    误上传火情
+                    总火情
                 </div>
                 <div class="layui-card-body layuiadmin-card-list">
-                    <p class="layuiadmin-big-font">66,666
+                    <p class="layuiadmin-big-font" th:text="${allAlarm}">66,666
                         <span class="layuiadmin-span-color"> <i class="layui-inline layui-icon layui-icon-survey"></i></span>
                         <br>
                     </p>
@@ -75,15 +80,7 @@
                 </div>
                 <div class="layui-card-body">
                     <div class="layui-row">
-                        <div class="layui-col-sm8">
-                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
-                                 lay-filter="LAY-index-pagetwo">
-                                <div carousel-item id="LAY-index-pagetwo">
-                                    <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layui-col-sm4">
+                        <div class="layui-col-sm12">
                             <div class="layuiadmin-card-list">
                                 <p class="layuiadmin-normal-font">年统计</p>
                                 <span>同去年变化</span>
@@ -113,70 +110,37 @@
                 <div class="layui-card-header">
                     影像数据中心
                 </div>
+
                 <div class="layui-card-body">
                     <div class="layui-row layui-col-space10">
                         <div class="layui-col-xs12 layui-col-sm4">
                             <div class="layuiadmin-card-text">
                                 <div class="layui-text-top"><i class="layui-icon layui-icon-picture"></i><a
                                         lay-href="http://www.layui.com/doc/modules/flow.html">picture.imgName</a></div>
-                                <img src="picture.imgSktUrl" alt="picture.imgSktUrl" />
-                                <p class="layui-text-center">picture.mptID -> mptName</p>
-                                <p class="layui-text-bottom"><a lay-href="#">picture.userID ->
-                                    userName</a><span>picture.createTime</span></p>
+                                <img th:src="${pictures.get(0).getImgurl()}" alt="picture.imgSktUrl" />
+                                <p class="layui-text-center" th:text="${pictures.get(0).getImgname()}">picture.mptID -> mptName</p>
                             </div>
                         </div>
                         <div class="layui-col-xs12 layui-col-sm4">
                             <div class="layuiadmin-card-text">
-                                <div class="layui-text-top"><i class="layui-icon layui-icon-video"></i><a
-                                        lay-href="http://www.layui.com/doc/modules/upload.html">video.vidName</a></div>
-                                <img src="video.vidSkchImgUrl" alt="video.vidSkchImgUrl" />
-                                <p class="layui-text-center">video.mptID -> mptName</p>
-                                <p class="layui-text-bottom"><a lay-href="http://www.layui.com/doc/modules/upload.html">video.userID
-                                    -> userName</a><span>video.vidStartTime</span></p>
+                                <div class="layui-text-top"><i class="layui-icon layui-icon-video"></i><strong th:text="${videos.get(0).getVidname()}"></strong></div>
+                                <img th:src="${videos.get(0).getVidskchimgurl()}" th:alt="${videos.get(0).getVidname()}" />
+                                <p class="layui-text-center" th:text="${videos.get(0).getVidname()}"></p>
+                                <!--<p class="layui-text-bottom"><a lay-href="http://www.layui.com/doc/modules/upload.html">video.userID
+                                    -> userName</a><span>video.vidStartTime</span></p>-->
                             </div>
                         </div>
                         <div class="layui-col-xs12 layui-col-sm4">
                             <div class="layuiadmin-card-text">
-                                <div class="layui-text-top"><i class="layui-icon layui-icon-video"></i><a
-                                        lay-href="http://www.layui.com/doc/modules/upload.html">video.vidName</a></div>
-                                <img src="video.vidSkchImgUrl" alt="video.vidSkchImgUrl" />
-                                <p class="layui-text-center">video.mptID -> mptName</p>
-                                <p class="layui-text-bottom"><a lay-href="http://www.layui.com/doc/modules/upload.html">video.userID
-                                    -> userName</a><span>video.vidStartTime</span></p>
-                            </div>
-                        </div>
-                        <div class="layui-col-xs12 layui-col-sm4">
-                            <div class="layuiadmin-card-text">
-                                <div class="layui-text-top"><i class="layui-icon layui-icon-picture"></i><a
-                                        lay-href="http://www.layui.com/doc/modules/flow.html">picture.imgName</a></div>
-                                <img src="picture.imgSktUrl" alt="picture.imgSktUrl" />
-                                <p class="layui-text-center">picture.mptID -> mptName</p>
-                                <p class="layui-text-bottom"><a lay-href="#">picture.userID ->
-                                    userName</a><span>picture.createTime</span></p>
-                            </div>
-                        </div>
-                        <div class="layui-col-xs12 layui-col-sm4">
-                            <div class="layuiadmin-card-text">
-                                <div class="layui-text-top"><i class="layui-icon layui-icon-video"></i><a
-                                        lay-href="http://www.layui.com/doc/modules/upload.html">video.vidName</a></div>
-                                <img src="video.vidSkchImgUrl" alt="video.vidSkchImgUrl" />
-                                <p class="layui-text-center">video.mptID -> mptName</p>
-                                <p class="layui-text-bottom"><a lay-href="http://www.layui.com/doc/modules/upload.html">video.userID
-                                    -> userName</a><span>video.vidStartTime</span></p>
-                            </div>
-                        </div>
-                        <div class="layui-col-xs12 layui-col-sm4">
-                            <div class="layuiadmin-card-text">
-                                <div class="layui-text-top"><i class="layui-icon layui-icon-video"></i><a
-                                        lay-href="http://www.layui.com/doc/modules/upload.html">video.vidName</a></div>
-                                <img src="video.vidSkchImgUrl" alt="video.vidSkchImgUrl" />
-                                <p class="layui-text-center">video.mptID -> mptName</p>
-                                <p class="layui-text-bottom"><a lay-href="http://www.layui.com/doc/modules/upload.html">video.userID
-                                    -> userName</a><span>video.vidStartTime</span></p>
+                                <div class="layui-text-top"><i class="layui-icon layui-icon-video"></i><strong th:text="${videos.get(1).getVidname()}"></strong></div></div>
+                                <img th:src="${videos.get(1).getVidskchimgurl()}" th:alt="${videos.get(1).getVidname()}" />
+                                <p class="layui-text-center" th:text="${videos.get(1).getVidname()}"></p>
+                                <!--<p class="layui-text-bottom"><a lay-href="http://www.layui.com/doc/modules/upload.html">video.userID
+                                    -> userName</a><span>video.vidStartTime</span></p>-->
                             </div>
                         </div>
                         <p class="layui-text-bottom" align="right"><a
-                                lay-href="http://www.layui.com/doc/modules/upload.html"><span>more >></span></a></p>
+                                lay-href=""><span>more >></span></a></p>
                     </div>
                 </div>
             </div>
@@ -186,99 +150,76 @@
                     <div class="layui-card">
                         <div class="layui-card-header">操作日志管理<i class="layui-inline layui-icon layui-icon-note"></i></div>
                         <div class="layui-card-body">
-                            <dl class="layuiadmin-card-status">
+                            <dl class="layuiadmin-card-status" th:each="log:${indexLog}">
                                 <dd>
                                     <!--layuiadmin/style/res/logo.png 更换一张图片(透明底logo)作为 操作日志 下用户头像-->
                                     <div class="layui-status-img"><a href="javascript:;"><img
                                             src="../../layuiadmin/style/res/logo.png"></a>
                                     </div>
                                     <div>
-                                        <p>森林防火工作人员 胡歌 进行了 登录 操作</p>
-                                        <span>几秒前</span>
+                                        <p th:text="${log.getLogcontent()}">森林防火工作人员 胡歌 进行了 登录 操作</p>
+                                        <span th:text="${log.getLogtime()}">几秒前</span>
                                     </div>
                                 </dd>
-                                <dd>
-                                    <div class="layui-status-img"><a href="javascript:;"><img
-                                            src="../../layuiadmin/style/res/logo.png"></a>
-                                    </div>
-                                    <div>
-                                        <p>彭于晏 在 <a lay-href="http://fly.layui.com/vipclub/list/layuiadmin/">layuiadmin专区</a> 进行了 <a
-                                                lay-href="http://fly.layui.com/vipclub/list/layuiadmin/column/quiz/">提问</a></p>
-                                        <span>2天前</span>
-                                    </div>
-                                </dd>
-                                <dd>
-                                    <div class="layui-status-img"><a href="javascript:;"><img
-                                            src="../../layuiadmin/style/res/logo.png"></a>
-                                    </div>
-                                    <div>
-                                        <p>贤心 将 <a lay-href="http://www.layui.com/">layui</a> 更新至 2.3.0 版本</p>
-                                        <span>7天前</span>
-                                    </div>
-                                </dd>
-                            </dl>
-                            <p class="layui-text-bottom" align="right"><a
-                                    lay-href="http://www.layui.com/doc/modules/upload.html"><span>more >></span></a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md4">
-                    <div class="layui-card">
-                        <div class="layui-card-header">用户信息管理</div>
-                        <div class="layui-card-body">
-                            <dl class="layuiadmin-card-status">
-                                <dd>
-                                    <div>
-                                        <i class="layui-icon layui-icon-user"></i>
-                                    </div>
-                                    <div>
-                                        <p>&emsp; user.userName &emsp;&emsp;&emsp; user.userID</p>
-                                    </div>
-                                </dd>
-                                <dd>
-                                    <div>
-                                        <i class="layui-icon layui-icon-user"></i>
-                                    </div>
-                                    <div>
-                                        <p>&emsp; user.userName &emsp;&emsp;&emsp; user.userID</p>
-                                    </div>
-                                </dd>
-                                <dd>
-                                    <div>
-                                        <i class="layui-icon layui-icon-user"></i>
-                                    </div>
-                                    <div>
-                                        <p>&emsp; user.userName &emsp;&emsp;&emsp; user.userID</p>
-                                    </div>
-                                </dd>
-                                <dd>
-                                    <div>
-                                        <i class="layui-icon layui-icon-user"></i>
-                                    </div>
-                                    <div>
-                                        <p>&emsp; user.userName &emsp;&emsp;&emsp; user.userID</p>
-                                    </div>
-                                </dd>
-                            </dl>
-                            <p class="layui-text-bottom" align="right"><a
-                                    lay-href="http://www.layui.com/doc/modules/upload.html"><span>more >></span></a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
 
-<script src="../../layuiadmin/layui/layui.js"></script>
-<script>
-    layui.config({
-        base: '../../layuiadmin/' //静态资源所在路径
-    }).extend({
-        index: 'lib/index' //主入口模块
-    }).use(['index', 'sample']);
-</script>
-</body>
+                                    <!-- <div>
+                                          <p th:text="${indexLog.get(1).getLogcontent()}">彭于晏 在 <a lay-href="http://fly.layui.com/vipclub/list/layuiadmin/">layuiadmin专区</a> 进行了 <a
+                                                  lay-href="http://fly.layui.com/vipclub/list/layuiadmin/column/quiz/">提问</a></p>
+                                          <span>2天前</span>
+                                      </div>
+                                  </dd>
+                                  <dd>
+                                      <div class="layui-status-img"><a href="javascript:;"><img
+                                              src="../../layuiadmin/style/res/logo.png"></a>
+                                      </div>
+                                      <div>
+                                          <p th:text="${indexLog.get(2).getLogcontent()}">贤心 将 <a lay-href="http://www.layui.com/">layui</a> 更新至 2.3.0 版本</p>
+                                          <span>7天前</span>
+                                      </div>
+                                      -->
+                                  </dd>
 
-</html>
+                              </dl>
+                              <p class="layui-text-bottom" align="right"><a
+                                      lay-href="http://www.layui.com/doc/modules/upload.html"><span>more >></span></a></p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="layui-col-md4">
+                      <div class="layui-card">
+                          <div class="layui-card-header">用户信息管理</div>
+                          <div class="layui-card-body">
+                              <dl class="layuiadmin-card-status" th:each="user:${users}">
+                                  <dd>
+                                      <div>
+                                          <i class="layui-icon layui-icon-user"></i>
+                                      </div>
+                                      <div>
+                                          <p th:text="${user.getUsername()}">&emsp; user.userName &emsp;&emsp;&emsp; user.userID</p>
+                                          <span th:text="${user.getUserid()}"></span>
+                                      </div>
+                                  </dd>
+
+                              </dl>
+                              <p class="layui-text-bottom" align="right"><a
+                                      lay-href="http://www.layui.com/doc/modules/upload.html"><span>more >></span></a></p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+
+  <script src="../../layuiadmin/layui/layui.js"></script>
+  <script>
+      layui.config({
+          base: '../../layuiadmin/' //静态资源所在路径
+      }).extend({
+          index: 'lib/index' //主入口模块
+      }).use(['index', 'sample']);
+  </script>
+  </body>
+
+  </html>
