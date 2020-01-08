@@ -1,10 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>Forest Fire Monitor</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
 </head>
+
 <body>
-<h1>staffindex</h1>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+
+        <div class="layui-row layui-col-space15">
+
+            <div class="layui-card">
+                <div class="layui-card-header">操作日志管理<i class="layui-inline layui-icon layui-icon-note"></i></div>
+                <div class="layui-card-body">
+                    <dl class="layuiadmin-card-status" th:each="log:${indexLog}">
+                        <dd>
+                            <!--layuiadmin/style/res/logo.png 更换一张图片(透明底logo)作为 操作日志 下用户头像-->
+                            <div class="layui-status-img"><a href="javascript:;"><img
+                                    src="../../layuiadmin/style/res/logo.png"></a>
+                            </div>
+                            <div>
+                                <p th:text="${log.getLogcontent()}">森林防火工作人员 胡歌 进行了 登录 操作</p>
+                                <span th:text="${log.getLogtime()}">几秒前</span>
+                            </div>
+                        </dd>
+                    </dl>
+                    <p class="layui-text-bottom" align="right"><a
+                            lay-href="http://www.layui.com/doc/modules/upload.html"><span>more >></span></a></p>
+                </div>
+
+            </div>
+
+            <div class="layui-row layui-col-space15">
+                <div class="layui-card">
+                    <div class="layui-card-header">用户信息管理</div>
+                    <div class="layui-card-body">
+                        <dl class="layuiadmin-card-status" th:each="user:${users}">
+                            <dd>
+                                <div>
+                                    <i class="layui-icon layui-icon-user"></i>
+                                </div>
+                                <div>
+                                    <p th:text="${user.getUsername()}">&emsp; user.userName &emsp;&emsp;&emsp; user.userID</p>
+                                    <span th:text="${user.getUserid()}"></span>
+                                </div>
+                            </dd>
+                        </dl>
+                        <p class="layui-text-bottom" align="right"><a
+                                lay-href="http://www.layui.com/doc/modules/upload.html"><span>more >></span></a></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'sample']);
+</script>
 </body>
+
 </html>

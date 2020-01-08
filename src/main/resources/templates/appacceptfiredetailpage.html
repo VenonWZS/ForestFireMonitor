@@ -23,12 +23,26 @@
                             <div class="layuiadmin-card-text" >
                                 <div class="layui-text-top"><i class="layui-icon layui-icon-water"></i><span>报警记录ID </span><span th:text="${unhandeled.getArecid()}"></div>
                                 <hr class="layui-bg-green">
+                                <strong style="line-height:1.8em">报警记录ID：</strong>
+                                <span style="line-height:1.8em" th:text="${unhandeled.getArecid()}"></span><br>
+                                <strong style="line-height:1.8em">火场位置：</strong>
+                                <span style="line-height:1.8em">(</span>
+                                <span style="line-height:1.8em" th:text="${unhandeled.getOptlattitude()}"></span>
+                                <span style="line-height:1.8em">,</span>
+                                <span style="line-height:1.8em" th:text="${unhandeled.getOptlongtitude()}"></span>
+                                <span style="line-height:1.8em">)</span><br>
                                 <strong style="line-height:1.8em">报警时间：</strong>
-                                <span style="line-height:1.8em" th:text="${unhandeled.getAlarmtime()}">火情信息1</span><br>
+                                <span style="line-height:1.8em" th:text="${unhandeled.getAlarmtime()}"></span><br>
                                 <strong style="line-height:1.8em">巡值员工ID：</strong>
-                                <span style="line-height:1.8em" th:text="${unhandeled.getUserid()}">火情信息2</span><br>
+                                <span style="line-height:1.8em" th:text="${unhandeled.getUserid()}"></span><br>
                                 <strong style="line-height:1.8em">监控点ID：</strong>
-                                <span style="line-height:1.8em" th:text="${unhandeled.getMptid()}">火情信息3</span>
+                                <span style="line-height:1.8em" th:text="${unhandeled.getMptid()}"></span>
+                                <br>
+                                <strong style="line-height:1.8em">视频截图：</strong><br>
+                                <div th:each="img:${images}" >
+                                    <img th:src="${img}" style="width:260px ; height: auto"><br><br>
+
+                                </div>
                                 <br>
                                 <hr>
 <!--                                <a th:href="@{/appacceptfiredetailpage(arecid=${unhandeled.getArecid()})}"  type="button" class="layui-btn layui-btn-danger layui-btn-fluid">接警</a>-->
