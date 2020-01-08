@@ -1,14 +1,15 @@
 package com.bjfu.forestfiremonitor.controller;
 
 import com.bjfu.forestfiremonitor.dao.*;
-import com.bjfu.forestfiremonitor.entity.Alarmrecord;
-import com.bjfu.forestfiremonitor.entity.Picture;
-import com.bjfu.forestfiremonitor.entity.User;
-import com.bjfu.forestfiremonitor.entity.Video;
+import com.bjfu.forestfiremonitor.entity.*;
 import com.bjfu.forestfiremonitor.jiguang.JiGuangPushService;
 import com.bjfu.forestfiremonitor.jiguang.PushBean;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import net.sf.json.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -264,6 +265,8 @@ public class alarm_confirmController {
     AlarmPictureMapper alarmPictureMapper;
     @Autowired
     PictureMapper pictureMapper;
+    @Autowired
+    FirefightersRecordMapper firefightersRecordMapper;
     @RequestMapping(value = "/gettableid")
     @ResponseBody
     public String gettableid(@RequestParam Map<String,String> reqMap, HttpSession session)
@@ -358,14 +361,27 @@ public class alarm_confirmController {
         String s=reqMap.get("arecid");
         Alarmrecord alarmrecord  = alarmrecordMapper.selectByPrimaryKey(Integer.parseInt(s));
         session.setAttribute("alarmselected",alarmrecord);
+        session.setAttribute("arecid",s);
 
         //zsh这里获取了arecid 去firefighter表里查出来对应的记录 返回一个List<firefighterRecord> 设置到!!!!!!session里
         //在getlocation那个页面里从!!!!!!session获取一下（上网搜一下js里访问thymleaf）
         //显示真实的人员坐标
         return "后台得到了id："+s;
     }
-    @RequestMapping("/getlocation")
-    public String getlocation(HttpSession session) {
+    @RequestMapping(value = "/getlocation",produces = "text/html;charset=UTF-8")
+    public String getlocation(HttpSession session,Model model) {
+        String s = (String)session.getAttribute("arecid");
+        List<FirefightersRecord> location = new ArrayList<>();
+                location=firefightersRecordMapper.selectLocation(Integer.parseInt(s));
+//        for(int i=0;i<location.size();i++)
+//        {
+//            System.out.println(location.get(i).getArecid());
+//            System.out.println(location.get(i).getXlocation());
+//            System.out.println(location.get(i).getYlocation());
+//        }
+        JSONArray js = JSONArray.fromObject(location);
+        System.out.println(js);
+        model.addAttribute("locations",js);
         return "getlocation";
     }
 // @@@@@@@@@@@@@@@@@@@@表格内按钮事件接口结束@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

@@ -17,6 +17,12 @@
     where aRecId = #{arecid,jdbcType=INTEGER}
       and userID = #{userid,jdbcType=VARCHAR}
   </select>
+  <select id="selectLocation" resultMap="BaseResultMap" parameterType="Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from firefighters_record
+    where aRecId = #{arecid,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="map" >
     delete from firefighters_record
     where aRecId = #{arecid,jdbcType=INTEGER}
