@@ -1,18 +1,16 @@
 package com.bjfu.forestfiremonitor.service;
-
-
 import com.bjfu.forestfiremonitor.dao.UserMapper;
 import com.bjfu.forestfiremonitor.entity.Log;
 import com.bjfu.forestfiremonitor.dao.*;
 import com.bjfu.forestfiremonitor.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 @Service
 public class AdminManagementService {
     @Autowired

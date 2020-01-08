@@ -1,11 +1,15 @@
 package com.bjfu.forestfiremonitor.controller;
 
+import com.bjfu.forestfiremonitor.entity.Picture;
 import com.bjfu.forestfiremonitor.entity.User;
 import com.bjfu.forestfiremonitor.entity.Video;
 import com.bjfu.forestfiremonitor.service.MediaService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +50,7 @@ public class VideoController {
     //表格搜索的数据接口
     @RequestMapping("/reloadvideotable")
     @ResponseBody
-    public String reloadvideotable(String videoname,String vidtime,String type) throws JsonProcessingException {
+    public String reloadvideotable(String videoname,String type) throws JsonProcessingException {
 
         //fzj这先获取所有video的list 然后遍历列表进行删除
         List<Video> allVideo = mediaService.getAllVideo();
@@ -54,22 +61,13 @@ public class VideoController {
             //遍历参照这个写 如果不符合条件就remove
             for (int i = allVideo.size() - 1; i >= 0; i--) {
                 temp=allVideo.get(i);
-                if (!(temp.getVidname()).equals(videoname)) {
+                if ((temp.getVidname().toString()).indexOf(videoname)==-1) {
                     allVideo.remove(temp);
                 }
             }
         }
 
-        if(!vidtime.equals(""))
-        {
-            Video temp;
-            for (int i = allVideo.size() - 1; i >= 0; i--) {
-                temp=allVideo.get(i);
-                if (!(temp.getVidstarttime().toString()).equals(vidtime)) {
-                    allVideo.remove(temp);
-                }
-            }
-        }
+
 
         if(!type.equals(""))
         {
@@ -146,4 +144,33 @@ public class VideoController {
         return "videodetailpage";
     }
 
+    @RequestMapping("/videoDowland")
+    public ResponseEntity<byte[]> fileDowland(HttpSession session) throws IOException {
+        Video video=(Video)session.getAttribute("sessionVideoToBeView");
+        //指定下载文件
+        String s=video.getVipurl();
+        String[] split=s.split("\\/");
+        String ss=split[4];
+        String prefix="/www/wwwroot/forestfiremonitor/resource/video";
+        //
+        // String prefix="C:\\Users\\wangz\\Desktop\\SEDesign\\forestfiremonitor\\src\\main\\resources\\static\\images\\";
+        prefix+=ss;
+        File file=new File(prefix);
+        FileInputStream is = new FileInputStream(file);
+        //通过字节数组保存文件
+        byte[] body=new byte[is.available()];
+        is.read(body);
+        //获取文件名
+        String name = file.getName();
+        //转换文件名格式
+
+        String dowlandFilename = new String(name.getBytes("UTF-8"),"ISO-8859-1");
+        //设置文件头
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Content-Disposition", "attachment;filename="+dowlandFilename);
+        HttpStatus status = HttpStatus.OK;
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(body, httpHeaders,status);
+        return responseEntity;
+
+    }
 }

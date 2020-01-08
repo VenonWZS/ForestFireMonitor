@@ -40,7 +40,7 @@
             <div class="layui-col-md4" th:each="picture:${session.RelatedPictures}">
                 <div class="layui-card">
                     <div class="layui-card-header">
-                        <p th:text="${picture.getImgid()}"></p>
+                        <p th:text="${picture.getImgname()}"></p>
                     </div>
                     <div class="layui-card-body">
                         <img th:src="${picture.getImgurl()}" width="500px" height="306px">

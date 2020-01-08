@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <title>Title</title>
+</head>
+<body>
+<!--这里写一个修改的form-->
+<div class="layui-card">
+    <div class="layui-card-header">
+        录入火灾信息
+    </div>
+    <div class="layui-card-body">
+        <form class="layui-form" action="/insertmissrecord" method="post">
+            <div class="layui-form-item">
+                <label class="layui-form-label">地点纬度</label><div class="layui-input-block">
+                <input name="latitude" class="layui-input" style="width: 50%;" type="text" autocomplete="off" placeholder="请输入纬度" />
+            </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">地点经度</label><div class="layui-input-block">
+                <input name="longtitude" class="layui-input" style="width: 50%;" type="text" autocomplete="off" placeholder="请输入精度" />
+            </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">地点海拔</label><div class="layui-input-block">
+                <input name="height" class="layui-input" style="width: 50%;" type="text" autocomplete="off" placeholder="请输入海拔高度" />
+            </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">旋转角度</label><div class="layui-input-block">
+                <input name="angle" class="layui-input" style="width: 50%;" type="text" autocomplete="off" placeholder="请输入角度" />
+            </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">监控点ID</label><div class="layui-input-block">
+                <input name="camera" class="layui-input" style="width: 50%;" type="text" autocomplete="off" placeholder="请输入监控点ID" />
+            </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="submit" class="layui-btn layui-btn-radius layui-btn-normal layui-btn-lg" value="确定">
+                    <input type="reset" class="layui-btn layui-btn-radius layui-btn-normal layui-btn-lg" value="重置">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script src="../../../layuiadmin/layui/layui.js"></script>
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+        var layer = layui.layer;
+        form.render();
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
+</html>

@@ -15,8 +15,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -385,6 +390,48 @@ public class alarm_confirmController {
         return "getlocation";
     }
 // @@@@@@@@@@@@@@@@@@@@表格内按钮事件接口结束@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+    @RequestMapping("addmissrecord")
+    public String missRecord()
+    {
+        return "addmissrecord";
+    }
+    @RequestMapping(value = "insertmissrecord")
+    public String insertMissRecord(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws IOException {
+        String latitude,longtitude,height,cameraid,angle;
+        latitude=request.getParameter("latitude");
+        longtitude=request.getParameter("longtitude");
+        height=request.getParameter("height");
+        cameraid = request.getParameter("camera");
+        angle = request.getParameter("angle");
+        User s = new User();
+        s=(User)session.getAttribute("sessionUser");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        Alarmrecord al= new Alarmrecord();
+        al.setOptlattitude(Double.parseDouble(latitude));
+        al.setOptlongtitude(Double.parseDouble(longtitude));
+        al.setHrzangle(Double.parseDouble(angle));
+        al.setOptheight(Double.parseDouble(height));
+        al.setIsconfirm(-2);
+        al.setIshandled(0);
+        al.setMptid(Integer.parseInt(cameraid));
+
+        al.setAlarmtime(new Date());
+//        System.out.println(al.getOptlattitude());
+//        System.out.println(al.getOptlongtitude());
+//        System.out.println(al.getIsconfirm());
+//        System.out.println(al.getAlarmtime());
+//        System.out.println(al.getIshandled());
+//        System.out.println(al.getHrzangle());
+//        System.out.println(al.getMptid());
+//        System.out.println(al.getOptheight());
+        al.setUserid(s.getUserid());
+        alarmrecordMapper.insert(al);
+        response.setContentType("text/html;charset=utf-8");
+        //response.getWriter().write("<script>alert('该数据已经同步完成');</script>"); 
+        response.getWriter().write( "<script>alert('填入漏报数据成果成功！');</script>");
+        return "addmissrecord";
+    }
 
 
 }

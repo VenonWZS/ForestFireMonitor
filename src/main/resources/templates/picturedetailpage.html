@@ -29,11 +29,12 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <div class="layui-card-header"> <a href="picturetable" class=" layui-btn layui-btn-normal">返回</a></div>
+                <div class="layui-card-header"> <a href="picturetable" class=" layui-btn layui-btn-normal">返回</a><a href="pictureDowland" class="layui-btn layui-btn-normal">下载资源</a></div>
+
                 <div class="layui-card-body">
                     <!--                    <blockquote class="layui-elem-quote" >火情视频</blockquote>-->
                     <!--                    <br>-->
-                    <blockquote class="layui-elem-quote" th:text="${session.sessionVideoToBeView.getVidname()}"></blockquote>
+                    <blockquote class="layui-elem-quote" th:text="${session.sessionPictureToBeView.imgname}"></blockquote>
                     <blockquote class="layui-elem-quote layui-quote-nm">
 
                         <img th:src="${session.sessionPictureToBeView.getImgurl()}" style="width: 100%; height:auto;">

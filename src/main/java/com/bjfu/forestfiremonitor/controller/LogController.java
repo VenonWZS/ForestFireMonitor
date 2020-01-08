@@ -1,12 +1,13 @@
 package com.bjfu.forestfiremonitor.controller;
 
 import com.bjfu.forestfiremonitor.entity.Log;
-import com.bjfu.forestfiremonitor.entity.Picture;
-import com.bjfu.forestfiremonitor.service.AdminManagementService;
+
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import com.bjfu.forestfiremonitor.service.AdminService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,9 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-public class LogController {
+public class LogController{
     @Autowired
-    AdminManagementService adminManagementService;
+    AdminService adminManagementService;
 
     //用户表数据接口
     @RequestMapping(value = "/getlogdata")

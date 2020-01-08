@@ -2,7 +2,7 @@ package com.bjfu.forestfiremonitor.controller;
 
 import com.bjfu.forestfiremonitor.entity.Alarmrecord;
 import com.bjfu.forestfiremonitor.entity.User;
-import com.bjfu.forestfiremonitor.service.AdminManagementService;
+import com.bjfu.forestfiremonitor.service.AdminService;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +23,7 @@ import java.util.Map;
 public class AdminManagementController {
 
     @Autowired
-    AdminManagementService adminService;
+    AdminService adminService;
 
     //用户表数据接口
     @RequestMapping(value = "/getuserdata")
